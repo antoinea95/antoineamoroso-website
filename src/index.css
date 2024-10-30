@@ -4,6 +4,18 @@
 
 @layer utilities {
 
+    html {
+        background-color: theme(colors.tertiary);
+    }
+
+    h1 {
+        font-weight: 900;
+    }
+
+    p {
+        font-weight: 600;
+    }
+
     .link-hover-effect:hover {
         transform: scale(1.25) rotate(-3deg);
         color: theme(colors.primary);

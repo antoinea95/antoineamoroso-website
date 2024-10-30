@@ -6,29 +6,28 @@
  * 
  * @param props - Configuration options for the `Stroke` component.
  * @param {string} props.name - The text content to be displayed in the SVG.
- * @param {string} props.width - Stroke width, specified in pixels (e.g., "5px").
+ * @param {string} props.strokeWidth - Stroke width, specified in pixels (e.g., "stroke-[5px]").
  * @param {boolean} [props.isHover] - Optional; if true, displays the stroke only on hover.
  * 
  * @returns An SVG element with a rounded stroke effect positioned behind the text.
  */
 export const Stroke = ({
   name,
-  width,
+  strokeWidth,
   isHover,
 }: {
   name: string;
-  width: string;
+  strokeWidth: string;
   isHover?: boolean;
 }) => {
   const svgClass = isHover
-    ? "invisible lg:visible stroke-transparent lg:group-hover:stroke-secondary lg:group-hover:drop-shadow-custom"
+    ? "stroke-transparent  lg:group-hover:stroke-secondary lg:group-hover:drop-shadow-custom"
     : "stroke-secondary drop-shadow-custom";
-  const strokeWidth = `stroke-[${width}]`;
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={`absolute inset-0 -z-10 w-full h-full ${strokeWidth} ${svgClass}`}
+      className={`absolute inset-0 -z-[1] w-full h-full ${strokeWidth} ${svgClass}`}
     >
       <text
         x="50%"
@@ -37,7 +36,6 @@ export const Stroke = ({
         text-anchor="middle"
         stroke-linejoin="round"
         stroke-linecap="round"
-        font-size="16"
       >
         {name}
       </text>

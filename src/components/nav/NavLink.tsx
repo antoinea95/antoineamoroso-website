@@ -17,7 +17,7 @@ export const NavLink = ({name} : {name: string}) => {
         className="lg:link-hover-effect relative px-1 group"
       >
         {name}
-        <Stroke name={name} width="5px" isHover />
+        <Stroke name={name} strokeWidth="stroke-[5px]" isHover />
       </a>
     )
 }

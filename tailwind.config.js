@@ -13,11 +13,11 @@ export default {
         'custom': '2px 2px 3px rgba(0,0,0,0.15)'
       },
       dropShadow: {
-        'custom' : '2px 2px 3px rgba(0,0,0,0.15)'
+        'custom' : '2px 2px 1px rgba(0,0,0,0.15)'
       },
       colors: {
         'primary' : "#5465FF",
-        'secondary' : "#E9E9E9",
+        'secondary' : "#f1f5f9",
         'tertiary' : "#FFF0EB",
         'quaternary': "#ACFCD9"
       }
