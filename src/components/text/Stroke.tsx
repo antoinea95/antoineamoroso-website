@@ -27,11 +27,11 @@ export const Stroke = ({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={`absolute inset-0 -z-[1] w-full h-full ${strokeWidth} ${svgClass}`}
+      className={`absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 inset-0 -z-[1] w-full h-full ${strokeWidth} ${svgClass}`}
     >
       <text
         x="50%"
-        y="50%"
+        y="53%"
         dy=".35em"
         text-anchor="middle"
         stroke-linejoin="round"

@@ -8,7 +8,7 @@ import { NavLink } from "./NavLink";
  */
 export const NavBar = () => {
   return (
-    <nav className="bg-primary w-11/12 max-w-[370px] flex items-center justify-between px-6 py-2 sm:px-8 sm:py-3 rounded-full border-[5px] sm:border-[7px] border-secondary shadow-custom font-semibold text-secondary fixed left-1/2 -translate-x-1/2">
+    <nav className="bg-primary w-5/6 max-w-[350px] flex items-center justify-between px-6 py-2 sm:px-8 sm:py-3 rounded-full border-[5px] sm:border-[7px] border-secondary shadow-custom font-semibold text-secondary fixed left-1/2 -translate-x-1/2">
       <NavLink name="Projects" />
       <NavLink name="Work" />
       <NavLink name="About" />

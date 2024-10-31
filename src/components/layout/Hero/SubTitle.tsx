@@ -1,18 +1,19 @@
 import { RoundLink } from "../../cta/RoundLink"
 import { Title } from "../../text/Title"
+import { SiGithub, SiLinkedin } from "react-icons/si";
 
 export const SubTitle = () => {
 
     return (
-        <div className="flex justify-between items-start">
-        <div className="-space-x-4 pt-2">
-            <RoundLink url="https://www.linkedin.com/in/antoine-amoroso-developpeur-web/" src="./assets/linkedin.png" content="LinkedIn" />
-            <RoundLink url="https://github.com/antoinea95" src="./assets/github.png" content="Github" />
+        <div className="flex justify-between items-start flex-nowrap px-2 w-full">
+        <div className="-space-x-2 flex-nowrap flex">
+            <RoundLink url="https://www.linkedin.com/in/antoine-amoroso-developpeur-web/" icon={SiLinkedin} content="LinkedIn" />
+            <RoundLink url="https://github.com/antoinea95" icon={SiGithub} content="Github" />
         </div>
         <Title
             headingLevel="p"
             content="front-end developer"
-            fontSize="text-2xl"
+            fontSize="text-lg md:text-2xl"
             strokeWidth="stroke-[8px]"
           />
 

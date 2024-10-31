@@ -4,7 +4,7 @@ import { NavBar } from "./components/nav/NavBar"
 function App() {
 
   return (
-      <main className="font-degular px-10 py-4 text-sm sm:text-base h-screen max-h-dvh">
+      <main className="font-degular px-3 md:px-10 py-4 text-sm sm:text-base h-screen max-h-dvh">
         <header>
           <NavBar />
         </header>

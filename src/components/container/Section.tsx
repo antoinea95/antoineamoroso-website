@@ -11,7 +11,7 @@ import { PropsWithChildren } from "react";
  */
 export const Section = ({ children }: PropsWithChildren) => {
   return (
-    <section className="h-full max-h-dvh flex items-center justify-center pt-16">
+    <section className="min-h-[70vh] lg:h-full max-h-dvh flex items-center justify-center pt-16">
       {children}
     </section>
   );

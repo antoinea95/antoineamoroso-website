@@ -29,7 +29,7 @@ export const Title = ({
     <Heading
       className={`text-primary px-3 py-1 ${
         fontSize ? fontSize : ""
-      } w-fit relative`}
+      } w-fit relative text-nowrap leading-none tracking-tight`}
     >
       {content}
       <Stroke name={content} strokeWidth={strokeWidth} />
