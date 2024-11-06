@@ -17,24 +17,22 @@ import { Stroke } from "./Stroke";
 export const Title = ({
   content,
   headingLevel: Heading,
-  fontSize,
-  strokeWidth,
 }: {
   content: string;
   headingLevel: ElementType;
-  fontSize?: string;
-  strokeWidth: string;
 }) => {
+
+  const titleSize = Heading === "h1" ? "clamp(2.3rem, 8vw, 15rem)": Heading === "h2" ? "clamp(1rem, 3vw, 4rem)" : "16px"
+
   return (
-    <Heading
-      className={`text-primary px-3 py-1 ${
-        fontSize ? fontSize : ""
-      } w-fit relative text-nowrap leading-none tracking-tight`}
-    >
-      {content}
-      <Stroke name={content} strokeWidth={strokeWidth} />
-    </Heading>
+    <div className="relative flex items-center justify-center leading-none tracking-tight whitespace-nowrap w-fit" style={{
+      fontSize: titleSize,
+      fontWeight: Heading === "h1" ? "900" : "600"
+    }}>
+      <Heading className="text-primary p-[0.15em]">
+        {content}
+      </Heading>
+      <Stroke name={content} />
+    </div>
   );
 };
-
-

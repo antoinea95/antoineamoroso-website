@@ -1,17 +1,15 @@
-import { Hero } from "./components/layout/Hero/Hero"
-import { NavBar } from "./components/nav/NavBar"
+import { About } from "./components/layout/About/About";
+import { Hero } from "./components/layout/Hero/Hero";
+
 
 function App() {
 
   return (
-      <main className="font-degular px-3 md:px-10 py-4 text-sm sm:text-base h-screen max-h-dvh">
-        <header>
-          <NavBar />
-        </header>
+      <main className="font-degular text-sm sm:text-base">
         <Hero />
+        <About />
       </main>
-     
-  )
+  );
 }
 
-export default App
+export default App;
