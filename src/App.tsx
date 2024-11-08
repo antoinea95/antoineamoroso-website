@@ -8,6 +8,7 @@ function App() {
       <main className="font-degular text-sm sm:text-base">
         <Hero />
         <About />
+        <div className="h-dvh"></div>
       </main>
   );
 }

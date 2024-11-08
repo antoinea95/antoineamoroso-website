@@ -39,7 +39,7 @@ export const Stroke = ({
 
   return (
     <div
-      className="absolute top-1/2 left-0 w-full h-full flex items-center justify-center -translate-y-1/2 -z-[1]"
+      className="absolute top-0 left-0 w-full h-full flex items-center justify-center -z-10"
       ref={divRef}
     >
       <svg

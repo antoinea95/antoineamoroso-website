@@ -37,18 +37,7 @@ export const Hero = () => {
       const heroSectionTop = heroPictureElement?.offsetTop || 0;
 
       if (scrollY > heroSectionTop) {
-        gsap.set(heroPictureElement, {
-          scale: 0.2,
-        });
-
-        gsap.set(navElement, {
-          gap: "5rem",
-          rotate: 0,
-          y: 0,
-        });
-
         initScrollAnimations();
-
       } else {
         const tl = gsap.timeline();
 
@@ -66,11 +55,19 @@ export const Hero = () => {
         // Title intro animation configuration based on screen size
         const getTitleAnimation = (isToLeft = false) => {
           const isMobile = !isLargeScreen;
+          const rotateFrames = [5, -5, 5, 0, 0];
+          const xValues = [280, 187, 94, -10, 0];
           const keyframes = isMobile
-            ? { y: [-80, -60, -40, -20, 0], rotate: [5, -5, 5, -5, 0] }
+            ? { y: [-80, -60, -40, -20, 0], rotate: rotateFrames }
             : {
-                x: isToLeft ? [280, 187, 94, -10, 0] : [-280, -187, -94, 10, 0],
-                rotate: [5, -5, 5, 0, 0],
+                x: isToLeft
+                  ? xValues
+                  : xValues.map((value) =>
+                      value.toLocaleString().includes("-")
+                        ? `${value}`
+                        : `-${value}`
+                    ),
+                rotate: rotateFrames,
               };
 
           return {
@@ -79,17 +76,18 @@ export const Hero = () => {
             ease: "steps(4)",
           };
         };
-
+        
+        const [titleLeft, titleRight] = titleRef.current.childNodes
         // Set initial positions for the titles and subtitle
         if (isLargeScreen) {
-          gsap.set(titleRef.current.childNodes[0], { x: 280, y: -30 });
-          gsap.set(titleRef.current.childNodes[1], { x: -280, y: -30 });
+          gsap.set(titleLeft, { x: 280, y: -30 });
+          gsap.set(titleRight, { x: -280, y: -30 });
         } else {
           gsap.set(titleRef.current, { y: -80 });
         }
         gsap.set(subTitleRef.current, { y: -80, opacity: 0, zIndex: -1 });
         gsap.set(navElement, { y: -80 });
-        gsap.set(titleRef.current, {width: 0})
+        gsap.set(titleRef.current, { width: 0 });
 
         // Main animation sequence
         tl.to(
@@ -100,10 +98,10 @@ export const Hero = () => {
 
         if (isLargeScreen) {
           tl.to(
-            titleRef.current.childNodes[0],
+            titleLeft,
             getTitleAnimation(true),
             "<"
-          ).to(titleRef.current.childNodes[1], getTitleAnimation(false), "<");
+          ).to(titleRight, getTitleAnimation(false), "<");
         } else {
           tl.to(titleRef.current, getTitleAnimation(), "<");
         }
@@ -155,7 +153,6 @@ export const Hero = () => {
             trigger: heroPictureElement,
             start: "top top",
             end: "+=180",
-            markers: true,
             invalidateOnRefresh: true,
             scrub: 0.3,
           },
