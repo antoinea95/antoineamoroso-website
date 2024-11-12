@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Section } from "../../container/Section";
 import { Title } from "../../text/Title";
 import { useAppContext } from "../../../hooks/useAppContext";
@@ -18,12 +18,12 @@ gsap.registerPlugin(ScrollTrigger);
  * @returns The Hero component.
  */
 export const Hero = () => {
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1024);
   const {
     navRef,
     heroPictureRef,
     heroPictureDimension,
     setHeroPictureDimension,
+    isLargeScreen
   } = useAppContext();
   const titleRef = useRef<HTMLElement>(null);
   const subTitleRef = useRef<HTMLElement>(null);
@@ -76,8 +76,8 @@ export const Hero = () => {
             ease: "steps(4)",
           };
         };
-        
-        const [titleLeft, titleRight] = titleRef.current.childNodes
+
+        const [titleLeft, titleRight] = titleRef.current.childNodes;
         // Set initial positions for the titles and subtitle
         if (isLargeScreen) {
           gsap.set(titleLeft, { x: 280, y: -30 });
@@ -97,11 +97,11 @@ export const Hero = () => {
         );
 
         if (isLargeScreen) {
-          tl.to(
-            titleLeft,
-            getTitleAnimation(true),
+          tl.to(titleLeft, getTitleAnimation(true), "<").to(
+            titleRight,
+            getTitleAnimation(false),
             "<"
-          ).to(titleRight, getTitleAnimation(false), "<");
+          );
         } else {
           tl.to(titleRef.current, getTitleAnimation(), "<");
         }
@@ -174,7 +174,7 @@ export const Hero = () => {
         // Animation for adjusting the gap in the navigation element
         tl.to(navElement, {
           keyframes: {
-            gap: ["8rem", "3rem", "5rem"],
+            gap: ["8rem", "3rem", `${heroPictureElement.offsetWidth * 0.2}px`],
             rotate: [-5, 5, 0],
           },
           duration: 1,
@@ -187,7 +187,6 @@ export const Hero = () => {
   // Update screen size and hero picture dimensions on resize
   useEffect(() => {
     const handleResize = () => {
-      setIsLargeScreen(window.innerWidth >= 1024);
       if (heroPictureRef && heroPictureRef.current) {
         setHeroPictureDimension({
           width: heroPictureRef.current.offsetWidth,
@@ -208,11 +207,11 @@ export const Hero = () => {
       <NavBar />
       <HeroPicture />
       <section
-        className="min-h-[520px] justify-end lg:h-full w-fit flex flex-col items-center lg:justify-center mx-auto -space-x-4 2xl:-space-y-4"
+        className=" justify-center h-full w-fit flex flex-col items-center mx-auto 2xl:-space-y-4"
         style={{
-          height: isLargeScreen
-            ? "100%"
-            : `calc(${heroPictureDimension.height + 100}px + 10vh)`,
+          paddingTop: isLargeScreen
+            ? "0"
+            : `calc(${heroPictureDimension.height + 100}px)`,
         }}
       >
         <section
@@ -243,7 +242,7 @@ export const Hero = () => {
               content="Github"
             />
           </div>
-          <Title headingLevel="h2" content="front-end developer" />
+          <Title headingLevel="h3" content="front-end developer" />
         </section>
       </section>
     </Section>

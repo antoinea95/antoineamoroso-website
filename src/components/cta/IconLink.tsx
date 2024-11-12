@@ -29,7 +29,7 @@ export const IconLink = ({
     >
       <span className="flex items-center shrink-0 z-10 h-fit w-6 sm:w-8 lg:w-fit text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl">
         <Icon
-          className="drop-shadow-custom"
+          className="drop-shadow-custom overflow-visible"
           stroke="#f1f5f9"
           paintOrder="stroke"
           strokeLinejoin="round"

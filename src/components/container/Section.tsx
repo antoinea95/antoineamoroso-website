@@ -11,7 +11,7 @@ import { PropsWithChildren } from "react";
  */
 export const Section = ({ children }: PropsWithChildren) => {
   return (
-    <section className="h-fit w-[95%] overflow-hidden lg:h-screen max-h-dvh m-auto relative py-2">
+    <section className="w-[95%] overflow-hidden h-screen max-h-dvh m-auto py-2">
       {children}
     </section>
   );

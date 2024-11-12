@@ -7,6 +7,8 @@ interface RefContextType {
   navRef: React.RefObject<HTMLElement> | null;
   heroPictureDimension: {width: number, height: number},
   setHeroPictureDimension: Dispatch<SetStateAction<{width: number, height: number}>>;
+  isLargeScreen: boolean;
+  setIsLargeScreen: Dispatch<SetStateAction<boolean>>;
 }
 
 // Créer le contexte

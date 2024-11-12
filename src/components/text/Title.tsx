@@ -22,7 +22,7 @@ export const Title = ({
   headingLevel: ElementType;
 }) => {
 
-  const titleSize = Heading === "h1" ? "clamp(2.3rem, 8vw, 15rem)": Heading === "h2" ? "clamp(1rem, 3vw, 4rem)" : "clamp(16px, 2vw, 24px)"
+  const titleSize = Heading === "h1" ? "clamp(2.3rem, 8vw, 15rem)": Heading === "h2" ? "clamp(2.3rem, 6vw, 12rem)" : Heading === "h3" ? "clamp(1rem, 3vw, 4rem)" : "clamp(16px, 5vw, 24px)"
 
   return (
     <div className={`relative inline-flex items-center justify-center leading-none tracking-tight whitespace-nowrap w-fit`} style={{

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Section } from "../../container/Section";
 import { Title } from "../../text/Title";
 import { useGSAP } from "@gsap/react";
@@ -13,25 +13,21 @@ export const About = () => {
   const heartRef = useRef<HTMLImageElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
-
-
   // Animation GSAP pour le scroll
   useGSAP(() => {
-
-    let heartLoop: gsap.core.Tween | null = null
+    let heartLoop: gsap.core.Tween | null = null;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#trigger", // Déclencheur
-        start: "-=200", // Déclenche l'animation quand le début de l'élément entre dans la fenêtre
-        markers: true,
+        start: "-=100", // Déclenche l'animation quand le début de l'élément entre dans la fenêtre
         end: "+=200",
         onEnter: () => {
           tl.restart();
         },
         onLeaveBack: () => {
           tl.reverse();
-          if(heartLoop) tl.remove(heartLoop)
+          if (heartLoop) tl.remove(heartLoop);
         },
       },
     });
@@ -118,7 +114,7 @@ export const About = () => {
               rotate: [-5, 5, -5, 0],
             },
             onComplete: () => {
-              heartLoop =  gsap.to(heartRef.current, {
+              heartLoop = gsap.to(heartRef.current, {
                 keyframes: {
                   scale: [1, 1.2, 1, 1.1, 1, 1],
                 },
@@ -132,43 +128,29 @@ export const About = () => {
           },
           ">-0.2"
         );
-
     }
   });
 
   return (
     <Section>
       <div
-        className="w-[80%] max-w-[1000px] min-h-[700px] h-full flex flex-col items-center justify-center gap-10 m-auto"
+        className="w-[80%] max-w-[1000px] min-h-[700px] h-full flex flex-col items-center justify-center gap-5 m-auto"
         id="trigger"
       >
         <section className="relative">
-          <h1
-            className="leading-none tracking-tight -space-x-2 lg:-space-x-5 relative flex items-center w-fit text-primary font-extrabold"
-            style={{
-              fontSize: "clamp(3rem, 8vw, 15rem)",
-            }}
-            ref={titleRef}
-          >
-            <span className="inline-flex relative p-[0.17em] ">
-              ABOUT
-              <Stroke name="ABOUT" />
-            </span>
-            <span className="inline-flex relative p-[0.17em]">
-              ME
-              <Stroke name="ME" />
-            </span>
-          </h1>
+          <div className="-space-x-3" ref={titleRef}>
+            <Title content="About" headingLevel="h2" />
+            <Title content="me" headingLevel="h2" />
+          </div>
           <img
             src="./assets/heart.png"
-            className="absolute top-2 lg:top-3 -right-3 z-10 drop-shadow-custom will-change-transform"
+            className="absolute top-0 lg:top-3 -right-3 z-10 drop-shadow-custom will-change-transform"
             style={{
-              width: "clamp(40px, 7vw, 150px)",
+              width: "clamp(40px, 5vw, 100px)",
             }}
             ref={heartRef}
           />
         </section>
-
         <p
           className="w-full px-4 py-4 leading-snug text-primary font-medium"
           ref={aboutRef}

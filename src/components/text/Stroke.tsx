@@ -46,7 +46,7 @@ export const Stroke = ({
         xmlns="http://www.w3.org/2000/svg"
         width={divDimension.width}
         height={divDimension.height}
-        className={`${svgClass} flex items-center justify-center`}
+        className={`${svgClass} flex items-center justify-center overflow-visible`}
         style={{
           strokeWidth: "clamp(5px, 0.2em, 20px)",
         }}
