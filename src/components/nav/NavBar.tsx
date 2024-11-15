@@ -11,7 +11,7 @@ export const NavBar = () => {
   const { navRef } = useAppContext();
 
   return (
-    <header className="flex items-center justify-center fixed w-full left-0 z-20">
+    <header className="flex items-center justify-center fixed w-full left-0 z-10">
       <nav
         ref={navRef}
         className="w-fit bg-primary max-w-[400px] h-fit flex items-center gap-2 px-4  rounded-full border-[5px] sm:border-[7px] border-secondary shadow-custom font-semibold text-secondary"

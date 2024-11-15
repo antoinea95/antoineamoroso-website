@@ -9,6 +9,8 @@ interface RefContextType {
   setHeroPictureDimension: Dispatch<SetStateAction<{width: number, height: number}>>;
   isLargeScreen: boolean;
   setIsLargeScreen: Dispatch<SetStateAction<boolean>>;
+  scrollY: number;
+  setScrollY: Dispatch<SetStateAction<number>>
 }
 
 // Créer le contexte

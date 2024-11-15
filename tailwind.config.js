@@ -19,7 +19,8 @@ export default {
         'primary' : "#5465FF",
         'secondary' : "#f1f5f9",
         'tertiary' : "#FFF0EB",
-        'quaternary': "#ACFCD9"
+        'quaternary': "#ACFCD9",
+        'quinary' : "#FC4C01"
       }
     },
   },

@@ -30,7 +30,7 @@ export const Title = ({
       fontWeight: Heading === "h1" ? "900" : "600",
       overflow: Heading === "span" ? "hidden" : "visible",
     }}>
-      <Heading className={`text-primary ${Heading === "span" ?"p-[0.3em]" : "p-[0.15em]"} z-10`}>
+      <Heading className={`text-primary ${Heading === "span" ?"p-[0.3em]" : "p-[0.15em]"} z-[5]`}>
         {content}
       </Heading>
       <Stroke name={content} />

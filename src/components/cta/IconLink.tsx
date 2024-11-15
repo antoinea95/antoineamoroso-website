@@ -40,7 +40,7 @@ export const IconLink = ({
         />
       </span>
 
-      <span className="relative px-3 inline-flex lg:-translate-x-14 lg:opacity-0 lg:group-hover:translate-x-0 lg:group-hover:opacity-100 transition-all duration-200"
+      <span className="relative px-3 inline-flex lg:-translate-x-14 lg:opacity-0 lg:group-hover:translate-x-0 lg:group-hover:opacity-100 transition-all duration-200 whitespace-nowrap"
       style={{
         fontSize: "clamp(14px, 8vw, 24px)"
       }}
