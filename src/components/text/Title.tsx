@@ -22,15 +22,15 @@ export const Title = ({
   headingLevel: ElementType;
 }) => {
 
-  const titleSize = Heading === "h1" ? "clamp(2.3rem, 8vw, 15rem)": Heading === "h2" ? "clamp(2.3rem, 6vw, 12rem)" : Heading === "h3" ? "clamp(1rem, 3vw, 4rem)" : "clamp(16px, 5vw, 24px)"
+  const titleSize = Heading === "h1" ? "clamp(2.6rem, 8vw, 15rem)": Heading === "h2" ? "clamp(3.5rem, 6vw, 12rem)" : Heading === "h3" ? "clamp(1.3rem, 3vw, 4rem)" : "clamp(16px, 5vw, 24px)"
 
   return (
-    <div className={`relative inline-flex items-center justify-center leading-none tracking-tight whitespace-nowrap w-fit`} style={{
+    <div className={`relative inline-flex items-center justify-center leading-none tracking-tight whitespace-nowrap w-fit lg:group-hover:scale-125 lg:group-hover:translate-x-3 transition-all`} style={{
       fontSize: titleSize,
       fontWeight: Heading === "h1" ? "900" : "600",
       overflow: Heading === "span" ? "hidden" : "visible",
     }}>
-      <Heading className={`text-primary ${Heading === "span" ?"p-[0.3em]" : "p-[0.15em]"} z-[5]`}>
+      <Heading className={`text-primary ${Heading === "span" ?"p-[0.3em]" : "p-[0.15em]"}`}>
         {content}
       </Heading>
       <Stroke name={content} />

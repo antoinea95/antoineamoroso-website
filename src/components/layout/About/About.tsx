@@ -4,7 +4,6 @@ import { Title } from "../../text/Title";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { Stroke } from "../../text/Stroke";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,13 +14,15 @@ export const About = () => {
 
   // Animation GSAP pour le scroll
   useGSAP(() => {
+    ScrollTrigger.refresh();
     let heartLoop: gsap.core.Tween | null = null;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#trigger", // Déclencheur
-        start: "-=100", // Déclenche l'animation quand le début de l'élément entre dans la fenêtre
+        start: `-=${window.innerHeight / 2}px`, // Déclenche l'animation quand le début de l'élément entre dans la fenêtre
         end: "+=200",
+        invalidateOnRefresh: true,
         onEnter: () => {
           tl.restart();
         },
@@ -86,7 +87,7 @@ export const About = () => {
           heartRef.current,
           {
             keyframes: {
-              scale: [0.2, 0.4, 0.6, 1, 1.2, 1.2, 1],
+              scale: [0, 0.4, 0.6, 1, 1.2, 1.2, 1],
               rotate: [60, 120, 180, 240, 300, 360, 12],
             },
             ease: "steps(6)",
@@ -134,7 +135,7 @@ export const About = () => {
   return (
     <Section>
       <div
-        className="w-[80%] max-w-[1000px] min-h-[700px] h-full flex flex-col items-center justify-center gap-5 m-auto"
+        className="w-[98%] max-w-[900px] flex flex-col items-center gap-5 m-auto overflow-hidden"
         id="trigger"
       >
         <section className="relative">
@@ -144,7 +145,7 @@ export const About = () => {
           </div>
           <img
             src="./assets/heart.png"
-            className="absolute top-0 lg:top-3 -right-3 z-10 drop-shadow-custom will-change-transform"
+            className="absolute top-3 -right-3 z-[1] drop-shadow-custom will-change-transform"
             style={{
               width: "clamp(40px, 5vw, 100px)",
             }}

@@ -10,7 +10,9 @@ interface RefContextType {
   isLargeScreen: boolean;
   setIsLargeScreen: Dispatch<SetStateAction<boolean>>;
   scrollY: number;
-  setScrollY: Dispatch<SetStateAction<number>>
+  setScrollY: Dispatch<SetStateAction<number>>;
+  transitionPlayed: string;
+  setTransitionPlayed: Dispatch<SetStateAction<string>>;
 }
 
 // Créer le contexte

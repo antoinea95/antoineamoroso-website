@@ -26,7 +26,6 @@ export const HeroPicture = () => {
             start: "top top",
             end: "+=180",
             invalidateOnRefresh: true,
-            markers: true,
             scrub: 0.3,
           },
         });

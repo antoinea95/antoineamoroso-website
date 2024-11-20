@@ -4,12 +4,12 @@ import { Title } from "../../text/Title";
 import { useAppContext } from "../../../hooks/useAppContext";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { HeroPicture } from "./HeroPicture";
 import { ScrollTrigger } from "gsap/all";
-import { NavBar } from "../../nav/NavBar";
 import { IconLink } from "../../cta/IconLink";
 import { RiLinkedinFill } from "react-icons/ri";
 import { TbBrandGithubFilled } from "react-icons/tb";
+import { NavBar } from "../../nav/NavBar";
+import { HeroPicture } from "./HeroPicture";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
@@ -126,8 +126,8 @@ export const Hero = () => {
 
   return (
     <Section>
-      <HeroPicture />
-      <NavBar />
+        <NavBar />
+        <HeroPicture />
       <section
         id="hero"
         className="justify-end lg:justify-center lg:h-full w-fit lg:w-full flex flex-col items-center mx-auto 2xl:-space-y-4 h-[75vh] min-h-[575px]"

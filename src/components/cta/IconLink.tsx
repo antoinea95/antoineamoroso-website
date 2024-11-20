@@ -27,7 +27,7 @@ export const IconLink = ({
       target="_blanl"
       className="inline-flex w-6 sm:w-8 lg:w-10 2xl:w-14 py-1 items-center -space-x-[10px] text-primary font-semibold group lg:hover:w-32 2xl:hover:w-36 overflow-hidden transition-all"
     >
-      <span className="flex items-center shrink-0 z-10 h-fit w-6 sm:w-8 lg:w-fit text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl">
+      <span className="flex items-center shrink-0 z-[1] h-fit w-6 sm:w-8 lg:w-fit text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl">
         <Icon
           className="drop-shadow-custom overflow-visible"
           stroke="#f1f5f9"
