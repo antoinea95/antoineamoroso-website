@@ -22,6 +22,7 @@ export const About = () => {
         trigger: "#trigger", // Déclencheur
         start: `-=${window.innerHeight / 2}px`, // Déclenche l'animation quand le début de l'élément entre dans la fenêtre
         end: "+=200",
+        markers: true,
         invalidateOnRefresh: true,
         onEnter: () => {
           tl.restart();

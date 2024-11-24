@@ -61,7 +61,7 @@ export const ProjectHeader = ({
       </div>
       <div className="flex items-center gap-3 flex-wrap">
         {project.technos.map((techno) => (
-          <Techno techno={techno} />
+          <Techno techno={techno} size="text-lg" />
         ))}
       </div>
     </header>

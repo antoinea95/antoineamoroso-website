@@ -170,22 +170,22 @@ export const ProjectCard = ({ projectName }: { projectName: string }) => {
   };
 
   return (
-    <button
-      className="w-full flex flex-col-reverse items-center lg:flex-row py-10 lg:py-0"
-      ref={sectionRef}
-      onClick={handleClick}
-      onMouseMove={moveShape}
-      onMouseLeave={handleMouseLeave}
-    >
-      <span className="w-full p-3 group flex justify-center lg:justify-start">
-        <Title content={projectName} headingLevel="h3" />
-      </span>
-      <img
-        src={project?.pictures[activeIndex]}
-        alt={`${projectName} preview`}
-        className="lg:fixed lg:-top-44 lg:-left-10 pointer-events-none w-2/3 lg:w-0 z-20"
-        ref={ImageRef}
-      />
-    </button>
+      <button
+        className="w-full flex flex-col-reverse items-center lg:flex-row py-10 lg:py-0 overflow-hidden"
+        ref={sectionRef}
+        onClick={handleClick}
+        onMouseMove={moveShape}
+        onMouseLeave={handleMouseLeave}
+      >
+        <span className="w-full p-3 group flex justify-center lg:justify-start">
+          <Title content={projectName} headingLevel="h3" />
+        </span>
+        <img
+          src={project?.pictures[activeIndex]}
+          alt={`${projectName} preview`}
+          className="lg:fixed lg:-top-44 lg:-left-10 pointer-events-none w-2/3 lg:w-0 z-20"
+          ref={ImageRef}
+        />
+      </button>
   );
 };

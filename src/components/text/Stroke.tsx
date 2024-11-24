@@ -1,15 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
-/**
- * `Stroke` is a component that renders an SVG to add a rounded, customizable stroke behind a given text.
- * It can be used within any text tag to add a decorative outline effect.
- *
- * @param {Object} props - Configuration options for the `Stroke` component.
- * @param {string} props.name - The text content to be displayed in the SVG.
- * @param {boolean} [props.isHover] - Optional; if true, displays the stroke only on hover.
- *
- * @returns An SVG element with a rounded stroke effect positioned behind the text.
- */
 export const Stroke = ({
   name,
   isHover,
@@ -22,20 +12,20 @@ export const Stroke = ({
     : "stroke-secondary drop-shadow-custom";
 
   const divRef = useRef<HTMLDivElement>(null);
-  const [divDimension, setDivDimension] = useState({
-    width: 0,
-    height: 0,
-  });
+  const textRef = useRef<SVGTextElement>(null);
+  const [fontSize, setFontSize] = useState<number>(16);
 
-  useEffect(() => {
-    if (divRef.current) {
-      const { offsetWidth, offsetHeight } = divRef.current;
-      setDivDimension({
-        width: offsetWidth,
-        height: offsetHeight,
-      });
-    }
-  }, [name]); // Re-run the effect if `name` changes to recalculate dimensions
+  useLayoutEffect(() => {
+    const updateFontSize = () => {
+      if (textRef.current) {
+        const computedStyle = window.getComputedStyle(textRef.current);
+        const parsedFontSize = parseFloat(computedStyle.fontSize);
+        setFontSize(parsedFontSize);
+      }
+    };
+
+    requestAnimationFrame(updateFontSize);
+  }, [name]); // Recalcul si `name` change
 
   return (
     <div
@@ -44,18 +34,19 @@ export const Stroke = ({
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width={divDimension.width}
-        height={divDimension.height}
         className={`${svgClass} flex items-center justify-center overflow-visible`}
+        width="100%"
+        height="100%"
         style={{
-          strokeWidth: "clamp(5px, 0.2em, 15px)",
+          strokeWidth: `${fontSize * 0.2}px`, // Stroke épaisseur basée sur la taille de police
         }}
       >
         <text
+          ref={textRef}
           x="50%"
           y="50%"
           textAnchor="middle"
-          dominantBaseline="central" // Correction pour le centrage vertical
+          dominantBaseline="central"
           strokeLinejoin="round"
           strokeLinecap="round"
           fontSize="inherit"

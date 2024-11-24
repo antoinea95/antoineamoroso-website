@@ -11,10 +11,67 @@
       {
         "name": "Bento-running",
         "url": "https://bento-running.vercel.app/",
-        "technos": [{"icon": "SiNextdotjs", "name": "Next.js"} ,{ "icon": "SiTypescript", "name": "Typescript"}, { "icon": "SiStrava", "name": "Strava API"}, { "icon": "DiSass", "name": "Sass"}],
+        "technos": [{"icon": "SiNextdotjs", "name": "Next.js"} ,{ "icon": "SiTypescript", "name": "Typescript"},  { "icon": "SiStrava", "name": "Strava API"}, { "icon": "DiSass", "name": "Sass"}],
         "backgroundColor": "bg-quinary",
         "pictures": ["./assets/bento-running/login.png", "./assets/bento-running/light.png", "./assets/bento-running/dark.png"],
         "content": "This is my first project developed using Next.js and TypeScript. Driven by my passion for running, I explored the Strava API to display user data in a clear and organized manner. The Bento design approach provides clarity and helps in structuring the elements effectively."
+      }
+    ],
+
+    "works": [
+      {
+        "id": "work-1",
+        "date": "Mar.24-Jun.24",
+        "role": "Front-end developer",
+        "company": "Aviation-advice",
+        "technos": [{"icon": "SiReact", "name": "React"} , {"icon": "SiFirebase", "name": "Firebase"}, { "icon": "SiStripe", "name": "Stripe"}, { "icon": "DiSass", "name": "Sass"}],
+        "details": "Led the development of a web platform for trainers to manage courses and interact with students, collaborating with two developers and validating Pull Requests. Features included training pack creation, availability updates, direct messaging, and document uploads for trainers, while students could schedule meetings, purchase courses (Stripe), upload CVs, and access quizzes. The platform streamlined course management and improved trainer-student collaboration."
+      },
+      {
+        "id": "work-2",
+        "date": "Dec.22-Nov.23",
+        "role": "Front-end developer",
+        "company": "Elit-tech.",
+        "technos": [{"icon": "SiReact", "name": "React"} ,{ "icon": "DiSass", "name": "Sass"}, { "icon": "SiPhp", "name": "PHP"}, { "icon": "SiMysql", "name": "MySQL"}, { "icon": "SiAzuredevops", "name": "Azure devOps"}],
+        "details": "Developed and designed a frontend portal for clients to view, manage, monitor, and report on assets, with a focus on data filtering and easy access to key information."
+      },
+      {
+        "id": "work-3",
+        "date": "Oct.21-Jan.22",
+        "role": "Specialist",
+        "company": "Apple Store",
+        "details": "Offering a unique customer experience: product demonstrations, assistance, and usage advice."
+      },
+      {
+        "id": "work-4",
+        "date": "Sep.19-Jun.20",
+        "role": "Entrepreneur",
+        "company": "Arter Shop",
+        "details": "Co-created a streetwear boutique concept in Lyon, aiming to offer an innovative customer experience and unique products. Led communication efforts, designing the brand's visual identity and developing a communication strategy with partners. Project halted due to the pandemic."
+      },
+      {
+        "id": "work-5",
+        "date": "Jan.18-Sep.19",
+        "role": "Customer advisor",
+        "company": "Lacoste",
+        "details": "Providing a premium sales experience, stock management, opening and closing the store."
+      }],
+      "education": [
+      {
+        "id": "education-1",
+        "date": "Dec.22-Nov.23",
+        "role": "Application designer",
+        "company": "Openclassrooms",
+        "technos": [{"icon": "SiNextdotjs", "name": "Next.js"} ,{ "icon": "SiTypescript", "name": "Typescript"}, { "icon": "SiStrava", "name": "Strava API"}, { "icon": "DiSass", "name": "Sass"}],
+        "details": "Focused on frontend development, consolidating skills and exploring tools like Redux and Jest. Completed 14 projects in a work-study program, gaining practical experience in modern frontend technologies."
+      },
+      {
+        "id": "education-2",
+        "date": "Mar.22-Aug.22",
+        "role": "Web developer",
+        "company": "Openclassrooms",
+        "technos": [{"icon": "SiNextdotjs", "name": "Next.js"} ,{ "icon": "SiTypescript", "name": "Typescript"}, { "icon": "SiStrava", "name": "Strava API"}, { "icon": "DiSass", "name": "Sass"}],
+        "details": "Learned web development basics (HTML/CSS, JavaScript, Node.js, Express, MongoDB) through 7 project-based assignments simulating real-world scenarios. The final project involved building a company social network from scratch using React, Node.js, Express, and MongoDB, with oral defenses to present work and justify technical choices."
       }
     ]
   }

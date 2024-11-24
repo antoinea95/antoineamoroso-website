@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { Section } from "../../container/Section";
 import { Title } from "../../text/Title";
 import { useAppContext } from "../../../hooks/useAppContext";
 import gsap from "gsap";
@@ -125,7 +124,7 @@ export const Hero = () => {
 
 
   return (
-    <Section>
+    <section className="h-screen max-h-dvh py-5 w-[95%] m-auto">
         <NavBar />
         <HeroPicture />
       <section
@@ -159,6 +158,6 @@ export const Hero = () => {
           <Title headingLevel="h3" content="front-end developer" />
         </section>
       </section>
-    </Section>
+    </section>
   );
 };
