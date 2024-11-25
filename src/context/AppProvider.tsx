@@ -24,7 +24,8 @@ export const AppProvider = ({ children } : PropsWithChildren) => {
 
     const heroPictureRef = useRef<HTMLImageElement>(null);
     const navRef = useRef<HTMLElement>(null);
+    const detailsRef = useRef<HTMLDivElement>(null);
     
-    return <AppContext.Provider value={{heroPictureRef, navRef, heroPictureDimension, setHeroPictureDimension, isLargeScreen, setIsLargeScreen, scrollY, setScrollY, transitionPlayed, setTransitionPlayed}}>{children}</AppContext.Provider>;
+    return <AppContext.Provider value={{heroPictureRef, navRef, detailsRef, heroPictureDimension, setHeroPictureDimension, isLargeScreen, setIsLargeScreen, scrollY, setScrollY, transitionPlayed, setTransitionPlayed}}>{children}</AppContext.Provider>;
   };
   

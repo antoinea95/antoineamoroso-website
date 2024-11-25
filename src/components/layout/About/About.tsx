@@ -39,10 +39,10 @@ export const About = () => {
     const childrens = aboutElement?.childNodes;
 
     if (sectionTitles && aboutElement && childrens) {
-      const [titleLeft, titleRight] = sectionTitles;
+      const [titleLeft] = sectionTitles;
 
-      gsap.set([titleLeft, titleRight], {
-        x: (i) => (i === 0 ? "-100vw" : "100vw"),
+      gsap.set([titleLeft], {
+        x: "-100vw"
       });
       gsap.set(heartRef.current, { scale: 0 });
       gsap.set(aboutElement, { y: "100vh" }); // Positionne l'élément en dehors de la fenêtre
@@ -72,18 +72,6 @@ export const About = () => {
         ease: "steps(8)",
         duration: 1,
       })
-        .to(
-          titleRight,
-          {
-            keyframes: {
-              x: transformValues,
-              rotation: [...rotationFrames, 5, 0],
-            },
-            ease: "steps(8)",
-            duration: 1,
-          },
-          "<"
-        )
         .to(
           heartRef.current,
           {
@@ -136,25 +124,24 @@ export const About = () => {
   return (
     <Section>
       <div
-        className="w-[98%] max-w-[900px] flex flex-col items-center gap-5 m-auto overflow-hidden"
+        className="space-y-10"
         id="trigger"
       >
-        <section className="relative">
-          <div className="-space-x-3" ref={titleRef}>
+        <section className="relative w-fit flex items-center -space-x-2">
+          <div ref={titleRef}>
             <Title content="About" headingLevel="h2" />
-            <Title content="me" headingLevel="h2" />
           </div>
           <img
             src="./assets/heart.png"
-            className="absolute top-3 -right-3 z-[1] drop-shadow-custom will-change-transform"
+            className="drop-shadow-custom"
             style={{
-              width: "clamp(40px, 5vw, 100px)",
+              width: "clamp(35px, 4vw, 80px)",
             }}
             ref={heartRef}
           />
         </section>
         <p
-          className="w-full px-4 py-4 leading-snug text-primary font-medium"
+          className="w-1/2 leading-snug text-primary font-medium text-lg"
           ref={aboutRef}
         >
           A <Title headingLevel="span" content="passionate developper" /> with

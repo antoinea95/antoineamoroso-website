@@ -1,27 +1,84 @@
 import { Stroke } from "../../text/Stroke";
 import { useAppContext } from "../../../hooks/useAppContext";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { WorkDetail } from "./WorkDetail";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
-type WorkCardProps = {
+export type WorkCardProps = {
   id: string;
   date: string;
   role: string;
-  technos?: {name: string, icon:string}[]
+  technos?: { name: string; icon: string }[];
   company: string;
   details: string;
 };
 
 export const WorkCard = ({
   work,
-  workActive,
   setWorkActive,
+  workActive,
 }: {
   work: WorkCardProps;
-  workActive: string | null
+  workActive: string | null;
   setWorkActive: Dispatch<SetStateAction<string | null>>;
 }) => {
   const { isLargeScreen } = useAppContext();
+  const detailsRef = useRef<HTMLDivElement | null>(null);
+  const [detailsHeight, setDetailsHeight] = useState(0);
+  const xTo = useRef<gsap.QuickToFunc | null>(null);
+  const yTo = useRef<gsap.QuickToFunc | null>(null);
+
+
+  useEffect(() => {
+    if(detailsRef.current) {
+      setDetailsHeight(detailsRef.current.offsetHeight)
+    }
+  }, [detailsRef])
+
+
+  const { contextSafe } = useGSAP(() => {
+    if (detailsRef.current) {
+      gsap.set(detailsRef.current, {opacity: 0, pointerEvents: "none"});
+      xTo.current = gsap.quickTo(detailsRef.current, "x", { duration: 0.2 });
+      yTo.current = gsap.quickTo(detailsRef.current, "y", { duration: 0.2 });
+    }
+  });
+
+  const handleDetailPosition = contextSafe(
+    (event: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
+      if (workActive === work.id) {
+        setWorkActive(null);
+        gsap.to(detailsRef.current, {
+          opacity: 1,
+        });
+        return;
+      }
+
+      if (xTo.current && yTo.current) {
+        const needToBeTop = window.innerHeight - event.clientY <= 200;
+        xTo.current(event.clientX - (isLargeScreen ? 200 : 180));
+        yTo.current(needToBeTop ? event.clientY - (detailsHeight + 30) : event.clientY + 30);
+        gsap.to(detailsRef.current, {
+          opacity: 1,
+        });
+      }
+
+      // Active la carte actuelle
+      setWorkActive(work.id);
+    }
+  );
+
+  const handleMouseLeave = contextSafe(() => {
+    setWorkActive(null);
+    if(xTo.current && yTo.current) {
+      xTo.current(0);
+      yTo.current(0)
+    }
+    gsap.to(detailsRef.current, {
+      opacity: 0,
+    });
+  });
 
   return (
     <div className="flex items-center whitespace-nowrap lg:flex-col lg:w-fit lg:gap-2 w-full">
@@ -34,12 +91,12 @@ export const WorkCard = ({
       {isLargeScreen ? (
         <div
           className="w-5 h-5 rounded-full bg-primary border-[3px] border-white shadow-custom hover:scale-150 transition-all cursor-pointer"
-          onMouseEnter={() => setWorkActive(work.id)}
-          onMouseLeave={() => setWorkActive(null)}
+          onMouseEnter={handleDetailPosition}
+          onMouseLeave={handleMouseLeave}
         />
       ) : (
         <button
-          onClick={() => setWorkActive(prev => prev === work.id ? null : work.id)}
+          onClick={handleDetailPosition}
           className="w-5 h-5 rounded-full bg-primary border-[3px] border-white shadow-custom hover:scale-150 transition-all cursor-pointer"
         ></button>
       )}
@@ -53,7 +110,13 @@ export const WorkCard = ({
           <Stroke name={work.company} />
         </p>
       </section>
-      {workActive === work.id && <WorkDetail detail={work.details} technos={work.technos} />}
+      <div
+        ref={detailsRef}
+        className="fixed bg-primary border-[3px] border-white shadow-custom rounded-2xl max-w-[350px] lg:max-w-[400px] px-4 py-3 z-20 top-0 left-0 overflow-hidden"
+        style={{visibility: workActive === work.id ? "visible" : "hidden"}}
+      >
+          <WorkDetail detail={work.details} technos={work.technos} />
+      </div>
     </div>
   );
 };

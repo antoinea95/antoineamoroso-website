@@ -177,7 +177,7 @@ export const ProjectCard = ({ projectName }: { projectName: string }) => {
         onMouseMove={moveShape}
         onMouseLeave={handleMouseLeave}
       >
-        <span className="w-full p-3 group flex justify-center lg:justify-start">
+        <span className="w-full py-3 group flex justify-center lg:justify-start">
           <Title content={projectName} headingLevel="h3" />
         </span>
         <img

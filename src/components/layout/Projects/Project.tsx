@@ -115,31 +115,28 @@ export const Project = () => {
 
   return (
     <Section>
-      <div
-        className="flex flex-col items-center justify-center gap-5"
-        id="project"
-      >
-        <section className="relative overflow-hidden flex items-center justify-center px-6">
-          <div ref={titleRef} className="overflow-hidden py-2">
+      <div id="project" className="space-y-10">
+        <section className="relative overflow-hidden w-fit flex items-center -space-x-3">
+          <div ref={titleRef} className="overflow-hidden">
             <Title content="Projects" headingLevel="h2" />
           </div>
           <img
             src="./assets/peace.png"
             ref={imageRef}
-            className="absolute top-3 right-2 rotate-12 drop-shadow-custom will-change-transform"
+            className="rotate-12 drop-shadow-custom"
             style={{
-              width: "clamp(40px, 4vw, 100px)",
+              width: "clamp(27px, 3vw, 80px)",
             }}
           />
         </section>
-        <section className="w-[90%] gap-10 lg:gap-3 relative" ref={cardRef}>
+        <section className="gap-10 lg:gap-3 relative" ref={cardRef}>
           <ProjectCard projectName="Taskly" />
           {isLargeScreen && (
-            <div className="h-3 w-full bg-primary border-[3px] border-white shadow-custom mx-3 rounded-full" />
+            <div className="h-3 w-full bg-primary border-[3px] border-white shadow-custom rounded-full" />
           )}
           <ProjectCard projectName="Bento-running" />
           {isLargeScreen && (
-            <div className="h-3 w-full bg-primary border-[3px] border-white shadow-custom mx-3 rounded-full" />
+            <div className="h-3 w-full bg-primary border-[3px] border-white shadow-custom rounded-full" />
           )}
         </section>
       </div>
