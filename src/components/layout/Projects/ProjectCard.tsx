@@ -1,166 +1,114 @@
-import { useGSAP } from "@gsap/react";
-import { useAppContext } from "../../../hooks/useAppContext";
-import { Title } from "../../text/Title";
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap/all";
-import projectsData from "../../../projects.json";
 import { useNavigate } from "react-router-dom";
+import gsap from "gsap/all";
+import { TbCircleArrowUpRightFilled } from "react-icons/tb";
+import projectsData from "../../../projects.json";
+import { useAppContext } from "../../../hooks/useAppContext";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
+import { useNavigationContext } from "../../../hooks/useNavigationContext";
 
-export const ProjectCard = ({ projectName }: { projectName: string }) => {
-  const { isLargeScreen, setScrollY, transitionPlayed, setTransitionPlayed } =
-    useAppContext();
+gsap.registerPlugin(ScrollTrigger);
+
+export const ProjectCard = ({
+  projectName,
+  alt,
+  number,
+}: {
+  projectName: string;
+  alt: string;
+  number: number;
+}) => {
   const navigate = useNavigate();
+  const { isLargeScreen } = useAppContext();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const ImageRef = useRef<HTMLImageElement>(null);
-  const xTo = useRef<gsap.QuickToFunc | null>(null);
-  const yTo = useRef<gsap.QuickToFunc | null>(null);
-  const sectionRef = useRef<HTMLButtonElement>(null);
+
+  const { previousKey, currentKey } = useNavigationContext();
+
+  useEffect(() => {
+    if (previousKey && previousKey !== currentKey) {
+      const tl = gsap.timeline();
+      tl.fromTo(
+        sectionRef.current,
+        { width: "100vw", backgroundColor: "black" },
+        {
+          width: 0,
+          duration: 0.6,
+          ease: "steps(3)",
+        }
+      ).fromTo(
+        cardRef.current,
+        { x: "-100vw" },
+        { x: 0, duration: 0.6 }
+      );
+    }
+  }, [currentKey, previousKey]);
+
   const [activeIndex, setActiveIndex] = useState(0);
   const project = projectsData.projects.find(
     (proj) => proj.name === projectName
   );
 
-  const initialStylesRef = useRef<DOMRect | null>(null);
-
-  useEffect(() => {
-    if (sectionRef.current && !initialStylesRef.current) {
-      const position = sectionRef.current.getBoundingClientRect();
-      initialStylesRef.current = position;
-    }
-  }, [sectionRef]);
-
+  // Animation pour naviguer vers une nouvelle page
   const handleClick = () => {
-    const position = sectionRef.current?.getBoundingClientRect();
-    const buttonTitle = sectionRef.current?.childNodes;
+    const tl = gsap.timeline({
+      onComplete: () => {
+        navigate(`/${projectName}`, { state: { transition: true } });
+      },
+    });
 
-    if (position && buttonTitle) {
-      const { x, y } = position;
-      initialStylesRef.current = position;
-
-      if (isLargeScreen) gsap.set(ImageRef.current, { width: 0 });
-      const tl = gsap.timeline({
-        onComplete: () => {
-          gsap.set(sectionRef.current, {
-            position: "fixed",
-            top: 0,
-            left: 0,
-            x: 0,
-            y: 0,
-            zIndex: 30,
-          });
-          setScrollY(window.scrollY);
-          navigate(`/${projectName}`);
-          setTransitionPlayed(projectName);
-        },
-      });
-
-      tl.to(buttonTitle, {
-        keyframes: {
-          x: [0, 30, "-100vw"],
-        },
-        ease: "steps(3)",
+    tl.to(cardRef.current, {
+      x: "-100vw",
+      duration: 0.6,
+      ease: "steps(3)",
+    })
+      .to(sectionRef.current, {
+        width: "100vw",
+        backgroundColor: "black",
         duration: 0.6,
+        ease: "steps(3)",
       })
-        .to(sectionRef.current, {
-          width: "100vw",
-          height: "100vh",
-          backgroundColor: "#5465FF",
-          y: `-${y}px`,
-          x: `-${x}px`,
-          duration: 0.6,
-          ease: "steps(3)",
-        })
-        .to(sectionRef.current, {
-          backgroundColor: "#FFF0EB",
-          duration: 0.3,
-        });
-    }
+      .to(sectionRef.current, {
+        backgroundColor: "white",
+        duration: 0.6,
+        ease: "steps(3)",
+      });
   };
 
-  useEffect(() => {
-    if (transitionPlayed === projectName && initialStylesRef.current) {
-      const { width, height, left } = initialStylesRef.current;
-      const buttonTitle = sectionRef.current?.childNodes;
-
-      if (buttonTitle) {
-        gsap.set(buttonTitle, { x: "-100vw" });
-
-        gsap.set(sectionRef.current, {
-          width: "100vw",
-          height: "100vh",
-          position: "fixed",
-          backgroundColor: "#5465FF",
-          top: 0,
-          left: 0,
-          zIndex: 30,
-        });
-
-        const tl = gsap.timeline({
-          onComplete: () => {
-            gsap.set(sectionRef.current, {
-              clearProps: "all",
-              position: "static",
-            });
-
-            gsap.to(buttonTitle, {
-              keyframes: {
-                x: ["-100vw", 30, 0],
-              },
-              ease: "steps(5)",
-              duration: 0.6,
-            });
-            setTransitionPlayed("");
-          },
-        });
-
-        tl.to(sectionRef.current, {
-          height: `${height}px`,
-          width: `${width}px`,
-          top: "50%",
-          left: left,
-          zIndex: 30,
-          ease: "steps(7)",
-          duration: 0.3,
-        });
-      }
-    }
-  }, [setTransitionPlayed, transitionPlayed, projectName]);
-
+  // Gestion des images de projet
   useEffect(() => {
     if (project) {
-      const timeOut = setTimeout(() => {
-        if (activeIndex === project.pictures.length - 1) {
-          setActiveIndex(0);
-        } else {
-          setActiveIndex((prev) => prev + 1);
-        }
+      const timeout = setTimeout(() => {
+        setActiveIndex((prev) => (prev + 1) % project.pictures.length);
       }, 1000);
 
-      return () => clearTimeout(timeOut);
+      return () => clearTimeout(timeout);
     }
-  }, [project, activeIndex]);
+  }, [activeIndex, project]);
 
   const { contextSafe } = useGSAP(() => {
     if (isLargeScreen) {
-      // Initial setup
-      gsap.set(ImageRef.current, { width: 0, pointerEvents: "none" });
-      xTo.current = gsap.quickTo(ImageRef.current, "x", { duration: 0.2 });
-      yTo.current = gsap.quickTo(ImageRef.current, "y", { duration: 0.2 });
+      gsap.set(ImageRef.current, { width: 10, pointerEvents: "none" });
     }
   });
 
   const moveShape = contextSafe(
     (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (xTo.current && yTo.current && isLargeScreen) {
-        xTo.current(event.clientX);
-        yTo.current(event.clientY);
-        gsap.to(ImageRef.current, { width: 300, ease: "steps(1)" });
+      if (isLargeScreen) {
+        gsap.to(ImageRef.current, {
+          x: event.clientX,
+          y: "-50%",
+          width: 300,
+        });
       }
     }
   );
 
   const handleMouseLeave = () => {
     if (isLargeScreen) {
-      // Smoothly hide the image
       gsap.to(ImageRef.current, {
         width: 0,
         ease: "steps(1)",
@@ -169,23 +117,80 @@ export const ProjectCard = ({ projectName }: { projectName: string }) => {
     }
   };
 
+  // Gestion des animations de défilement et arrière
+  useGSAP(() => {
+    const initScrollAnimations = () => {
+      gsap.set(buttonRef.current, { y: 200 });
+      gsap.set(cardRef.current, { x: "-100vw", overflow: "hidden" });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#project",
+          start: "top 30%",
+          end: "top 20%",
+          toggleActions: "play none none reset",
+        },
+      });
+
+      if(previousKey && currentKey !== previousKey) {
+        tl.pause(tl.endTime());
+      }
+
+      tl.to(cardRef.current, {
+        x: 0,
+        duration: 0.6,
+        ease: "steps(3)",
+        delay: number / 10,
+      }).to(
+        buttonRef.current,
+        {
+          keyframes: {
+            rotate: [-5, 5, -5, 5, 0],
+            y: isLargeScreen
+              ? [200, 150, 100, 50, 0]
+              : [500, 350, 200, 50, 0],
+          },
+          ease: "steps(5)",
+          duration: 0.6,
+        },
+        "<+0.4"
+      ).to(cardRef.current, { overflow: "visible", duration: 0.2 });
+    };
+
+    initScrollAnimations();
+  });
+
   return (
-      <button
-        className="w-full flex flex-col-reverse items-center lg:flex-row py-10 lg:py-0 overflow-hidden"
+    <>
+      <div
+        className="h-screen w-0 bg-primary fixed left-0 top-0 z-50"
         ref={sectionRef}
-        onClick={handleClick}
-        onMouseMove={moveShape}
-        onMouseLeave={handleMouseLeave}
+      />
+      <div
+        className="border-b border-primary flex items-center py-3 relative"
+        ref={cardRef}
       >
-        <span className="w-full py-3 group flex justify-center lg:justify-start">
-          <Title content={projectName} headingLevel="h3" />
-        </span>
+        <p className="absolute text-sm left-0 top-0">0{number}.</p>
+        <button
+          className="flex flex-col lg:flex-row lg:items-center justify-between pt-5 lg:py-0 overflow-hidden w-full lg:pl-10 mx-auto px-3"
+          onClick={handleClick}
+          onMouseMove={moveShape}
+          onMouseLeave={handleMouseLeave}
+          ref={buttonRef}
+        >
+          <h3 className="z-10">{projectName}</h3>
+          <p className="text-sm flex flex-col gap-2 lg:flex-row lg:items-center justify-between lg:w-1/4 pr-2">
+            {alt}
+            <TbCircleArrowUpRightFilled size={24} />
+          </p>
+        </button>
         <img
           src={project?.pictures[activeIndex]}
           alt={`${projectName} preview`}
-          className="lg:fixed lg:-top-44 lg:-left-10 pointer-events-none w-2/3 lg:w-0 z-20"
+          className="lg:absolute lg:top-[50%] lg:-left-10 pointer-events-none w-1/2 lg:w-0 z-30"
           ref={ImageRef}
         />
-      </button>
+      </div>
+    </>
   );
 };

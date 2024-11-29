@@ -14,7 +14,7 @@ export const NavLink = ({name} : {name: string}) => {
     return (
         <a
         href="#"
-        className="lg:link-hover-effect relative px-1 group h-fit inline-flex"
+        className="lg:link-hover-effect relative px-1 group h-fit inline-flex font-extrabold text-secondary"
       >
         {name}
         <Stroke name={name} isHover />

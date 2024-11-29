@@ -18,16 +18,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/:projectName",
-        element: <ProjectPage />
-      }
+        element: <ProjectPage />,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AppProvider>
-    <RouterProvider router={router} />
-    </AppProvider>
+      <AppProvider>
+        <RouterProvider router={router} />
+      </AppProvider>
   </StrictMode>
 );

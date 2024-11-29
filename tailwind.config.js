@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        degular: ["degular", "sans-serif"],
+        parkinsans: [ "Parkinsans", "sans-serif"],
+        modak: ["Modak", "system-ui"],
       },
       boxShadow: {
         'custom': '2px 2px 3px rgba(0,0,0,0.15)'
@@ -16,9 +17,12 @@ export default {
         'custom' : '2px 2px 1px rgba(0,0,0,0.15)'
       },
       colors: {
-        'primary' : "#5465FF",
+        'primary' : "black",
+        // 'primary' : "#5465FF",
         'secondary' : "#f1f5f9",
-        'tertiary' : "#FFF0EB",
+        // 'secondary' : "#f1f5f9",
+        'tertiary' : "white",
+        // 'tertiary' : "#FFF0EB",
         'quaternary': "#ACFCD9",
         'quinary' : "#FC4C01"
       }

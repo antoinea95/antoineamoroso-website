@@ -4,12 +4,37 @@
 
 @layer utilities {
 
+
+  h1, h2, h3, h4 {
+    font-family: 'Modak', system-ui;
+    text-transform: uppercase;
+    padding-top: 0.15em;
+
+  }
+
+  h1 {
+    font-size: clamp(4.5rem, 8vw, 8rem);
+    line-height: 60px;
+  }
+
+  h2 {
+    font-size: clamp(2.5rem, 6vw, 8rem);
+    line-height: 50px;
+
+  }
+
+  h3 {
+    font-size: clamp(2rem, 4vw, 6rem);
+    line-height: 33px;
+  }
+
   * {
     box-sizing: border-box;
+    scroll-behavior: smooth-scroll;
   }
 
   p {
-    font-size: clamp(20px, 2vw, 24px);
+    font-size: clamp(16px, 4vw, 24px);
   }
 
   

@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { NavigationProvider } from "../context/NavigationProvider";
 
 export const Root = () => {
   const location = useLocation();
@@ -17,8 +18,10 @@ export const Root = () => {
   }, [location.pathname]);
 
   return (
-    <main className="font-degular text-sm sm:text-base relative">
-      <Outlet />
-    </main>
+    <NavigationProvider>
+      <main className="font-parkinsans text-sm sm:text-base relative overflow-x-hidden">
+        <Outlet />
+      </main>
+    </NavigationProvider>
   );
 };

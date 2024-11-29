@@ -5,11 +5,11 @@ import {Work} from "../components/layout/Work/Work";
 
 export const HomePage = () => {
   return (
-    <>
+    <section className="space-y-40">
       <Hero />
       <About />
       <Project />
       <Work />
-    </>
+    </section>
   );
 };

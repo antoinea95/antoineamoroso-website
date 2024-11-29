@@ -1,9 +1,6 @@
-import { Stroke } from "../../text/Stroke";
-import { useAppContext } from "../../../hooks/useAppContext";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import { WorkDetail } from "./WorkDetail";
-import { useGSAP } from "@gsap/react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import gsap from "gsap";
+import { useAppContext } from "../../../hooks/useAppContext";
 
 export type WorkCardProps = {
   id: string;
@@ -11,112 +8,139 @@ export type WorkCardProps = {
   role: string;
   technos?: { name: string; icon: string }[];
   company: string;
-  details: string;
+  summary: string;
+  features?: string[];
 };
 
 export const WorkCard = ({
   work,
   setWorkActive,
-  workActive,
+  hasPlayed,
+  index,
 }: {
   work: WorkCardProps;
-  workActive: string | null;
-  setWorkActive: Dispatch<SetStateAction<string | null>>;
+  setWorkActive: Dispatch<SetStateAction<number | null>>;
+  hasPlayed: boolean;
+  index: number;
 }) => {
+  const workRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
+  const dateRef = useRef<HTMLDivElement>(null);
   const { isLargeScreen } = useAppContext();
-  const detailsRef = useRef<HTMLDivElement | null>(null);
-  const [detailsHeight, setDetailsHeight] = useState(0);
-  const xTo = useRef<gsap.QuickToFunc | null>(null);
-  const yTo = useRef<gsap.QuickToFunc | null>(null);
-
+  const timeLine = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
-    if(detailsRef.current) {
-      setDetailsHeight(detailsRef.current.offsetHeight)
-    }
-  }, [detailsRef])
 
+    const workElements = workRef.current?.childNodes;
+    const dateElements = dateRef.current?.childNodes;
+    const buttonElements = buttonRef.current?.childNodes;
 
-  const { contextSafe } = useGSAP(() => {
-    if (detailsRef.current) {
-      gsap.set(detailsRef.current, {opacity: 0, pointerEvents: "none"});
-      xTo.current = gsap.quickTo(detailsRef.current, "x", { duration: 0.2 });
-      yTo.current = gsap.quickTo(detailsRef.current, "y", { duration: 0.2 });
-    }
-  });
+    if (!workElements || !dateElements || !buttonElements) return;
 
-  const handleDetailPosition = contextSafe(
-    (event: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
-      if (workActive === work.id) {
-        setWorkActive(null);
-        gsap.to(detailsRef.current, {
-          opacity: 1,
-        });
-        return;
-      }
+    const animationDuration = 0.6;
+    const animationEase = "steps(5)";
+    const offsetY = 50;
+    const offsetX = 150;
 
-      if (xTo.current && yTo.current) {
-        const needToBeTop = window.innerHeight - event.clientY <= 200;
-        xTo.current(event.clientX - (isLargeScreen ? 200 : 180));
-        yTo.current(needToBeTop ? event.clientY - (detailsHeight + 30) : event.clientY + 30);
-        gsap.to(detailsRef.current, {
-          opacity: 1,
-        });
-      }
+    const getInitialPosition = (direction: "top" | "bottom") =>
+      direction === "top"
+        ? isLargeScreen
+          ? { y: offsetY }
+          : { x: offsetX }
+        : isLargeScreen
+        ? { y: -offsetY }
+        : { x: -offsetX };
 
-      // Active la carte actuelle
-      setWorkActive(work.id);
-    }
-  );
+    const finalPosition = isLargeScreen ? { y: 0 } : { x: 0 };
 
-  const handleMouseLeave = contextSafe(() => {
-    setWorkActive(null);
-    if(xTo.current && yTo.current) {
-      xTo.current(0);
-      yTo.current(0)
-    }
-    gsap.to(detailsRef.current, {
-      opacity: 0,
+    // Crée une timeline
+    timeLine.current = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#work",
+        start: "top 30%",
+        end: "top 20%",
+        markers: true,
+        toggleActions: "play none none reset",
+      },
     });
-  });
+
+    // Animation pour les boutons
+    timeLine.current
+      .fromTo(
+        buttonElements,
+        { scale: 0 },
+        {
+          scale: 1,
+          ease: "steps(3)",
+          duration: 0.3,
+          delay: 0.25 * (index + 1),
+        }
+      )
+      // Animation pour les éléments de travail
+      .fromTo(
+        workElements,
+        getInitialPosition("bottom"),
+        {
+          ...finalPosition,
+          keyframes: {
+            rotate: [-5, 5, -5, 5, 0],
+          },
+          ease: animationEase,
+          duration: animationDuration,
+        },
+        "<"
+      )
+      // Animation pour les dates
+      .fromTo(
+        dateElements,
+        getInitialPosition("top"),
+        {
+          ...finalPosition,
+          keyframes: {
+            rotate: [-5, 5, -5, 5, 0],
+          },
+          ease: animationEase,
+          duration: animationDuration,
+        },
+        "<"
+      );
+  }, [isLargeScreen, index]);
+
+  useEffect(() => {
+    if(hasPlayed) {
+        timeLine.current?.seek(timeLine.current.duration());
+    }
+  }, [hasPlayed])
 
   return (
-    <div className="flex items-center whitespace-nowrap lg:flex-col lg:w-fit lg:gap-2 w-full">
-      <section className="flex-1 flex items-center justify-center overflow-hidden px-2 lg:mt-1">
-        <p className="relative text-primary text-base font-medium py-2">
-          {work.date}
-          <Stroke name={work.date} />
-        </p>
-      </section>
-      {isLargeScreen ? (
-        <div
-          className="w-5 h-5 rounded-full bg-primary border-[3px] border-white shadow-custom hover:scale-150 transition-all cursor-pointer"
-          onMouseEnter={handleDetailPosition}
-          onMouseLeave={handleMouseLeave}
-        />
-      ) : (
-        <button
-          onClick={handleDetailPosition}
-          className="w-5 h-5 rounded-full bg-primary border-[3px] border-white shadow-custom hover:scale-150 transition-all cursor-pointer"
-        ></button>
-      )}
-      <section className="flex flex-col items-center -space-y-3 flex-1 overflow-hidden px-2">
-        <p className="relative text-primary text-base lg:text-lg font-semibold p-0.5">
-          {work.role}
-          <Stroke name={work.role} />
-        </p>
-        <p className="relative text-primary text-sm lg:text-base font-medium p-0.5">
-          {work.company}
-          <Stroke name={work.company} />
-        </p>
-      </section>
-      <div
-        ref={detailsRef}
-        className="fixed bg-primary border-[3px] border-white shadow-custom rounded-2xl max-w-[350px] lg:max-w-[400px] px-4 py-3 z-20 top-0 left-0 overflow-hidden"
-        style={{visibility: workActive === work.id ? "visible" : "hidden"}}
+    <div className="flex items-center lg:whitespace-nowrap lg:flex-col lg:w-fit lg:gap-2 relative">
+      <section
+        className="flex-1 flex items-center justify-center px-2 lg:mt-1 overflow-hidden"
+        ref={dateRef}
       >
-          <WorkDetail detail={work.details} technos={work.technos} />
-      </div>
+        <p className="relative text-primary text-sm font-normal py-2">
+          {work.date}
+        </p>
+      </section>
+      <section ref={buttonRef}>
+        <button
+          onClick={() => {
+            setWorkActive(index); // Active cette carte
+          }}
+          className="w-7 h-7 rounded-full bg-primary border-2 border-white hover:scale-150 transition-all cursor-pointer"
+        ></button>
+      </section>
+      <section
+        className="flex flex-col lg:items-center lg:-space-y-3 flex-1 px-2 overflow-hidden"
+        ref={workRef}
+      >
+        <p className="relative text-primary text-base lg:text-base leading-none lg:p-0.5 font-parkinsans font-bold">
+          {work.role}
+        </p>
+        <p className="relative text-primary text-xs lg:text-sm font-medium p-0.5">
+          {work.company}
+        </p>
+      </section>
     </div>
   );
 };

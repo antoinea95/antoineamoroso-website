@@ -3,18 +3,31 @@
       {
         "name": "Taskly",
         "url": "https://taskly-kappa.vercel.app/",
+        "alt": "Kanban board",
         "technos": [{"icon": "SiReact", "name": "React"},{ "icon": "SiTypescript", "name": "Typescript"}, {"icon": "SiFirebase", "name": "Firebase"}, {"icon": "SiTailwindcss", "name":"Tailwind"}],
-        "backgroundColor": "bg-quaternary",
         "pictures": ["./assets/taskly/home.png", "./assets/taskly/task.png", "./assets/taskly/login.png", "./assets/taskly/comment.png", "./assets/taskly/member.png", "./assets/taskly/account.png"],
-        "content": "This project is a tool for creating Kanban boards and managing projects. It allows users to organize tasks visually using boards, lists, and cards, making it easier to track progress and collaborate effectively. I developed this clone using TypeScript, Tailwind CSS, ShadCN, React, and Firebase to enhance the quality of my code and improve my TypeScript skills. I utilized React Query to manage requests to Firebase and created a class to avoid code repetition for subscribing to the database, among other functionalities. Additionally, I employed Zod and React Hook Form to manage forms and validate data, and React Router for seamless navigation within the application."
+        "summary": "Taskly is a side project developed to enhance my React skills and progress in TypeScript. It combines complexity and versatility, offering a robust platform to manage collaborative projects efficiently.",
+        "features": [
+          "Authentication: Secure user login and management of personal boards.",
+          "User Collaboration: Board creators can invite users to collaborate on projects.",
+          "Board and List Management: Create, edit, and organize boards and task lists for seamless workflow.",
+          "Task Features: Add, modify, assign, and set deadlines for tasks, with drag-and-drop functionality.",
+          "Enhanced Collaboration: Task comments and user assignments to improve team communication."
+        ]          
       },
       {
         "name": "Bento-running",
         "url": "https://bento-running.vercel.app/",
+        "alt": "Strava visualizer",
         "technos": [{"icon": "SiNextdotjs", "name": "Next.js"} ,{ "icon": "SiTypescript", "name": "Typescript"},  { "icon": "SiStrava", "name": "Strava API"}, { "icon": "DiSass", "name": "Sass"}],
-        "backgroundColor": "bg-quinary",
         "pictures": ["./assets/bento-running/login.png", "./assets/bento-running/light.png", "./assets/bento-running/dark.png"],
-        "content": "This is my first project developed using Next.js and TypeScript. Driven by my passion for running, I explored the Strava API to display user data in a clear and organized manner. The Bento design approach provides clarity and helps in structuring the elements effectively."
+        "summary": "This was my first project using Next.js and TypeScript, driven by my passion for running. It leverages the Strava API to display user performance data in a clear and organized way with a Bento design approach for structured elements.",
+        "features": [
+          "User Authentication: OAuth authentication implemented with NextAuth.",
+          "Data Visualization: Informative performance charts created using Recharts.",
+          "Interactive Maps: React-Leaflet integrated with Google Maps tiles for enhanced user interaction.",
+          "Bento Design: A clean and structured layout for intuitive data presentation."
+        ]
       }
     ],
 
@@ -25,7 +38,13 @@
         "role": "Front-end developer",
         "company": "Aviation-advice",
         "technos": [{"icon": "SiReact", "name": "React"} , {"icon": "SiFirebase", "name": "Firebase"}, { "icon": "SiStripe", "name": "Stripe"}, { "icon": "DiSass", "name": "Sass"}],
-        "details": "Led the development of a web platform for trainers to manage courses and interact with students, collaborating with two developers and validating Pull Requests. Features included training pack creation, availability updates, direct messaging, and document uploads for trainers, while students could schedule meetings, purchase courses (Stripe), upload CVs, and access quizzes. The platform streamlined course management and improved trainer-student collaboration."
+        "summary": "Development of a web platform designed for trainers to efficiently manage their training sessions and engage with students. Collaborated with two developers, overseeing development progress and validating Pull Requests.",
+        "features": [
+          "Trainer Dashboard: Create and manage training packs, customize the homepage, update availability, and communicate with students.",
+          "Student Portal: Schedule meetings with admins (email confirmation + Google Meet integration), purchase training packs via Stripe, and upload resumes.",
+          "Interactive Tools: Personalized profiles, dedicated messaging, quizzes, and CV feedback.",
+          "Document Management: Import and share training materials seamlessly."
+        ]
       },
       {
         "id": "work-2",
@@ -33,45 +52,34 @@
         "role": "Front-end developer",
         "company": "Elit-tech.",
         "technos": [{"icon": "SiReact", "name": "React"} ,{ "icon": "DiSass", "name": "Sass"}, { "icon": "SiPhp", "name": "PHP"}, { "icon": "SiMysql", "name": "MySQL"}, { "icon": "SiAzuredevops", "name": "Azure devOps"}],
-        "details": "Developed and designed a frontend portal for clients to view, manage, monitor, and report on assets, with a focus on data filtering and easy access to key information."
+        "summary": "Development and design of a front-end portal providing clients with a comprehensive view of their assets. Focused on intuitive data display and effective filtering to highlight key insights.",
+        "features": [
+          "Asset Management: Centralized overview and management of client assets.",
+          "Monitoring: Real-time updates on asset performance and status.",
+          "Reporting: Generation of detailed and customizable reports.",
+          "Data Filtering: Advanced tools to sort and focus on relevant information.",
+          "User-friendly Interface: Streamlined navigation for quick access to important data."
+        ]
       },
       {
         "id": "work-3",
         "date": "Oct.21-Jan.22",
         "role": "Specialist",
         "company": "Apple Store",
-        "details": "Offering a unique customer experience: product demonstrations, assistance, and usage advice."
+        "summary": "Offering a unique customer experience: product demonstrations, assistance, and usage advice."
       },
       {
         "id": "work-4",
         "date": "Sep.19-Jun.20",
         "role": "Entrepreneur",
         "company": "Arter Shop",
-        "details": "Co-created a streetwear boutique concept in Lyon, aiming to offer an innovative customer experience and unique products. Led communication efforts, designing the brand's visual identity and developing a communication strategy with partners. Project halted due to the pandemic."
+        "summary": "Co-created a streetwear boutique concept in Lyon, aiming to offer an innovative customer experience and unique products. Led communication efforts, designing the brand's visual identity and developing a communication strategy with partners. Project halted due to the pandemic."
       },
       {
         "id": "work-5",
         "date": "Jan.18-Sep.19",
         "role": "Customer advisor",
         "company": "Lacoste",
-        "details": "Providing a premium sales experience, stock management, opening and closing the store."
-      }],
-      "education": [
-      {
-        "id": "education-1",
-        "date": "Dec.22-Nov.23",
-        "role": "Application designer",
-        "company": "Openclassrooms",
-        "technos": [{"icon": "SiNextdotjs", "name": "Next.js"} ,{ "icon": "SiTypescript", "name": "Typescript"}, { "icon": "SiStrava", "name": "Strava API"}, { "icon": "DiSass", "name": "Sass"}],
-        "details": "Focused on frontend development, consolidating skills and exploring tools like Redux and Jest. Completed 14 projects in a work-study program, gaining practical experience in modern frontend technologies."
-      },
-      {
-        "id": "education-2",
-        "date": "Mar.22-Aug.22",
-        "role": "Web developer",
-        "company": "Openclassrooms",
-        "technos": [{"icon": "SiNextdotjs", "name": "Next.js"} ,{ "icon": "SiTypescript", "name": "Typescript"}, { "icon": "SiStrava", "name": "Strava API"}, { "icon": "DiSass", "name": "Sass"}],
-        "details": "Learned web development basics (HTML/CSS, JavaScript, Node.js, Express, MongoDB) through 7 project-based assignments simulating real-world scenarios. The final project involved building a company social network from scratch using React, Node.js, Express, and MongoDB, with oral defenses to present work and justify technical choices."
-      }
-    ]
+        "summary": "Providing a premium sales experience, stock management, opening and closing the store."
+      }]
   }

@@ -1,5 +1,5 @@
-import { ElementType } from "react";
-import { Stroke } from "./Stroke";
+import gsap from "gsap";
+import { ElementType, useEffect, useRef } from "react";
 
 /**
  * `Title` is a component that renders a heading or paragraph with a stroke effect behind the text.
@@ -15,25 +15,62 @@ import { Stroke } from "./Stroke";
  */
 
 export const Title = ({
-  content,
+  titleText,
   headingLevel: Heading,
+  trigger
 }: {
-  content: string;
+  titleText: string;
   headingLevel: ElementType;
+  trigger: string
 }) => {
 
-  const titleSize = Heading === "h1" ? "clamp(2.6rem, 8vw, 15rem)": Heading === "h2" ? "clamp(2.3rem, 4vw, 6rem)" : Heading === "h3" ? "clamp(1.3rem, 3vw, 4rem)" : Heading === "h4" ? "clamp(1rem, 2.3vw, 3rem)" : "clamp(16px, 5vw, 24px)"
+  const titleRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const titleElements = titleRef.current?.querySelectorAll("span");
+
+    if (titleElements) {
+      gsap.set(titleElements, {
+        x: () => gsap.utils.random(-500, 500), // Position X aléatoire
+        y: () => gsap.utils.random(-100, 200), // Position Y aléatoire
+        scale: () => gsap.utils.random(0.3, 2), // Position Y aléatoire
+        opacity: 0
+      });
+
+      // Animation principale
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: trigger,
+          start: "top 80%",
+          end: "top 20%",
+          markers: true,
+          toggleActions: "restart none none reset",
+        },
+      });
+
+      // Animation des lettres
+      tl.to(titleElements, {
+        x: 0, // Ramène les lettres à leur position finale
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        keyframes: {
+          rotation: [-15, 15, -15, 15, -15, 10, 0], // Balancement
+        },
+        duration: 0.6,
+        stagger: 0.1,
+        ease: "steps(5)",
+      });
+    }
+  }, [trigger])
+
+
 
   return (
-    <div className={`relative inline-flex items-center justify-center leading-none tracking-tight whitespace-nowrap w-fit lg:group-hover:scale-125 lg:group-hover:translate-x-6 transition-all`} style={{
-      fontSize: titleSize,
-      fontWeight: Heading === "h1" ? "900" : "600",
-      overflow: Heading === "span" ? "hidden" : "visible",
-    }}>
-      <Heading className={`text-primary ${Heading === "span" ?"p-[0.3em]" : "p-[0.15em]"}`}>
-        {content}
+      <Heading ref={titleRef}>
+          {titleText.split("").map((letter) => (
+            <span key={letter} className="inline-block scale-0">{letter}</span>
+          ))}
       </Heading>
-      <Stroke name={content} />
-    </div>
   );
 };

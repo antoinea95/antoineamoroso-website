@@ -14,7 +14,7 @@ const iconName = techno.icon
 
 
   return (
-    <p className={`flex flex-col items-center -space-y-2 text-primary font-semibold ${size}`}>
+    <p className={`flex flex-col items-center text-primary font-modak ${size}`}>
       <Icon 
           className="drop-shadow-custom overflow-visible z-10"
           stroke="#f1f5f9"
@@ -22,12 +22,11 @@ const iconName = techno.icon
           strokeLinejoin="round"
           strokeLinecap="round"
           style={{
-            strokeWidth: "clamp(2px, 0.3em, 10px)",
+            strokeWidth: "clamp(2px, 0.3em, 5px)",
           }}
       />
       <span className="relative inline-flex">
         {techno.name}
-        <Stroke name={techno.name} key={techno.name} />
     </span>
     </p>
   );

@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { Stroke } from "../text/Stroke";
+import { useAppContext } from "../../hooks/useAppContext";
 
 /**
  * `RoundLink` is a component that renders a rounded link with an icon and text that slides in on hover.
@@ -21,33 +21,19 @@ export const IconLink = ({
   content: string;
 }) => {
   const Icon = icon;
+
+  const {isLargeScreen} = useAppContext();
+
   return (
     <a
       href={url}
-      target="_blanl"
-      className="inline-flex w-6 sm:w-8 lg:w-10 2xl:w-14 py-1 items-center -space-x-[10px] text-primary font-semibold group lg:hover:w-32 2xl:hover:w-36 overflow-hidden transition-all"
+      target="_blank"
+      className="flex items-center -space-x-0.5 text-xl font-extrabold pt-2 pb-1 leading-4 group transition-all"
     >
-      <span className="flex items-center shrink-0 z-[1] h-fit w-6 sm:w-8 lg:w-fit text-xl sm:text-2xl lg:text-3xl 2xl:text-4xl">
-        <Icon
-          className="drop-shadow-custom overflow-visible"
-          stroke="#f1f5f9"
-          paintOrder="stroke"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-          style={{
-            strokeWidth: "clamp(2px, 0.2em, 5px)",
-          }}
-        />
-      </span>
-
-      <span className="relative px-3 inline-flex lg:-translate-x-14 lg:opacity-0 lg:group-hover:translate-x-0 lg:group-hover:opacity-100 transition-all duration-200 whitespace-nowrap"
-      style={{
-        fontSize: "clamp(14px, 8vw, 24px)"
-      }}
-      >
+      <Icon className="rounded-full bg-primary text-white flex items-center justify-center p-1 w-7 h-7  lg:w-8 lg:h-8 border-2 lg:shadow-custom mb-1 border-white z-[1]" />
+      {isLargeScreen && <span className="inline-block py-1 text-primary w-0 overflow-hidden group-hover:w-[95px] transition-all">
         {content}
-        <Stroke name={content} />
-      </span>
+      </span>}
     </a>
   );
 };
