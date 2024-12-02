@@ -9,15 +9,33 @@ import { Stroke } from "../text/Stroke"
  * 
  * @returns A JSX element containing an anchor (`<a>`) with a hoverable SVG stroke effect.
  */
-export const NavLink = ({name} : {name: string}) => {
+export const NavLink = ({ name }: { name: string }) => {
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault(); // Empêche le comportement par défaut
+    const targetId = name.toLowerCase();
+    const targetElement = document.getElementById(targetId);
 
-    return (
-        <a
-        href="#"
-        className="lg:link-hover-effect relative px-1 group h-fit inline-flex font-extrabold text-secondary"
-      >
-        {name}
-        <Stroke name={name} isHover />
-      </a>
-    )
-}
+    if (targetElement) {
+      // Hauteur de la navbar (ajustez en fonction de votre design)
+      const navbarHeight = document.querySelector('#navbar')?.clientHeight || 0;
+      const targetPosition = targetElement.offsetTop - navbarHeight;
+
+      // Défilement avec un effet lisse
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  return (
+    <a
+      href={`#${name.toLowerCase()}`}
+      onClick={handleClick}
+      className="lg:link-hover-effect relative px-1 group h-fit inline-flex font-extrabold text-secondary"
+    >
+      {name}
+      <Stroke name={name} isHover />
+    </a>
+  );
+};

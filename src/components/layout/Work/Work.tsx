@@ -5,16 +5,52 @@ import { useState, useEffect, useRef } from "react";
 import { useAppContext } from "../../../hooks/useAppContext";
 import { WorkCard } from "./WorkCard";
 import gsap from "gsap";
+import { Modal } from "../../container/Modal";
 import { WorkDetail } from "./WorkDetail";
-import { PiArrowLeftBold, PiArrowRightBold } from "react-icons/pi";
 
 export const Work = () => {
   const works = projectsData.works;
-  const [workActive, setWorkActive] = useState<number | null>(null);
   const timeRef = useRef<HTMLDivElement>(null);
   const timeLineRef = useRef<HTMLDivElement>(null);
   const { isLargeScreen } = useAppContext();
   const [hasPlayed, setHasPlayed] = useState(false);
+  const [workActive, setWorkActive] = useState<number | null>(null);
+
+  const handleNext = () => {
+    if (workActive) {
+      gsap.to(`#work-${workActive}`, {
+        x: "100vw",
+        keyframes: {
+          rotate: [5, -5, 5, -5, 5, 0],
+        },
+        ease: "steps(6)",
+        duration: 0.6,
+        onComplete: () => {
+          setWorkActive(() =>
+            workActive === works.length ? 1 : workActive + 1
+          );
+        },
+      });
+    }
+  };
+
+  const handlePrev = () => {
+    if (workActive) {
+      gsap.to(`#work-${workActive}`, {
+        x: "-100vw",
+        keyframes: {
+          rotate: [5, -5, 5, -5, 5, 0],
+        },
+        ease: "steps(6)",
+        duration: 0.6,
+        onComplete: () => {
+          setWorkActive(() =>
+            workActive === 1 ? works.length : workActive - 1
+          );
+        },
+      });
+    }
+  };
 
   // Animation principale (timeline + ligne)
   useEffect(() => {
@@ -23,15 +59,11 @@ export const Work = () => {
         trigger: "#work",
         start: "top 30%",
         end: "top 20%",
-        markers: true,
         toggleActions: "play none none reset",
-        onLeaveBack: () => {
-          setWorkActive(null)
-        }
       },
       onComplete: () => {
         setHasPlayed(true);
-      }
+      },
     });
 
     const animationDuration = 2;
@@ -42,14 +74,6 @@ export const Work = () => {
     const finalSize = isLargeScreen ? { width: "100%" } : { scaleY: "100%" };
 
     tl.fromTo(
-      timeLineRef.current,
-      { y: 200 },
-      {
-        y: 0,
-        duration: 0.6,
-        ease: "steps(5)",
-      }
-    ).fromTo(
       timeRef.current,
       initialSize,
       {
@@ -62,69 +86,39 @@ export const Work = () => {
   }, [isLargeScreen]);
 
   return (
-    <Section>
-      <div
-        className={`relative flex flex-col ${workActive ? "justify-start space-y-32" : "justify-evenly"} items-center h-full w-full`}
-        id="work"
-      >
+    <Section id="work">
         <Title titleText="Work" headingLevel="h1" trigger="#work" />
-
         <section className="flex flex-col lg:flex-row justify-between items-center w-full gap-10">
-          {!workActive ? (
+          <div
+            className="flex flex-col lg:flex-row lg:items-center justify-between relative lg:flex-1 min-h-[500px] lg:min-h-0"
+            ref={timeLineRef}
+          >
             <div
-              className="flex flex-col lg:flex-row lg:items-center justify-between relative lg:flex-1 min-h-[500px] lg:min-h-0"
-              ref={timeLineRef}
-            >
-              <div
-                ref={timeRef}
-                className="h-full min-h-[500px] lg:min-h-3 lg:h-3 w-3 lg:w-[100%] absolute left-1/2 -translate-x-1/2 lg:left-0 lg:-translate-x-0 lg:top-1/2 lg:-translate-y-1/2 bg-primary rounded-full -z-10"
-                style={{
-                  willChange: "width, height",
-                }}
-              />
-              {works.map((work, index) => (
-                <WorkCard
-                  key={work.id}
-                  work={work}
-                  setWorkActive={setWorkActive}
-                  hasPlayed={hasPlayed}
-                  index={index + 1}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="relative px-3 lg:px-10 flex flex-col w-full flex-1">
-              <div className="absolute lg:top-1/2 lg:-translate-y-1/2 left-1/2 -translate-x-1/2 w-96 justify-between flex items-center px-5 lg:px-0">
-                <button
-                  className="w-5 h-5 rounded-full bg-primary text-secondary flex items-center justify-center"
-                  onClick={() => {
-                    setWorkActive(
-                      workActive === 1 ? works.length : workActive - 1
-                    );
-                  }}
-                >
-                  <PiArrowLeftBold />
-                </button>
-                <button
-                  className="w-5 h-5 rounded-full bg-primary text-secondary flex items-center justify-center"
-                  onClick={() => {
-                    setWorkActive(
-                      workActive === works.length ? 1 : workActive + 1
-                    );
-                  }}
-                >
-                  <PiArrowRightBold />
-                </button>
-              </div>
-              <WorkDetail
-                key={workActive}
-                work={works[workActive - 1]}
+              ref={timeRef}
+              className="h-full min-h-[500px] lg:min-h-3 lg:h-3 w-3 lg:w-[100%] absolute left-1/2 -translate-x-1/2 lg:left-0 lg:-translate-x-0 lg:top-1/2 lg:-translate-y-1/2 bg-primary rounded-full -z-10"
+              style={{
+                willChange: "width, height",
+              }}
+            />
+            {works.map((work, index) => (
+              <WorkCard
+                key={work.id}
+                work={work}
                 setWorkActive={setWorkActive}
+                hasPlayed={hasPlayed}
+                index={index + 1}
               />
-            </div>
-          )}
+            ))}
+          </div>
         </section>
-      </div>
+      <Modal
+        workActive={workActive}
+        onClose={() => setWorkActive(null)}
+        handleNext={handleNext}
+        handlePrev={handlePrev}
+      >
+        <WorkDetail work={workActive ? works[workActive - 1] : null} />
+      </Modal>
     </Section>
   );
 };

@@ -42,10 +42,6 @@
     background-color: theme(colors.tertiary);
   }
 
-  body {
-    overflow-x: hidden;
-  }
-
   .link-hover-effect:hover {
     transform: scale(1.25) rotate(-3deg);
     color: theme(colors.primary);

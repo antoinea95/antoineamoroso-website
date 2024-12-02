@@ -9,9 +9,9 @@ import { PropsWithChildren } from "react";
  *
  * @returns A section element containing the provided children, styled with a border and flex properties.
  */
-export const Section = ({ children }: PropsWithChildren) => {
+export const Section = ({id, children }: PropsWithChildren<{id: string}>) => {
   return (
-    <section className="w-[90%] h-[100vh] max-h-dvh m-auto">
+    <section className="w-[90%] m-auto flex flex-col items-center justify-evenly gap-32 py-10" id={id}>
       {children}
     </section>
   );

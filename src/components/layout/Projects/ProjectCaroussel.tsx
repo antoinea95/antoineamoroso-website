@@ -21,6 +21,10 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
   const nextImgRef = useRef<HTMLImageElement>(null);
   const rotateFrame = [5, -5, 5, -5, 0];
 
+  useEffect(() => {
+    gsap.fromTo(carousel.current, {y: 200}, { keyframes: {rotate: [5, -5, 5, -5, 0]}, y: 0, duration: 0.6, ease: "steps(6)", delay: 0.3})
+  }, [])
+
   const { contextSafe } = useGSAP(() => {
     gsap.set(nextImgRef.current, { x: isLargeScreen ? "-60vw" : "-90vw" });
     gsap.set(activeImgRef.current, { x: isLargeScreen ? "-60vw" : "-90vw" });

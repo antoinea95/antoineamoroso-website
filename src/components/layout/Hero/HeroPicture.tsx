@@ -78,7 +78,7 @@ export const HeroPicture = () => {
       ease: "steps(1)",
     }, "<+0.7").to(navElement, {
       keyframes: {
-        gap: ["8rem", "3rem", "80px"],
+        gap: ["8rem", "3rem", "50px"],
         rotate: [-5, 5, 0],
       },
       duration: 1,
@@ -125,7 +125,7 @@ export const HeroPicture = () => {
 
   return (
     <div
-      className="fixed flex items-center justify-center z-10 aspect-auto w-3/4 lg:w-[30%] h-[65vh] sm:h-[70vh] sm:w-[60%] lg:h-[100vh]"
+      className="fixed flex items-center justify-center z-[1] aspect-auto w-3/4 lg:w-[30%] h-[65vh] sm:h-[70vh] sm:w-[60%] lg:h-[100vh]"
       id="heroPicture-container"
       ref={heroPictureRef}
     >

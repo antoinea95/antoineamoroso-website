@@ -19,7 +19,7 @@ export const Root = () => {
 
   return (
     <NavigationProvider>
-      <main className="font-parkinsans text-sm sm:text-base relative overflow-x-hidden">
+      <main className="font-parkinsans text-sm sm:text-base relative overflow-hidden">
         <Outlet />
       </main>
     </NavigationProvider>

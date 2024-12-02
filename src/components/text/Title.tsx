@@ -43,7 +43,6 @@ export const Title = ({
           trigger: trigger,
           start: "top 80%",
           end: "top 20%",
-          markers: true,
           toggleActions: "restart none none reset",
         },
       });

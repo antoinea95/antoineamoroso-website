@@ -31,7 +31,7 @@ export const IconLink = ({
       className="flex items-center -space-x-0.5 text-xl font-extrabold pt-2 pb-1 leading-4 group transition-all"
     >
       <Icon className="rounded-full bg-primary text-white flex items-center justify-center p-1 w-7 h-7  lg:w-8 lg:h-8 border-2 lg:shadow-custom mb-1 border-white z-[1]" />
-      {isLargeScreen && <span className="inline-block py-1 text-primary w-0 overflow-hidden group-hover:w-[95px] transition-all">
+      {isLargeScreen && <span className="inline-block py-1 text-primary w-0 overflow-hidden whitespace-nowrap group-hover:w-[95px] transition-all">
         {content}
       </span>}
     </a>

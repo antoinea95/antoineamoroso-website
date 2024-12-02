@@ -14,14 +14,14 @@ export type WorkCardProps = {
 
 export const WorkCard = ({
   work,
-  setWorkActive,
   hasPlayed,
   index,
+  setWorkActive,
 }: {
   work: WorkCardProps;
-  setWorkActive: Dispatch<SetStateAction<number | null>>;
   hasPlayed: boolean;
   index: number;
+  setWorkActive: Dispatch<SetStateAction<number | null>>;
 }) => {
   const workRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
@@ -29,8 +29,8 @@ export const WorkCard = ({
   const { isLargeScreen } = useAppContext();
   const timeLine = useRef<gsap.core.Timeline | null>(null);
 
-  useEffect(() => {
 
+  useEffect(() => {
     const workElements = workRef.current?.childNodes;
     const dateElements = dateRef.current?.childNodes;
     const buttonElements = buttonRef.current?.childNodes;
@@ -59,7 +59,6 @@ export const WorkCard = ({
         trigger: "#work",
         start: "top 30%",
         end: "top 20%",
-        markers: true,
         toggleActions: "play none none reset",
       },
     });
@@ -107,40 +106,42 @@ export const WorkCard = ({
   }, [isLargeScreen, index]);
 
   useEffect(() => {
-    if(hasPlayed) {
-        timeLine.current?.seek(timeLine.current.duration());
+    if (hasPlayed) {
+      timeLine.current?.seek(timeLine.current.duration());
     }
-  }, [hasPlayed])
+  }, [hasPlayed]);
 
   return (
-    <div className="flex items-center lg:whitespace-nowrap lg:flex-col lg:w-fit lg:gap-2 relative">
-      <section
-        className="flex-1 flex items-center justify-center px-2 lg:mt-1 overflow-hidden"
-        ref={dateRef}
-      >
-        <p className="relative text-primary text-sm font-normal py-2">
-          {work.date}
-        </p>
-      </section>
-      <section ref={buttonRef}>
-        <button
-          onClick={() => {
-            setWorkActive(index); // Active cette carte
-          }}
-          className="w-7 h-7 rounded-full bg-primary border-2 border-white hover:scale-150 transition-all cursor-pointer"
-        ></button>
-      </section>
-      <section
-        className="flex flex-col lg:items-center lg:-space-y-3 flex-1 px-2 overflow-hidden"
-        ref={workRef}
-      >
-        <p className="relative text-primary text-base lg:text-base leading-none lg:p-0.5 font-parkinsans font-bold">
-          {work.role}
-        </p>
-        <p className="relative text-primary text-xs lg:text-sm font-medium p-0.5">
-          {work.company}
-        </p>
-      </section>
+    <div>
+      <div className="flex items-center lg:whitespace-nowrap lg:flex-col lg:w-fit lg:gap-2">
+        <section
+          className="flex-1 flex items-center justify-center px-2 lg:mt-1 overflow-hidden"
+          ref={dateRef}
+        >
+          <p className="relative text-primary text-sm font-normal py-2">
+            {work.date}
+          </p>
+        </section>
+        <section ref={buttonRef}>
+          <button
+            onClick={() => {
+              setWorkActive(index);
+            }}
+            className="w-7 h-7 rounded-full bg-primary border-2 border-white hover:scale-150 transition-all cursor-pointer"
+          ></button>
+        </section>
+        <section
+          className="flex flex-col lg:items-center lg:-space-y-3 flex-1 px-2 overflow-hidden"
+          ref={workRef}
+        >
+          <p className="relative text-primary text-base lg:text-base leading-none lg:p-0.5 font-parkinsans font-bold">
+            {work.role}
+          </p>
+          <p className="relative text-primary text-xs lg:text-sm font-medium p-0.5">
+            {work.company}
+          </p>
+        </section>
+      </div>
     </div>
   );
 };

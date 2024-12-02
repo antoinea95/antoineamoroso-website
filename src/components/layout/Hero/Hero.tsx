@@ -84,7 +84,7 @@ export const Hero = () => {
   }, [isLargeScreen, navRef]);
 
   return (
-    <section className="h-screen max-h-dvh py-5 w-[95%] m-auto">
+    <section className="max-h-dvh h-[70vh] py-5 w-[95%] m-auto">
       <NavBar />
       <HeroPicture />
       <section

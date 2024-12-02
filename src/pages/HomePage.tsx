@@ -10,6 +10,7 @@ export const HomePage = () => {
       <About />
       <Project />
       <Work />
+      <div className="h-[70vh] w-full"></div>
     </section>
   );
 };

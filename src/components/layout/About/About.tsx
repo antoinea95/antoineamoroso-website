@@ -15,7 +15,7 @@ export const About = () => {
 
     if (aboutElement) {
       // Position de départ pour le paragraphe
-      gsap.set(aboutElement, { y: 500,});
+      gsap.set(aboutElement, { y: 500 });
 
       // Animation principale
       const tl = gsap.timeline({
@@ -44,15 +44,10 @@ export const About = () => {
   }, []);
 
   return (
-    <Section>
-      <div
-        className="w-full h-full flex flex-col justify-between items-center"
-        id="about"
-      >
+    <Section id="about">
         <Title titleText="About" headingLevel="h1" trigger="#about" />
 
-        {/* Paragraphe animé */}
-        <div className="overflow-hidden p-10 flex items-center justify-center">
+        <div className="overflow-hidden flex items-center justify-center">
           <p
             className="leading-snug text-primary font-medium w-full sm:w-[90%]"
             ref={aboutRef}
@@ -66,9 +61,7 @@ export const About = () => {
             exciting challenge that I approach with enthusiasm and creativity.
           </p>
         </div>
-
         <Skills />
-      </div>
     </Section>
   );
 };

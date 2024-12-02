@@ -39,11 +39,7 @@ export const ProjectCard = ({
           duration: 0.6,
           ease: "steps(3)",
         }
-      ).fromTo(
-        cardRef.current,
-        { x: "-100vw" },
-        { x: 0, duration: 0.6 }
-      );
+      ).fromTo(cardRef.current, { x: "-100vw" }, { x: 0, duration: 0.6 });
     }
   }, [currentKey, previousKey]);
 
@@ -100,7 +96,7 @@ export const ProjectCard = ({
       if (isLargeScreen) {
         gsap.to(ImageRef.current, {
           x: event.clientX,
-          y: "-50%",
+          y: -100,
           width: 300,
         });
       }
@@ -125,14 +121,14 @@ export const ProjectCard = ({
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: "#project",
+          trigger: "#projects",
           start: "top 30%",
           end: "top 20%",
           toggleActions: "play none none reset",
         },
       });
 
-      if(previousKey && currentKey !== previousKey) {
+      if (previousKey && currentKey !== previousKey) {
         tl.pause(tl.endTime());
       }
 
@@ -141,20 +137,22 @@ export const ProjectCard = ({
         duration: 0.6,
         ease: "steps(3)",
         delay: number / 10,
-      }).to(
-        buttonRef.current,
-        {
-          keyframes: {
-            rotate: [-5, 5, -5, 5, 0],
-            y: isLargeScreen
-              ? [200, 150, 100, 50, 0]
-              : [500, 350, 200, 50, 0],
+      })
+        .to(
+          buttonRef.current,
+          {
+            keyframes: {
+              rotate: [-5, 5, -5, 5, 0],
+              y: isLargeScreen
+                ? [200, 150, 100, 50, 0]
+                : [500, 350, 200, 50, 0],
+            },
+            ease: "steps(5)",
+            duration: 0.6,
           },
-          ease: "steps(5)",
-          duration: 0.6,
-        },
-        "<+0.4"
-      ).to(cardRef.current, { overflow: "visible", duration: 0.2 });
+          "<+0.4"
+        )
+        .to(cardRef.current, { overflow: "visible", duration: 0.2 });
     };
 
     initScrollAnimations();
@@ -178,7 +176,7 @@ export const ProjectCard = ({
           onMouseLeave={handleMouseLeave}
           ref={buttonRef}
         >
-          <h3 className="z-10">{projectName}</h3>
+          <h3>{projectName}</h3>
           <p className="text-sm flex flex-col gap-2 lg:flex-row lg:items-center justify-between lg:w-1/4 pr-2">
             {alt}
             <TbCircleArrowUpRightFilled size={24} />
@@ -187,7 +185,7 @@ export const ProjectCard = ({
         <img
           src={project?.pictures[activeIndex]}
           alt={`${projectName} preview`}
-          className="lg:absolute lg:top-[50%] lg:-left-10 pointer-events-none w-1/2 lg:w-0 z-30"
+          className="lg:absolute lg:top-[50%] lg:-left-10 w-1/2 lg:w-0 z-50"
           ref={ImageRef}
         />
       </div>
