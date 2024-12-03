@@ -66,7 +66,7 @@ export const Title = ({
 
 
   return (
-      <Heading ref={titleRef}>
+      <Heading ref={titleRef} className="flex flex-nowrap">
           {titleText.split("").map((letter) => (
             <span key={letter} className="inline-block scale-0">{letter}</span>
           ))}

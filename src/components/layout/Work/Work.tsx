@@ -52,6 +52,40 @@ export const Work = () => {
     }
   };
 
+  useEffect(() => {
+    gsap.fromTo(
+      "#mac",
+      { y: 30, scale: 0 },
+      {
+        scrollTrigger: {
+          trigger: "#work",
+          start: "top 80%",
+          end: "top 20%",
+          toggleActions: "restart none none reset",
+        },
+        y: 0,
+        keyframes: {
+          rotate: [-5, 5, -5, 5, 0],
+          scale: [0, 0.3, 0.6, 1.2, 2, 1],
+        },
+        duration: 0.6,
+        delay: 0.5,
+        ease: "steps(6)",
+        onComplete: () => {
+          gsap.to("#mac", {
+            y: -5,
+            keyframes: {
+              rotate: [-5, 5],
+            },
+            duration: 0.8,
+            ease: "steps(2)",
+            repeat: -1,
+          });
+        },
+      }
+    );
+  });
+
   // Animation principale (timeline + ligne)
   useEffect(() => {
     const tl = gsap.timeline({
@@ -87,30 +121,33 @@ export const Work = () => {
 
   return (
     <Section id="work">
+      <div className="flex items-center relative">
         <Title titleText="Work" headingLevel="h1" trigger="#work" />
-        <section className="flex flex-col lg:flex-row justify-between items-center w-full gap-10">
+        <img src="./assets/mac.png" className="w-24 stroke-two" id="mac" />
+      </div>
+      <section className="flex flex-col lg:flex-row justify-between items-center w-full gap-10">
+        <div
+          className="flex flex-col lg:flex-row lg:items-center justify-between relative lg:flex-1 min-h-[500px] lg:min-h-0"
+          ref={timeLineRef}
+        >
           <div
-            className="flex flex-col lg:flex-row lg:items-center justify-between relative lg:flex-1 min-h-[500px] lg:min-h-0"
-            ref={timeLineRef}
-          >
-            <div
-              ref={timeRef}
-              className="h-full min-h-[500px] lg:min-h-3 lg:h-3 w-3 lg:w-[100%] absolute left-1/2 -translate-x-1/2 lg:left-0 lg:-translate-x-0 lg:top-1/2 lg:-translate-y-1/2 bg-primary rounded-full"
-              style={{
-                willChange: "width, height",
-              }}
+            ref={timeRef}
+            className="h-full min-h-[500px] lg:min-h-3 lg:h-3 w-3 lg:w-[100%] absolute left-1/2 -translate-x-1/2 lg:left-0 lg:-translate-x-0 lg:top-1/2 lg:-translate-y-1/2 bg-primary rounded-full"
+            style={{
+              willChange: "width, height",
+            }}
+          />
+          {works.map((work, index) => (
+            <WorkCard
+              key={work.id}
+              work={work}
+              setWorkActive={setWorkActive}
+              hasPlayed={hasPlayed}
+              index={index + 1}
             />
-            {works.map((work, index) => (
-              <WorkCard
-                key={work.id}
-                work={work}
-                setWorkActive={setWorkActive}
-                hasPlayed={hasPlayed}
-                index={index + 1}
-              />
-            ))}
-          </div>
-        </section>
+          ))}
+        </div>
+      </section>
       <Modal
         workActive={workActive}
         onClose={() => setWorkActive(null)}
