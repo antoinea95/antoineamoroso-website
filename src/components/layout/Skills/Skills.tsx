@@ -47,8 +47,7 @@ export const Skills = () => {
   }, []);
 
   return (
-    <div className="w-full px-3 flex items-center justify-center">
-      <div className="grid grid-cols-3 gap-10 lg:flex lg:gap-10 lg:items-center lg:flex-wrap" ref={wrapperRef}>
+      <div className="grid grid-cols-2 gap-y-6  lg:flex lg:items-center lg:justify-between lg:flex-wrap w-full" ref={wrapperRef}>
         {skills.map((techno) => {
           const Icon = iconMap[techno.icon];
           return (
@@ -56,12 +55,11 @@ export const Skills = () => {
               key={techno.icon}
               className="flex flex-col items-center gap-1 font-modak uppercase"
               style={{
-                fontSize: "clamp(1.3rem, 2.5vw, 2.5rem)"
+                fontSize: "clamp(2rem, 2.5vw, 2.5rem)"
               }}
             >
               <Icon
-                className="drop-shadow-custom overflow-visible z-10"
-                stroke="#f1f5f9"
+                className="drop-shadow-custom overflow-visible z-10 stroke-tertiary"
                 paintOrder="stroke"
                 strokeLinejoin="round"
                 strokeLinecap="round"
@@ -74,6 +72,5 @@ export const Skills = () => {
           );
         })}
       </div>
-    </div>
   );
 };

@@ -4,17 +4,17 @@
 
 @layer utilities {
 
-
   h1, h2, h3, h4 {
     font-family: 'Modak', system-ui;
     text-transform: uppercase;
     padding-top: 0.15em;
-
+    color: theme(colors.primary);
   }
 
   h1 {
     font-size: clamp(4.5rem, 8vw, 8rem);
     line-height: 60px;
+
   }
 
   h2 {
@@ -30,17 +30,46 @@
 
   * {
     box-sizing: border-box;
-    scroll-behavior: smooth-scroll;
+    scroll-behavior: smooth
   }
 
   p {
     font-size: clamp(16px, 4vw, 24px);
+    color: theme(colors.primary);
   }
 
   
   html {
     background-color: theme(colors.tertiary);
   }
+
+  .stroke {
+      -webkit-filter: drop-shadow(11px 0 0 theme(colors.tertiary)) 
+      drop-shadow(0 11px 0 theme(colors.tertiary))
+      drop-shadow(-11px 0 0 theme(colors.tertiary)) 
+      drop-shadow(0 -11px 0 theme(colors.tertiary))
+      drop-shadow(2px 2px 5px rgba(0,0,0,0.10));
+      
+      filter: drop-shadow(11px 0 0 theme(colors.tertiary)) 
+      drop-shadow(0 11px 0 theme(colors.tertiary))
+      drop-shadow(-11px 0 0 theme(colors.tertiary)) 
+      drop-shadow(0 -11px 0 theme(colors.tertiary))
+      drop-shadow(2px 2px 5px rgba(0,0,0,0.10));
+  }
+
+  .stroke-two {
+    -webkit-filter: drop-shadow(3px 0 0 theme(colors.tertiary)) 
+    drop-shadow(0 3px 0 theme(colors.tertiary))
+    drop-shadow(-3px 0 0 theme(colors.tertiary)) 
+    drop-shadow(0 -3px 0 theme(colors.tertiary))
+    drop-shadow(2px 2px 5px rgba(0,0,0,0.10));
+
+    filter: drop-shadow(-3px 0 0 theme(colors.tertiary)) 
+    drop-shadow(0 3px 0 theme(colors.tertiary))
+    drop-shadow(3px 0 0 theme(colors.tertiary)) 
+    drop-shadow(0 -3px 0 theme(colors.tertiary))
+    drop-shadow(2px 2px 5px rgba(0,0,0,0.10));
+}
 
   .link-hover-effect:hover {
     transform: scale(1.25) rotate(-3deg);

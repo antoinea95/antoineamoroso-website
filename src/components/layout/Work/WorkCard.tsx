@@ -29,7 +29,6 @@ export const WorkCard = ({
   const { isLargeScreen } = useAppContext();
   const timeLine = useRef<gsap.core.Timeline | null>(null);
 
-
   useEffect(() => {
     const workElements = workRef.current?.childNodes;
     const dateElements = dateRef.current?.childNodes;
@@ -72,7 +71,7 @@ export const WorkCard = ({
           scale: 1,
           ease: "steps(3)",
           duration: 0.3,
-          delay: 0.25 * (index + 1),
+          delay: 0.3 * (index + 1),
         }
       )
       // Animation pour les éléments de travail
@@ -113,31 +112,31 @@ export const WorkCard = ({
 
   return (
     <div>
-      <div className="flex items-center lg:whitespace-nowrap lg:flex-col lg:w-fit lg:gap-2">
+      <div
+        className="flex items-center lg:whitespace-nowrap lg:flex-col lg:w-fit lg:gap-2 hover:scale-110 cursor-pointer"
+        onClick={() => {
+          setWorkActive(index);
+        }}
+      >
         <section
           className="flex-1 flex items-center justify-center px-2 lg:mt-1 overflow-hidden"
           ref={dateRef}
         >
-          <p className="relative text-primary text-sm font-normal py-2">
+          <p className="relative text-sm font-normal py-2">
             {work.date}
           </p>
         </section>
         <section ref={buttonRef}>
-          <button
-            onClick={() => {
-              setWorkActive(index);
-            }}
-            className="w-7 h-7 rounded-full bg-primary border-2 border-white hover:scale-150 transition-all cursor-pointer"
-          ></button>
+          <div className="w-7 h-7 rounded-full bg-primary border-4 border-tertiary shadow-custom" />
         </section>
         <section
           className="flex flex-col lg:items-center lg:-space-y-3 flex-1 px-2 overflow-hidden"
           ref={workRef}
         >
-          <p className="relative text-primary text-base lg:text-base leading-none lg:p-0.5 font-parkinsans font-bold">
+          <p className="relative text-base lg:text-base leading-none lg:p-0.5 font-bold uppercase">
             {work.role}
           </p>
-          <p className="relative text-primary text-xs lg:text-sm font-medium p-0.5">
+          <p className="relative text-xs lg:text-sm font-medium p-0.5">
             {work.company}
           </p>
         </section>

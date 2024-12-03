@@ -33,7 +33,7 @@ export const ProjectCard = ({
       const tl = gsap.timeline();
       tl.fromTo(
         sectionRef.current,
-        { width: "100vw", backgroundColor: "black" },
+        { width: "100vw"},
         {
           width: 0,
           duration: 0.6,
@@ -63,12 +63,11 @@ export const ProjectCard = ({
     })
       .to(sectionRef.current, {
         width: "100vw",
-        backgroundColor: "black",
         duration: 0.6,
         ease: "steps(3)",
       })
       .to(sectionRef.current, {
-        backgroundColor: "white",
+        backgroundColor: "#EDE8E4",
         duration: 0.6,
         ease: "steps(3)",
       });
@@ -85,11 +84,7 @@ export const ProjectCard = ({
     }
   }, [activeIndex, project]);
 
-  const { contextSafe } = useGSAP(() => {
-    if (isLargeScreen) {
-      gsap.set(ImageRef.current, { width: 10, pointerEvents: "none" });
-    }
-  });
+  const { contextSafe } = useGSAP();
 
   const moveShape = contextSafe(
     (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -97,7 +92,7 @@ export const ProjectCard = ({
         gsap.to(ImageRef.current, {
           x: event.clientX,
           y: -100,
-          width: 300,
+          scale: 1,
         });
       }
     }
@@ -106,9 +101,8 @@ export const ProjectCard = ({
   const handleMouseLeave = () => {
     if (isLargeScreen) {
       gsap.to(ImageRef.current, {
-        width: 0,
+        scale: 0,
         ease: "steps(1)",
-        pointerEvents: "none",
       });
     }
   };
@@ -165,12 +159,12 @@ export const ProjectCard = ({
         ref={sectionRef}
       />
       <div
-        className="border-b border-primary flex items-center py-3 relative"
+        className="border-b border-primary flex items-center pb-3 pt-8 hover:bg-secondary"
         ref={cardRef}
       >
-        <p className="absolute text-sm left-0 top-0">0{number}.</p>
+        <p className="absolute text-sm left-3 top-3">0{number}.</p>
         <button
-          className="flex flex-col lg:flex-row lg:items-center justify-between pt-5 lg:py-0 overflow-hidden w-full lg:pl-10 mx-auto px-3"
+          className="flex flex-col lg:flex-row lg:items-center justify-between pt-5 lg:py-0 w-full lg:pl-10 mx-auto px-3"
           onClick={handleClick}
           onMouseMove={moveShape}
           onMouseLeave={handleMouseLeave}
@@ -185,7 +179,7 @@ export const ProjectCard = ({
         <img
           src={project?.pictures[activeIndex]}
           alt={`${projectName} preview`}
-          className="lg:absolute lg:top-[50%] lg:-left-10 w-1/2 lg:w-0 z-50"
+          className="lg:absolute lg:top-[50%] lg:-left-10 w-1/2 lg:w-1/3 lg:scale-0 z-50 stroke-two"
           ref={ImageRef}
         />
       </div>

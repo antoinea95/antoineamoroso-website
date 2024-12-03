@@ -49,16 +49,15 @@ export const Modal = ({
         className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="absolute z-50 w-[92vw] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-between">
+      <div className="absolute z-50 w-[95vw] lg:w-[93vw] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-between">
         <button
-          className="text-3xl text-primary"
+          className="text-3xl lg:text-4xl text-primary hover:scale-150"
           onClick={() => {
             handlePrev();
           }}
         >
           <PiArrowLeftBold
-            className="drop-shadow-custom overflow-visible"
-            stroke="#f1f5f9"
+            className="drop-shadow-custom overflow-visible stroke-tertiary"
             paintOrder="stroke"
             strokeLinejoin="round"
             strokeLinecap="round"
@@ -68,14 +67,13 @@ export const Modal = ({
           />
         </button>
         <button
-          className="text-3xl text-primary"
+          className="text-3xl lg:text-4xl text-primary hover:scale-150"
           onClick={() => {
             handleNext();
           }}
         >
           <PiArrowRightBold
-            className="drop-shadow-custom overflow-visible"
-            stroke="#f1f5f9"
+            className="drop-shadow-custom overflow-visible stroke-tertiary"
             paintOrder="stroke"
             strokeLinejoin="round"
             strokeLinecap="round"
@@ -85,29 +83,28 @@ export const Modal = ({
           />
         </button>
       </div>
-        <div
-          ref={contentRef}
-          className=" bg-secondary w-[90vw] h-[90vh] p-10 rounded-xl border-4 border-secondary overflow-y-auto overflow-x-hidden relative"
-          key={`work-detail-${workActive}`}
-          id={`work-${workActive}`}
+      <div
+        ref={contentRef}
+        className=" bg-tertiary w-[90vw] max-h-[90vh] p-10 rounded-xl overflow-y-auto overflow-x-hidden relative"
+        key={`work-detail-${workActive}`}
+        id={`work-${workActive}`}
+      >
+        <button
+          className="absolute right-3 top-3 text-3xl text-primary"
+          onClick={onClose}
         >
-          <button
-            className="absolute right-3 top-3 text-2xl text-primary"
-            onClick={onClose}
-          >
-            <CgClose
-              className="drop-shadow-custom overflow-visible"
-              stroke="#f1f5f9"
-              paintOrder="stroke"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              style={{
-                strokeWidth: "clamp(2px, 3rem, 5px)",
-              }}
-            />
-          </button>
-          {children}
-        </div>
+          <CgClose
+            className="drop-shadow-custom overflow-visible stroke-tertiary"
+            paintOrder="stroke"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            style={{
+              strokeWidth: "clamp(2px, 3rem, 5px)",
+            }}
+          />
+        </button>
+        {children}
+      </div>
     </div>
   );
 };

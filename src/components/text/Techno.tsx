@@ -1,6 +1,5 @@
 import { iconMap } from "../../utils/iconMap";
 import { IconType } from "react-icons";
-import { Stroke } from "./Stroke";
 
 export const Techno = ({
   techno,
@@ -16,8 +15,7 @@ const iconName = techno.icon
   return (
     <p className={`flex flex-col items-center text-primary font-modak ${size}`}>
       <Icon 
-          className="drop-shadow-custom overflow-visible z-10"
-          stroke="#f1f5f9"
+          className="drop-shadow-custom overflow-visible z-10 stroke-tertiary"
           paintOrder="stroke"
           strokeLinejoin="round"
           strokeLinecap="round"

@@ -49,7 +49,7 @@ export const About = () => {
 
         <div className="overflow-hidden flex items-center justify-center">
           <p
-            className="leading-snug text-primary font-medium w-full sm:w-[90%]"
+            className="leading-snug font-medium w-full sm:w-[90%]"
             ref={aboutRef}
           >
             A passionate developer with nearly two years of experience, I am

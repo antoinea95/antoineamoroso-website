@@ -124,12 +124,11 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
       ref={carousel}
     >
       <button
-        className="absolute left-3 z-20 text-3xl text-primary"
+        className="absolute left-3 z-20 text-3xl text-primary hover:scale-125"
         onClick={prev}
       >
         <PiArrowLeftBold
-          className="drop-shadow-custom overflow-visible"
-          stroke="#f1f5f9"
+          className="drop-shadow-custom overflow-visible stroke-tertiary"
           paintOrder="stroke"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -139,12 +138,11 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
         />
       </button>
       <button
-        className="absolute right-3 z-20 text-3xl text-primary"
+        className="absolute right-3 z-20 text-3xl text-primary hover:scale-125"
         onClick={next}
       >
         <PiArrowRightBold
-          className="drop-shadow-custom overflow-visible"
-          stroke="#f1f5f9"
+          className="drop-shadow-custom overflow-visible stroke-tertiary"
           paintOrder="stroke"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -153,20 +151,20 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
           }}
         />
       </button>
-      <div className="w-[90vw] lg:w-[60vw] flex items-center">
+      <div className="w-[90vw] lg:w-[60vw] flex items-center pb-2">
         <img
           src={pictures[getNextIndex()]}
-          className="object-cover w-full h-full px-10"
+          className="object-cover w-full h-full px-10 stroke-two"
           ref={nextImgRef}
         />
         <img
           src={pictures[activeIndex]}
-          className="object-cover w-full h-full px-10"
+          className="object-cover w-full h-full px-10 stroke-two"
           ref={activeImgRef}
         />
         <img
           src={pictures[getPrevIndex()]}
-          className="object-cover w-full h-full px-10"
+          className="object-cover w-full h-full px-10 stroke-two"
           ref={prevImgRef}
         />
       </div>
@@ -180,8 +178,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
           >
             {activeIndex === index ? (
               <BsFillCircleFill
-                className="drop-shadow-custom overflow-visible"
-                stroke="#f1f5f9"
+                className="drop-shadow-custom overflow-visible stroke-tertiary"
                 paintOrder="stroke"
                 strokeLinejoin="round"
                 strokeLinecap="round"

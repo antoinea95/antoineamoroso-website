@@ -28,10 +28,10 @@ export const IconLink = ({
     <a
       href={url}
       target="_blank"
-      className="flex items-center -space-x-0.5 text-xl font-extrabold pt-2 pb-1 leading-4 group transition-all"
+      className="flex items-center justify-between gap-0 text-xl font-extrabold group lg:hover:gap-2 lg:hover:pr-3 transition-all w-fit h-9 p-2 rounded-full bg-primary text-tertiary"
     >
-      <Icon className="rounded-full bg-primary text-white flex items-center justify-center p-1 w-7 h-7  lg:w-8 lg:h-8 border-2 lg:shadow-custom mb-1 border-white z-[1]" />
-      {isLargeScreen && <span className="inline-block py-1 text-primary w-0 overflow-hidden whitespace-nowrap group-hover:w-[95px] transition-all">
+      <Icon className=" flex items-center justify-center w-5 h-5  z-[1]" />
+      {isLargeScreen && <span className="inline-block text-tertiary max-w-0 overflow-hidden whitespace-nowrap lg:group-hover:w-fit lg:group-hover:max-w-[95px] transition-all text-lg font-light">
         {content}
       </span>}
     </a>

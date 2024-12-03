@@ -11,17 +11,17 @@ export const NavBar = () => {
   const { navRef } = useAppContext();
 
   return (
-    <header className="flex items-center justify-center">
+    <header className="flex items-center justify-center fixed w-[90%] left-1/2 -translate-x-1/2 z-10">
       <nav
         ref={navRef}
-        className="w-fit h-fit flex items-center gap-2 rounded-full font-semibold fixed bg-primary border-secondary border-4 top-[10px] z-10"
+        className="h-fit flex items-center p-4 rounded-full font-semibold bg-primary"
         id="navbar"
       >
-        <div className=" w-fit p-4 gap-3 flex items-center justify-between rounded-l-full">
+        <div className=" w-fit pr-2 gap-2 flex items-center justify-between rounded-l-full">
           <NavLink name="Projects" />
           <NavLink name="Work" />
         </div>
-        <div className=" w-fit p-4 gap-3 flex items-center justify-between rounded-r-full">
+        <div className=" w-fit pl-2 gap-2 flex items-center justify-between rounded-r-full">
           <NavLink name="About" />
           <NavLink name="Contact" />
         </div>

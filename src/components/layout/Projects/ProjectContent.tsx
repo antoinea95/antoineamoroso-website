@@ -22,7 +22,7 @@ const ContentTitle = ({ title }: { title: string }) => {
   }, []);
 
   return (
-    <p className="font-bold border-b pb-1 mb-3 text-lg lg:text-xl overflow-hidden">
+    <p className="font-bold border-b border-primary pb-1 mb-3 text-lg lg:text-xl overflow-hidden whitespace-nowrap">
       <span ref={spanRef} id="title" className="inline-block">
         {title}
       </span>
@@ -68,7 +68,7 @@ export const ProjectContent = ({
   features?: string[];
 }) => {
   return (
-    <section className="flex flex-col lg:flex-row justify-between p-2 gap-10 flex-1 mt-10">
+    <section className="flex flex-col lg:flex-row lg:justify-between p-2 gap-10 lg:flex-1 mt-10">
       <ContentContainer direction="right">
         <ContentTitle title="About" />
         <p className="text-sm lg:text-lg font-semibold">{summary}</p>
@@ -85,8 +85,7 @@ export const ProjectContent = ({
                   >
                     <Icon
                       size={30}
-                      className="drop-shadow-custom overflow-visible z-10"
-                      stroke="#f1f5f9"
+                      className="drop-shadow-custom overflow-visible z-10 stroke-tertiary"
                       paintOrder="stroke"
                       strokeLinejoin="round"
                       strokeLinecap="round"
@@ -105,7 +104,7 @@ export const ProjectContent = ({
       {features && (
         <ContentContainer direction="left">
           <ContentTitle title="Main features" />
-          <ul className="space-y-5">
+          <ul className="space-y-5 text-primary">
             {features.map((feature, index) => (
               <li key={index} className="flex flex-col text-xs">
                 <span className="font-bold text-sm">

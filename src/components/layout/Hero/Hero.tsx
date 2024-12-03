@@ -13,6 +13,8 @@ export const Hero = () => {
   const { navRef, isLargeScreen } = useAppContext();
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subTitleRef = useRef<HTMLElement>(null);
+  const isAnimated = sessionStorage.getItem("hasAnimationPlayed");
+
 
   useEffect(() => {
 
@@ -31,7 +33,6 @@ export const Hero = () => {
 
     const navElement = navRef?.current;
     if (navElement && titleRef.current && subTitleRef.current) {
-      const isAnimated = sessionStorage.getItem("hasAnimationPlayed");
 
       if (isAnimated !== "true") {
         const tl = gsap.timeline({ delay: 1.2 });
@@ -81,29 +82,28 @@ export const Hero = () => {
         );
       }
     }
-  }, [isLargeScreen, navRef]);
+  }, [isLargeScreen, navRef, isAnimated]);
 
   return (
-    <section className="max-h-dvh h-[70vh] py-5 w-[95%] m-auto">
+    <section className="max-h-dvh h-dvh py-5 w-[95%] m-auto" id="hero-container">
       <NavBar />
       <HeroPicture />
       <section
         id="hero"
-        className="flex flex-col items-center justify-end lg:justify-center lg:h-full h-[83vh] min-h-[575px] lg:space-y-3 2xl:space-y-6 mt-3 w-fit lg:w-full mx-auto"
+        className="flex flex-col items-center justify-end lg:justify-center lg:h-full h-[95vh] sm:h-[85vh] min-h-[575px] lg:space-y-3 2xl:space-y-6 mt-3 w-fit lg:w-full mx-auto"
       >
         <h1
-          className="flex items-center justify-center lg:w-full flex-wrap lg:flex-nowrap -space-y-3 sm:space-y-0"
+          className="flex items-center justify-center lg:w-full flex-wrap lg:flex-nowrap -space-y-3 sm:space-y-0 gap-2.5 lg:gap-[24%] 2xl:gap-[22%]"
           ref={titleRef}
-          style={{ gap: isLargeScreen ? "24%" : "10px" }}
         >
           <span className="will-change-auto">Antoine</span>
           <span className="will-change-auto">Amoroso</span>
         </h1>
         <section
-          className="flex flex-col-reverse lg:flex-row justify-between items-center flex-nowrap w-full lg:w-[97%]"
+          className="flex flex-col-reverse gap-3 lg:flex-row justify-between items-center flex-nowrap w-full lg:w-[97%] max-w-[1380px]"
           ref={subTitleRef}
         >
-          <div className="flex items-center w-fit lg:gap-2">
+          <div className="flex items-center w-fit gap-2">
             <IconLink
               url="https://www.linkedin.com/in/antoine-amoroso-developpeur-web/"
               icon={RiLinkedinFill}
@@ -116,12 +116,12 @@ export const Hero = () => {
             />
           </div>
           <p
-            className="font-extrabold relative tracking-tight text-primary text-xl"
+            className="font-extralight bg-primary text-tertiary px-4 py-2 rounded-full relative tracking-tight text-xl"
             style={{
-              fontSize: "clamp(1.5rem, 5vw, 2rem)",
+              fontSize: "clamp(1.2rem, 2vw, 2rem)",
             }}
           >
-            Front-end developer
+            front-end developer
           </p>
         </section>
       </section>

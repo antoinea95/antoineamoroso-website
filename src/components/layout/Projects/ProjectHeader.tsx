@@ -27,10 +27,10 @@ export const ProjectHeader = ({ project }: { project: ProjectType }) => {
 
   return (
     <header className="flex flex-col lg:flex-row items-center lg:justify-between w-full gap-6">
-      <div className="flex" ref={headerRef}>
+      <div className="flex gap-2" ref={headerRef}>
         <h2>{project.name}</h2>
         <IconLink
-          content="View live"
+          content="Live"
           url={project.url}
           icon={TbArrowUpRight}
         />

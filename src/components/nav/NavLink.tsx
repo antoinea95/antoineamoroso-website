@@ -32,7 +32,7 @@ export const NavLink = ({ name }: { name: string }) => {
     <a
       href={`#${name.toLowerCase()}`}
       onClick={handleClick}
-      className="lg:link-hover-effect relative px-1 group h-fit inline-flex font-extrabold text-secondary"
+      className="lg:link-hover-effect relative px-1 group h-fit inline-flex font-extrabold text-tertiary z-30"
     >
       {name}
       <Stroke name={name} isHover />
