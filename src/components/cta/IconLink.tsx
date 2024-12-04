@@ -25,7 +25,7 @@ export const IconLink = ({
     <a
       href={url}
       target="_blank"
-      className="flex items-center gap-1 bg-primary text-tertiary h-fit py-1 px-3 rounded-full border-2 border-tertiary hover:shadow-custom hover:scale-110 transition-transform"
+      className="flex items-center gap-1 bg-primary text-tertiary h-fit py-1 px-3 rounded-full border-2 border-tertiary hover:shadow-custom hover:scale-110 transition-transform text-lg"
     >
       <Icon />
       {content}

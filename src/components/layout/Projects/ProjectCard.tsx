@@ -179,7 +179,7 @@ export const ProjectCard = ({
         ref={sectionRef}
       />
       <div
-        className="border-b border-primary flex items-center pb-3 pt-8 hover:bg-secondary"
+        className="border-b border-primary flex items-center pb-5 2xl:pb-8 pt-8 hover:bg-secondary max-w-[1400px] w-full"
         ref={cardRef}
       >
         <p className="absolute text-sm left-3 top-3">0{number}.</p>
@@ -199,7 +199,7 @@ export const ProjectCard = ({
         <img
           src={project?.pictures[activeIndex]}
           alt={`${projectName} preview`}
-          className="lg:absolute lg:top-[50%] lg:-left-10 w-1/2 lg:w-1/3 lg:scale-0 z-50 stroke-two"
+          className="lg:absolute lg:top-[0] lg:-left-10 w-1/2 lg:w-1/3 max-w-[350px] lg:scale-0 z-50 stroke-two"
           ref={imageRef}
         />
       </div>

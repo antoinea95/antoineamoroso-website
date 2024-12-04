@@ -73,7 +73,7 @@ export const Project = () => {
         <Title titleText="Projects" headingLevel="h1" trigger="#projects" />
         <img src="./assets/heart.png" className="w-20 stroke-two" id="heart" />
       </div>
-      <section className="w-[90%] flex flex-col justify-center relative">
+      <section className="w-[90%] flex flex-col justify-center items-center relative">
         {projects.map((project, index) => (
           <ProjectCard
             projectName={project.projectName}

@@ -97,6 +97,12 @@ export const About = () => {
           y: 0, // Monte doucement à sa position
           duration: 1,
           ease: "steps(5)",
+          scrollTrigger: {
+            trigger: "#about",
+            start: "top 80%",
+            end: "top 20%",
+            toggleActions: "restart none none reset",
+          },
         }
       );
 
@@ -170,7 +176,7 @@ export const About = () => {
 
       <div className="overflow-hidden flex items-center justify-center">
         <p
-          className="leading-snug font-medium w-full sm:w-[90%] py-3"
+          className="leading-snug font-medium w-full sm:w-[90%] max-w-[1300px] py-3"
           ref={aboutRef}
         >
           A {" "}

@@ -46,6 +46,8 @@ export const HeroPicture = () => {
     return () => cancelAnimationFrame(animationId); // Nettoyage
   }, [images]); // Recrée uniquement si `images` change
 
+  
+
   useEffect(() => {
     const heroElement = heroPictureRef.current;
     const picture = document.getElementById("hero-picture");
@@ -94,7 +96,6 @@ export const HeroPicture = () => {
               scale: [1, 0.8, 0.6, 0.4, 0.2],
             },
             yPercent: -45,
-            xPercent: isLargeScreen ? -47.9 : -50,
             duration: 1,
             ease: "steps(5)",
           })
@@ -144,13 +145,13 @@ export const HeroPicture = () => {
 
   return (
     <div
-      className="pointer-events-none fixed flex items-center justify-center h-screen w-screen max-h-[75vh] lg:max-h-dvh z-10 left-1/2 lg:left-[48%] 2xl:left-[47.5%] -translate-x-1/2 lg:scale-0"
+      className="pointer-events-none fixed flex items-center justify-center h-screen w-screen max-h-[75vh] lg:max-h-dvh z-10 lg:scale-0 left-0 top-5"
       ref={heroPictureRef}
       id="heroPicture-container"
     >
       <img
         src="./assets/big-head.png"
-        className="object-cover w-[75%] sm:w-[60%] lg:w-[30%] max-w-[400px] will-change-auto stroke"
+        className="object-cover w-[75%] sm:w-[60%] lg:w-[30%] 2xl:w-[25%] max-w-[500px] will-change-auto stroke lg:-translate-x-10"
         alt="Hero Animation"
         id="hero-picture"
       />

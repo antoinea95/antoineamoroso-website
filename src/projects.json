@@ -8,7 +8,7 @@
         "pictures": ["./assets/taskly/taskly-home.png", "./assets/taskly/taskly-task.png", "./assets/taskly/taskly-login.png", "./assets/taskly/taskly-comment.png", "./assets/taskly/taskly-sidebar.png", "./assets/taskly/taskly-account.png"],
         "summary": "Taskly is a side project developed to enhance my React skills and progress in TypeScript. It combines complexity and versatility, offering a robust platform to manage collaborative projects efficiently.",
         "features": [
-          "Authentication: Secure user login and management of personal boards.",
+          "Authentification: Secure user login and management of personal boards.",
           "User Collaboration: Board creators can invite users to collaborate on projects.",
           "Board and List Management: Create, edit, and organize boards and task lists for seamless workflow.",
           "Task Features: Add, modify, assign, and set deadlines for tasks, with drag-and-drop functionality.",

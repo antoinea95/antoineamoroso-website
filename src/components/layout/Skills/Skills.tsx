@@ -69,7 +69,7 @@ export const Skills = () => {
 
   return (
     <div
-      className="flex items-center justify-center flex-wrap gap-4 sm:gap-10 w-full"
+      className="flex items-center justify-center flex-wrap gap-4 sm:gap-10 w-full "
       ref={wrapperRef}
     >
       {skills.map((techno) => {
@@ -77,9 +77,9 @@ export const Skills = () => {
         return (
           <p
             key={techno.icon}
-            className="flex flex-col items-center gap-1 font-modak uppercase w-[30%] sm:w-fit"
+            className="flex flex-col items-center gap-1 font-modak uppercase w-[30%] sm:w-fit border"
             style={{
-              fontSize: "clamp(1.3rem, 5vw, 1.8rem)",
+              fontSize: "clamp(1.3rem, 5vw, 2.3rem)",
             }}
           >
             <Icon

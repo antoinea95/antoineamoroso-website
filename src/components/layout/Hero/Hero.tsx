@@ -128,17 +128,17 @@ export const Hero = () => {
       <HeroPicture />
       <section
         id="hero"
-        className="flex flex-col items-center justify-end lg:justify-center lg:h-full h-[95vh] sm:h-[85vh] min-h-[575px] lg:space-y-3 2xl:space-y-6 mt-3 w-fit lg:w-full mx-auto"
+        className="flex flex-col lg:gap-2 items-center justify-end lg:justify-center lg:h-full h-[95vh] sm:h-[85vh] min-h-[575px] lg:space-y-3 2xl:space-y-6 mt-3 w-fit lg:w-full mx-auto"
       >
         <h1
-          className="flex items-center justify-center lg:w-full flex-wrap lg:flex-nowrap -space-y-3 sm:space-y-0 gap-2.5 lg:gap-[24%] 2xl:gap-[22%]"
+          className="flex items-center justify-center lg:w-full flex-wrap lg:flex-nowrap -space-y-3 sm:space-y-0 gap-2.5 lg:gap-[24%] 2xl:gap-[20%]"
           ref={titleRef}
         >
           <span className="will-change-auto">Antoine</span>
           <span className="will-change-auto">Amoroso</span>
         </h1>
         <section
-          className="flex flex-col-reverse gap-3 lg:flex-row justify-between items-center flex-nowrap w-full lg:w-[97%] max-w-[1380px]"
+          className="flex flex-col-reverse gap-3 lg:flex-row justify-between items-center flex-nowrap w-full lg:w-[97%] max-w-[1480px]"
           ref={subTitleRef}
         >
           <div className="flex items-center w-fit gap-2">

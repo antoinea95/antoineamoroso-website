@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useAppContext } from "../../../hooks/useAppContext";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { PiArrowLeftBold, PiArrowRightBold } from "react-icons/pi";
@@ -7,10 +6,15 @@ import { BsFillCircleFill } from "react-icons/bs";
 
 export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const { isLargeScreen } = useAppContext();
 
   const carousel = useRef<HTMLElement>(null);
   const intervalRef = useRef<number | null>(null);
+
+    // Fonction pour calculer la largeur dynamique du carrousel
+    const calculateDynamicShift = () => {
+      const carouselWidth = carousel.current?.offsetWidth || window.innerWidth * 0.6; // Par défaut, 60% de l'écran
+      return carouselWidth;
+    };
 
   const stopAutoScroll = () => {
     if (intervalRef.current) clearInterval(intervalRef.current); // Arrête l'intervalle si existant
@@ -40,9 +44,9 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
   }, []);
 
   const { contextSafe } = useGSAP(() => {
-    gsap.set(nextImgRef.current, { x: isLargeScreen ? "-60vw" : "-90vw" });
-    gsap.set(activeImgRef.current, { x: isLargeScreen ? "-60vw" : "-90vw" });
-    gsap.set(prevImgRef.current, { x: isLargeScreen ? "-60vw" : "-90vw" });
+    gsap.set(nextImgRef.current, { x: -calculateDynamicShift() });
+    gsap.set(activeImgRef.current, { x: -calculateDynamicShift() });
+    gsap.set(prevImgRef.current, { x: calculateDynamicShift() });
   }, [activeIndex]);
 
   const next = contextSafe(() => {
@@ -60,7 +64,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
         keyframes: {
           rotate: rotateFrame,
         },
-        x: isLargeScreen ? "60vw" : "90vw",
+        x: calculateDynamicShift(),
         ease: "steps(4)",
         duration: 0.7,
       },
@@ -96,7 +100,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
         keyframes: {
           rotate: rotateFrame,
         },
-        x: isLargeScreen ? "-120vw" : "-150vw",
+        x: -calculateDynamicShift() * 2,
         ease: "steps(4)",
         duration: 0.7,
       },
@@ -107,7 +111,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
         keyframes: {
           rotate: rotateFrame,
         },
-        x: isLargeScreen ? "-120vw" : "-150vw",
+        x: -calculateDynamicShift() * 2,
         ease: "steps(4)",
         duration: 0.7,
       },
@@ -138,7 +142,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
       ref={carousel}
     >
       <button
-        className="absolute left-3 z-20 text-3xl text-primary hover:scale-125"
+        className="absolute left-3 z-20 text-3xl text-primary hover:scale-125 cursor-pointer"
         onClick={prev}
       >
         <PiArrowLeftBold
@@ -152,7 +156,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
         />
       </button>
       <button
-        className="absolute right-3 z-20 text-3xl text-primary hover:scale-125"
+        className="absolute right-3 z-20 text-3xl text-primary hover:scale-125 cursor-pointer"
         onClick={next}
       >
         <PiArrowRightBold
@@ -165,7 +169,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
           }}
         />
       </button>
-      <div className="w-[90vw] lg:w-[60vw] flex items-center pb-2">
+      <div className="w-[90vw] lg:w-[60vw] max-w-[800px] flex items-center pb-2">
         <img
           src={pictures[getNextIndex()]}
           className="object-cover w-full h-full px-10 stroke-two"
@@ -188,7 +192,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
             className={`${
               activeIndex === index ? "text-xl" : "text-base"
             } text-primary`}
-            key={index}
+            key={pic}
           >
             {activeIndex === index ? (
               <BsFillCircleFill

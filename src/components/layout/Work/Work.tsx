@@ -150,14 +150,14 @@ export const Work = () => {
         <Title titleText="Work" headingLevel="h1" trigger="#work" />
         <img src="./assets/mac.png" className="w-24 stroke-two" id="mac" />
       </div>
-      <section className="flex flex-col lg:flex-row justify-between items-center w-full gap-10">
+      <section className="flex flex-col lg:flex-row justify-between items-center w-full max-w-[1400px] gap-10">
         <div
           className="flex flex-col lg:flex-row lg:items-center justify-between relative lg:flex-1 min-h-[500px] lg:min-h-0"
           ref={timeLineRef}
         >
           <div
             ref={timeRef}
-            className="h-full min-h-[500px] lg:min-h-3 lg:h-3 w-3 lg:w-[100%] absolute left-1/2 -translate-x-1/2 lg:left-0 lg:-translate-x-0 lg:top-1/2 lg:-translate-y-1/2 bg-primary rounded-full"
+            className="h-full min-h-[500px] lg:min-h-3 lg:h-3 w-3 lg:w-[100%] max-w-[1400px] absolute left-1/2 -translate-x-1/2 lg:left-0 lg:-translate-x-0 lg:top-1/2 lg:-translate-y-1/2 bg-primary rounded-full"
             style={{
               willChange: "width, height",
             }}

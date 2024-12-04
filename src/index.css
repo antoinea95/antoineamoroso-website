@@ -4,6 +4,19 @@
 
 @layer utilities {
 
+  html {
+    background-color: theme(colors.tertiary);
+    font-size: 16px; /* Ajuste selon tes besoins */
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   h1, h2, h3, h4 {
     font-family: 'Modak', system-ui;
     text-transform: uppercase;
@@ -39,9 +52,7 @@
   }
 
   
-  html {
-    background-color: theme(colors.tertiary);
-  }
+
 
   .stroke {
       -webkit-filter: drop-shadow(11px 0 0 theme(colors.tertiary)) 
