@@ -1,16 +1,15 @@
 import { TbArrowUpRight} from "react-icons/tb";
 import { IconLink } from "../../cta/IconLink";
 import { ProjectType } from "../../../pages/ProjectPage";
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 export const ProjectHeader = ({ project }: { project: ProjectType }) => {
   const headerRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
+  useEffect(() => {
     const rotateFrames = [5, -5, 5, -5, 5, 0];
-    gsap.fromTo(
+    const animation = gsap.fromTo(
       headerRef.current,
       { x: "-100vw" },
       {
@@ -23,7 +22,11 @@ export const ProjectHeader = ({ project }: { project: ProjectType }) => {
         delay: 0.3,
       }
     );
-  });
+
+    return () => {
+      animation.kill();
+    }
+  }, []);
 
   return (
     <header className="flex flex-col lg:flex-row items-center lg:justify-between w-full gap-6">

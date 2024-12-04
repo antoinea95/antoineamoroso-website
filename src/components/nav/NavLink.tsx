@@ -1,4 +1,3 @@
-import { Stroke } from "../text/Stroke"
 
 /**
  * `NavLink` is a component that renders a navigational link with a decorative SVG stroke behind the text. 
@@ -32,10 +31,10 @@ export const NavLink = ({ name }: { name: string }) => {
     <a
       href={`#${name.toLowerCase()}`}
       onClick={handleClick}
-      className="lg:link-hover-effect relative px-1 group h-fit inline-flex font-extrabold text-tertiary z-30"
+      className="relative group font-light text-tertiary z-30 hover:underline px-2"
+      data-after={name}
     >
       {name}
-      <Stroke name={name} isHover />
     </a>
   );
 };

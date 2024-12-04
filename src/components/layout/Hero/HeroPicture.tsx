@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useAppContext } from "../../../hooks/useAppContext";
@@ -7,10 +7,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const HeroPicture = () => {
   const { navRef, isLargeScreen } = useAppContext(); // Assuming this provides the navbar ref
-  const images = ["./assets/big-head.png", "./assets/big-head-2.png"];
+  const images = useMemo(() => ["./assets/big-head.png", "./assets/big-head-2.png"], []);
   const heroPictureRef = useRef<HTMLDivElement>(null);
   const currentImageIndex = useRef(0);
-  const scrollTriggerRef = useRef<ScrollTrigger | null>(null); // To store the ScrollTrigger
 
   // Preload images
   useEffect(() => {
@@ -18,43 +17,50 @@ export const HeroPicture = () => {
       const img = new Image();
       img.src = path;
     });
-  });
+  }, [images]);
 
   // Image rotation for stop-motion effect
   useEffect(() => {
     let lastTime = 0;
-    const frameDuration = 900; // 900ms per frame
+    const frameDuration = 900; // Durée d'une image (ms)
+  
     const loop = (currentTime: number) => {
       if (currentTime - lastTime >= frameDuration) {
         lastTime = currentTime;
         currentImageIndex.current =
           (currentImageIndex.current + 1) % images.length;
-
-        // Update image without triggering re-renders
+  
+        // Mise à jour de l'image
         if (heroPictureRef.current) {
-          heroPictureRef.current.querySelector("img")!.src =
-            images[currentImageIndex.current];
+          const imgElement = heroPictureRef.current.querySelector("img");
+          if (imgElement) {
+            imgElement.src = images[currentImageIndex.current];
+          }
         }
       }
-      requestAnimationFrame(loop);
+      animationId = requestAnimationFrame(loop);
     };
-
-    const animationId = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(animationId);
-  });
+  
+    let animationId = requestAnimationFrame(loop);
+  
+    return () => cancelAnimationFrame(animationId); // Nettoyage
+  }, [images]); // Recrée uniquement si `images` change
 
   useEffect(() => {
     const heroElement = heroPictureRef.current;
     const picture = document.getElementById("hero-picture");
     const navElement = navRef?.current;
-
+  
     if (!picture || !heroElement || !navElement) return;
-
+  
     const isAnimated = sessionStorage.getItem("hasAnimationPlayed");
-
-    // Animation d'entrée
+    const scrollY = window.scrollY;
+  
+    let entryAnimation : gsap.core.Tween | null = null; // Stocker l'animation d'entrée
+    let scrollAnimation : globalThis.ScrollTrigger | null = null; // Stocker ScrollTrigger
+  
     const animateEntry = () => {
-      return gsap.fromTo(
+      entryAnimation = gsap.fromTo(
         heroElement,
         { scale: 0 },
         {
@@ -70,11 +76,11 @@ export const HeroPicture = () => {
           },
         }
       );
+      return entryAnimation; // Retourner l'animation pour chaîner les appels
     };
-
-    // Animation au scroll
-    const scrollAnimation = () => {
-      scrollTriggerRef.current = ScrollTrigger.create({
+  
+    const setupScrollAnimation = () => {
+      scrollAnimation = ScrollTrigger.create({
         trigger: "#hero-container",
         start: "top top",
         end: "+=180",
@@ -88,13 +94,10 @@ export const HeroPicture = () => {
               scale: [1, 0.8, 0.6, 0.4, 0.2],
             },
             yPercent: -45,
-            left: "50%",
+            xPercent: isLargeScreen ? -47.9 : -50,
             duration: 1,
             ease: "steps(5)",
-          }).to(heroElement, {
-            zIndex: 10,
-            duration: 0.2,
-          }, "<+0.6")
+          })
           .to(
             navElement,
             {
@@ -105,45 +108,49 @@ export const HeroPicture = () => {
               duration: 1,
               ease: "steps(3)",
             },
-            "<"
+            "<+0.6"
           ),
       });
     };
-
-    // Initialisation des animations
+  
     const initAnimations = () => {
-      if (scrollTriggerRef.current) {
-        scrollTriggerRef.current.kill();
+      if (scrollAnimation) {
+        scrollAnimation.kill(); // Nettoyer les anciens triggers
       }
-
-      if (!isAnimated) {
-        animateEntry().then(scrollAnimation);
-      } else {
-        scrollAnimation();
+  
+      if (!isAnimated && scrollY === 0) {
+        animateEntry().then(setupScrollAnimation);
+      } else if (isAnimated) {
+        setupScrollAnimation();
       }
     };
-
-    // Déclenche les animations après un léger délai (pour éviter le glitch)
-    setTimeout(initAnimations, 50);
-
-    // Nettoyage
+  
+    // Initialisation des animations après un délai
+    const timeoutId = setTimeout(initAnimations, 50);
+  
     return () => {
-      if (scrollTriggerRef.current) {
-        scrollTriggerRef.current.kill();
+      clearTimeout(timeoutId); // Nettoyer le timeout
+      if (entryAnimation) {
+        entryAnimation.kill(); // Nettoyer l'animation d'entrée
       }
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      if (scrollAnimation) {
+        scrollAnimation.kill(); // Nettoyer ScrollTrigger
+      }
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); // Nettoyage global
     };
-  }, [navRef, isLargeScreen]);
+  }, [navRef, isLargeScreen]); // Dépendances pertinentes
+  
+  
 
   return (
     <div
-      className="fixed flex items-center justify-center h-screen w-screen max-h-[75vh] lg:max-h-dvh z-[1] left-1/2 lg:left-[48%] 2xl:left-[47.5%] -translate-x-1/2 lg:scale-0"
+      className="pointer-events-none fixed flex items-center justify-center h-screen w-screen max-h-[75vh] lg:max-h-dvh z-10 left-1/2 lg:left-[48%] 2xl:left-[47.5%] -translate-x-1/2 lg:scale-0"
       ref={heroPictureRef}
       id="heroPicture-container"
     >
       <img
         src="./assets/big-head.png"
-        className="object-cover w-[75%] sm:w-[60%] lg:w-[30%] max-w-[600px] will-change-auto stroke"
+        className="object-cover w-[75%] sm:w-[60%] lg:w-[30%] max-w-[400px] will-change-auto stroke"
         alt="Hero Animation"
         id="hero-picture"
       />

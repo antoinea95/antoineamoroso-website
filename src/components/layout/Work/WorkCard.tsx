@@ -14,12 +14,10 @@ export type WorkCardProps = {
 
 export const WorkCard = ({
   work,
-  hasPlayed,
   index,
   setWorkActive,
 }: {
   work: WorkCardProps;
-  hasPlayed: boolean;
   index: number;
   setWorkActive: Dispatch<SetStateAction<number | null>>;
 }) => {
@@ -27,7 +25,6 @@ export const WorkCard = ({
   const buttonRef = useRef<HTMLDivElement>(null);
   const dateRef = useRef<HTMLDivElement>(null);
   const { isLargeScreen } = useAppContext();
-  const timeLine = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
     const workElements = workRef.current?.childNodes;
@@ -53,7 +50,7 @@ export const WorkCard = ({
     const finalPosition = isLargeScreen ? { y: 0 } : { x: 0 };
 
     // Crée une timeline
-    timeLine.current = gsap.timeline({
+    const timeLine = gsap.timeline({
       scrollTrigger: {
         trigger: "#work",
         start: "top 30%",
@@ -63,7 +60,7 @@ export const WorkCard = ({
     });
 
     // Animation pour les boutons
-    timeLine.current
+    timeLine
       .fromTo(
         buttonElements,
         { scale: 0 },
@@ -102,13 +99,11 @@ export const WorkCard = ({
         },
         "<"
       );
-  }, [isLargeScreen, index]);
 
-  useEffect(() => {
-    if (hasPlayed) {
-      timeLine.current?.seek(timeLine.current.duration());
-    }
-  }, [hasPlayed]);
+      return () => {
+        timeLine.kill()
+      }
+  }, [isLargeScreen, index]);
 
   return (
     <div>

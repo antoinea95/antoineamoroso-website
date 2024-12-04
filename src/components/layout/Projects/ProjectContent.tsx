@@ -6,7 +6,7 @@ const ContentTitle = ({ title }: { title: string }) => {
   const spanRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    gsap.fromTo(
+    const animation = gsap.fromTo(
       spanRef.current,
       { y: 100 },
       {
@@ -19,6 +19,10 @@ const ContentTitle = ({ title }: { title: string }) => {
         delay: 0.5,
       }
     );
+
+    return () => {
+      animation.kill();
+    }
   }, []);
 
   return (
@@ -37,7 +41,7 @@ export const ContentContainer = ({
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    gsap.fromTo(
+    const animation = gsap.fromTo(
       sectionRef.current,
       { x: direction === "right" ? "-100vw" : "100vw" },
       {
@@ -49,6 +53,10 @@ export const ContentContainer = ({
         ease: "steps(6)",
       }
     );
+
+    return () => {
+      animation.kill();
+    }
   }, [direction]);
 
   return (

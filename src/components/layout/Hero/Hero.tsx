@@ -13,62 +13,75 @@ export const Hero = () => {
   const { navRef, isLargeScreen } = useAppContext();
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subTitleRef = useRef<HTMLElement>(null);
-  const isAnimated = sessionStorage.getItem("hasAnimationPlayed");
-
 
   useEffect(() => {
-
+    if (!navRef?.current || !titleRef.current || !subTitleRef.current) return;
+  
+    const isAnimated = sessionStorage.getItem("hasAnimationPlayed");
+    const scrollY = window.scrollY;
+  
+    const navElement = navRef.current;
+    const titleElement = titleRef.current;
+    const subtitleElement = subTitleRef.current;
+    const [titleLeft, titleRight] = titleRef.current.childNodes;
+  
+    let timeline: gsap.core.Timeline | null = null; // Stocker l'instance de la timeline pour un nettoyage correct
+  
+    // Fonction pour récupérer l'animation du titre
     const getTitleAnimation = (isToLeft = false) => {
       const rotateFrames = [5, -5, 5, 0, 0];
       const xValues = [280, 187, 94, -10, 0];
       const keyframes = isLargeScreen
         ? {
-            x: isToLeft ? xValues : xValues.map(val => -val),
+            x: isToLeft ? xValues : xValues.map((val) => -val),
             rotate: rotateFrames,
           }
         : { y: [-80, -60, -40, -20, 0], rotate: rotateFrames };
   
       return { keyframes, duration: 0.6, ease: "steps(4)" };
     };
-
-    const navElement = navRef?.current;
-    if (navElement && titleRef.current && subTitleRef.current) {
-
-      if (isAnimated !== "true") {
-        const tl = gsap.timeline({ delay: 1.2 });
-        const [titleLeft, titleRight] = titleRef.current.childNodes;
-
-        // Set initial positions for the titles and subtitle
-        gsap.set(titleRef.current, {
-          y: isLargeScreen ? -30 : -80,
-          visibility: "hidden",
-        });
-        gsap.set(subTitleRef.current, { y: -80, opacity: 0, zIndex: -1 });
-        gsap.set(navElement, { y: -80 });
-
-        // Main animation sequence
-        tl.to(titleRef.current, { visibility: "visible", duration: 0.2, ease: "none" });
-
-        if (isLargeScreen) {
-          tl.to(titleLeft, getTitleAnimation(true), "<")
-            .to(titleRight, getTitleAnimation(false), "<");
-        } else {
-          tl.to(titleRef.current, getTitleAnimation(), "<");
-        }
-
-        tl.to(titleRef.current, { y: 0, duration: 0.3, ease: "steps(2)" }, ">")
-          .to(subTitleRef.current, { opacity: 1, duration: 0 }, "<+0.2")
-          .to(
-            subTitleRef.current,
-            {
-              keyframes: { "95%": { y: 20 }, "100%": { y: 0, zIndex: 1 } },
-              duration: 0.5,
-              ease: "steps(4)",
-            },
-            "<-0.2"
-          );
-
-        tl.to(
+  
+    // Positionnement initial des éléments
+    const initializePositions = () => {
+      gsap.set(titleRef.current, {
+        y: isLargeScreen ? -30 : -80,
+        visibility: "hidden",
+      });
+      gsap.set(subTitleRef.current, { y: -80, opacity: 0, zIndex: -1 });
+      gsap.set(navElement, { y: -80 });
+    };
+  
+    const playAnimations = () => {
+      timeline = gsap.timeline({ delay: 1.2 });
+  
+      // Séquence principale d'animations
+      timeline.to(titleElement, {
+        visibility: "visible",
+        duration: 0.2,
+        ease: "none",
+      });
+  
+      if (isLargeScreen) {
+        timeline
+          .to(titleLeft, getTitleAnimation(true), "<")
+          .to(titleRight, getTitleAnimation(false), "<");
+      } else {
+        timeline.to(titleElement, getTitleAnimation(), "<");
+      }
+  
+      timeline
+        .to(titleElement, { y: 0, duration: 0.3, ease: "steps(2)" }, ">")
+        .to(subtitleElement, { opacity: 1, duration: 0 }, "<+0.2")
+        .to(
+          subtitleElement,
+          {
+            keyframes: { "95%": { y: 20 }, "100%": { y: 0, zIndex: 1 } },
+            duration: 0.5,
+            ease: "steps(4)",
+          },
+          "<-0.2"
+        )
+        .to(
           navElement,
           {
             keyframes: {
@@ -80,12 +93,37 @@ export const Hero = () => {
           },
           "<"
         );
+    };
+  
+    const initAnimations = () => {
+      if (!isAnimated && scrollY === 0) {
+        initializePositions();
+        playAnimations();
+        sessionStorage.setItem("hasAnimationPlayed", "true");
       }
-    }
-  }, [isLargeScreen, navRef, isAnimated]);
+    };
+  
+    // Initialisation des animations après un délai
+    const timeoutId = setTimeout(initAnimations, 50);
+  
+    // Nettoyage pour éviter les animations persistantes
+    return () => {
+      clearTimeout(timeoutId); // Nettoyer le timeout
+      if (timeline) {
+        timeline.kill(); // Arrêter et nettoyer la timeline
+      }
+      gsap.set([titleElement, subtitleElement, navElement], {
+        clearProps: "all", // Supprimer les styles injectés par GSAP
+      });
+    };
+  }, [isLargeScreen, navRef]);
+  
 
   return (
-    <section className="max-h-dvh h-dvh py-5 w-[95%] m-auto" id="hero-container">
+    <section
+      className="max-h-dvh h-dvh py-5 w-[95%] m-auto"
+      id="hero-container"
+    >
       <NavBar />
       <HeroPicture />
       <section
@@ -116,7 +154,7 @@ export const Hero = () => {
             />
           </div>
           <p
-            className="font-extralight bg-primary text-tertiary px-4 py-2 rounded-full relative tracking-tight text-xl"
+            className="font-extralight text-primary tracking-tight text-xl uppercase"
             style={{
               fontSize: "clamp(1.2rem, 2vw, 2rem)",
             }}

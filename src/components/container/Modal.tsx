@@ -23,7 +23,7 @@ export const Modal = ({
 
   useEffect(() => {
     if (workActive) {
-      gsap.fromTo(
+      const animation = gsap.fromTo(
         contentRef.current,
         { scale: 0 },
         {
@@ -35,6 +35,10 @@ export const Modal = ({
           duration: 0.6,
         }
       );
+
+      return () => {
+        animation.kill();
+      }
     }
   }, [workActive]);
 

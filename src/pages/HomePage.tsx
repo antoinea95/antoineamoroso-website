@@ -6,7 +6,7 @@ import {Work} from "../components/layout/Work/Work";
 
 export const HomePage = () => {
   return (
-    <section className="space-y-48">
+    <section className="space-y-32">
       <Hero />
       <About />
       <Project />

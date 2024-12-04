@@ -11,7 +11,7 @@ import { PropsWithChildren } from "react";
  */
 export const Section = ({id, children }: PropsWithChildren<{id: string}>) => {
   return (
-    <section className="w-[90%] m-auto flex flex-col items-center justify-evenly gap-32 pt-10 relative" id={id}>
+    <section className="w-[90%] min-h-[100vh] m-auto flex flex-col items-center justify-evenly relative gap-16" id={id}>
       {children}
     </section>
   );

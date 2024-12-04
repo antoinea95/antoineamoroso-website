@@ -5,15 +5,17 @@ import { useState, useEffect, useRef } from "react";
 import { useAppContext } from "../../../hooks/useAppContext";
 import { WorkCard } from "./WorkCard";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 import { Modal } from "../../container/Modal";
 import { WorkDetail } from "./WorkDetail";
+
+gsap.registerPlugin(ScrollTrigger)
 
 export const Work = () => {
   const works = projectsData.works;
   const timeRef = useRef<HTMLDivElement>(null);
   const timeLineRef = useRef<HTMLDivElement>(null);
   const { isLargeScreen } = useAppContext();
-  const [hasPlayed, setHasPlayed] = useState(false);
   const [workActive, setWorkActive] = useState<number | null>(null);
 
   const handleNext = () => {
@@ -53,16 +55,24 @@ export const Work = () => {
   };
 
   useEffect(() => {
-    gsap.fromTo(
+    ScrollTrigger.refresh()
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#work",
+        start: "top 80%",
+        end: "top 20%",
+        toggleActions: "restart none none none",
+        onLeaveBack: () => {
+          infiniteAnimation.pause();
+        },
+      },
+    });
+
+    // Animation principale contrôlée par ScrollTrigger
+    tl.fromTo(
       "#mac",
       { y: 30, scale: 0 },
       {
-        scrollTrigger: {
-          trigger: "#work",
-          start: "top 80%",
-          end: "top 20%",
-          toggleActions: "restart none none reset",
-        },
         y: 0,
         keyframes: {
           rotate: [-5, 5, -5, 5, 0],
@@ -71,32 +81,42 @@ export const Work = () => {
         duration: 0.6,
         delay: 0.5,
         ease: "steps(6)",
-        onComplete: () => {
-          gsap.to("#mac", {
-            y: -5,
-            keyframes: {
-              rotate: [-5, 5],
-            },
-            duration: 0.8,
-            ease: "steps(2)",
-            repeat: -1,
-          });
-        },
       }
     );
-  });
+
+    // Animation infinie séparée (démarrage après la timeline principale)
+    const infiniteAnimation = gsap.to("#mac", {
+      y: -5,
+      keyframes: {
+        rotate: [-10, 10],
+      },
+      duration: 0.8,
+      ease: "steps(2)",
+      repeat: -1,
+      paused: true,
+    });
+
+    // Démarrer l'animation infinie à la fin de la timeline
+    tl.eventCallback("onComplete", () => {
+      infiniteAnimation.play();
+    });
+
+    return () => {
+      tl.kill(); // Nettoyer la timeline
+      infiniteAnimation.kill(); // Nettoyer l'animation infinie
+      gsap.killTweensOf("#mac"); // Nettoyer les tweens restants
+    };
+  }, []);
 
   // Animation principale (timeline + ligne)
   useEffect(() => {
+    const timeElement = timeRef.current;
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#work",
         start: "top 30%",
         end: "top 20%",
         toggleActions: "play none none reset",
-      },
-      onComplete: () => {
-        setHasPlayed(true);
       },
     });
 
@@ -108,7 +128,7 @@ export const Work = () => {
     const finalSize = isLargeScreen ? { width: "100%" } : { scaleY: "100%" };
 
     tl.fromTo(
-      timeRef.current,
+      timeElement,
       initialSize,
       {
         ...finalSize,
@@ -117,11 +137,16 @@ export const Work = () => {
       },
       "<+0.3"
     );
+
+    return () => {
+      tl.kill(); // Nettoyer la timeline
+      gsap.killTweensOf(timeElement); // Nettoyer les tweens restants
+    };
   }, [isLargeScreen]);
 
   return (
     <Section id="work">
-      <div className="flex items-center relative">
+      <div className="flex items-center relative px-3 py-1">
         <Title titleText="Work" headingLevel="h1" trigger="#work" />
         <img src="./assets/mac.png" className="w-24 stroke-two" id="mac" />
       </div>
@@ -142,7 +167,6 @@ export const Work = () => {
               key={work.id}
               work={work}
               setWorkActive={setWorkActive}
-              hasPlayed={hasPlayed}
               index={index + 1}
             />
           ))}

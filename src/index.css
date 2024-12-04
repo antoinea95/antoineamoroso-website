@@ -68,45 +68,20 @@
     drop-shadow(0 3px 0 theme(colors.tertiary))
     drop-shadow(3px 0 0 theme(colors.tertiary)) 
     drop-shadow(0 -3px 0 theme(colors.tertiary))
-    drop-shadow(2px 2px 5px rgba(0,0,0,0.10));
+    drop-shadow(2px 2px 1px rgba(0,0,0,0.10));
 }
 
-  .link-hover-effect:hover {
-    transform: scale(1.25) rotate(-3deg);
-    color: theme(colors.primary);
-  }
+.strong-elipse::before {
+  display: block;
+  content: "";
+  width: 102%;
+  height: 120%;
+  border: 1.5px solid theme(colors.primary);
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%
 
-  .link-hover-effect:active {
-    transform: scale(1) rotate(0deg);
-  }
-
-  .fadeIn {
-    animation: 0.5s fadeIn forwards;
-  }
-  
-  .fadeOut {
-    animation: 0.5s fadeOut forwards;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translate(-20px, 0);
-    }
-    to {
-      opacity: 1;
-      transform: translate(0px, 0px);
-    }
-  }
-  
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-      transform: translate(0px, 0px);
-    }
-    to {
-      transform: translate(-20px, 0);
-      opacity: 0;
-    }
-  }
+}
 }

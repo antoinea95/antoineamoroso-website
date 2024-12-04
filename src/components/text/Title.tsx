@@ -1,5 +1,8 @@
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 import { ElementType, useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /**
  * `Title` is a component that renders a heading or paragraph with a stroke effect behind the text.
@@ -17,13 +20,12 @@ import { ElementType, useEffect, useRef } from "react";
 export const Title = ({
   titleText,
   headingLevel: Heading,
-  trigger
+  trigger,
 }: {
   titleText: string;
   headingLevel: ElementType;
-  trigger: string
+  trigger: string;
 }) => {
-
   const titleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export const Title = ({
         x: () => gsap.utils.random(-500, 500), // Position X aléatoire
         y: () => gsap.utils.random(-100, 200), // Position Y aléatoire
         scale: () => gsap.utils.random(0.3, 2), // Position Y aléatoire
-        opacity: 0
+        opacity: 0,
       });
 
       // Animation principale
@@ -60,16 +62,21 @@ export const Title = ({
         stagger: 0.1,
         ease: "steps(5)",
       });
+
+      // Nettoyage
+      return () => {
+        tl.kill(); // Supprimer la timeline et les animations associées
+      };
     }
-  }, [trigger])
-
-
+  }, [trigger]);
 
   return (
-      <Heading ref={titleRef} className="flex flex-nowrap">
-          {titleText.split("").map((letter) => (
-            <span key={letter} className="inline-block scale-0">{letter}</span>
-          ))}
-      </Heading>
+    <Heading ref={titleRef} className="flex flex-nowrap">
+      {titleText.split("").map((letter) => (
+        <span key={letter} className="inline-block scale-0">
+          {letter}
+        </span>
+      ))}
+    </Heading>
   );
 };
