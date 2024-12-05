@@ -179,7 +179,7 @@ export const About = () => {
           className="leading-snug font-medium w-full sm:w-[90%] max-w-[1300px] py-3"
           ref={aboutRef}
         >
-          A {" "}
+          As a {" "}
           <span className="relative inline-block">
              passionate developer 
             <svg

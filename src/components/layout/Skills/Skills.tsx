@@ -77,7 +77,7 @@ export const Skills = () => {
         return (
           <p
             key={techno.icon}
-            className="flex flex-col items-center gap-1 font-modak uppercase w-[30%] sm:w-fit border"
+            className="flex flex-col items-center gap-1 font-modak uppercase max-w-[30%] sm:w-fit"
             style={{
               fontSize: "clamp(1.3rem, 5vw, 2.3rem)",
             }}

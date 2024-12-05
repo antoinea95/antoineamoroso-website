@@ -151,7 +151,7 @@ export const HeroPicture = () => {
     >
       <img
         src="./assets/big-head.png"
-        className="object-cover w-[75%] sm:w-[60%] lg:w-[30%] 2xl:w-[25%] max-w-[500px] will-change-auto stroke lg:-translate-x-10"
+        className="object-cover w-[75%] sm:w-[60%] lg:w-[30%] 2xl:w-[25%] max-w-[500px] will-change-auto lg:-translate-x-10 drop-shadow-custom"
         alt="Hero Animation"
         id="hero-picture"
       />

@@ -92,34 +92,36 @@ export const Contact = () => {
       );
 
       return () => {
-        tl.kill()
-      }
+        tl.kill();
+      };
     }
   }, []);
 
   return (
     <footer className="flex flex-col w-screen pb-2 relative" id="contact">
       <h1
-        className="text-center overflow-hidden pt-10 flex flex-wrap items-center justify-center gap-4 relative"
+        className="text-center overflow-hidden pt-10 flex flex-wrap items-center justify-center gap-2 lg:gap-4 relative"
         ref={titleRef}
       >
         {titleText.split(" ").map((word, wordIndex) => (
-          <span className="flex flex-nowrap" key={`word-${wordIndex}`}>
+          <span className="inline-flex flex-nowrap relative w-fit py-3" key={`word-${wordIndex}`}>
             {word.split("").map((letter, letterIndex) => (
               <span
-                className="letter inline-block"
+                className="letter"
                 key={`letter-${wordIndex}-${letterIndex}`}
               >
                 {letter}
               </span>
             ))}
+            {wordIndex === titleText.split(" ").length - 1 && (
+              <img
+                src="./assets/rock.png"
+                className=" w-8 lg:w-16 stroke-two absolute -right-8 lg:-right-16 lg:-top-3"
+                id="rock"
+              />
+            )}
           </span>
         ))}
-        <img
-          src="./assets/rock.png"
-          className=" w-10 lg:w-16 stroke-two"
-          id="rock"
-        />
       </h1>
 
       {/* Liens sociaux */}
