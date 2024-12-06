@@ -2,9 +2,16 @@ import { PropsWithChildren, useEffect, useRef } from "react";
 import { iconMap } from "../../../utils/iconMap";
 import gsap from "gsap";
 
+
+/**
+ * 
+ * @param {string} title - title of projects/works sections
+ * @returns an animate subtitle
+ */
 const ContentTitle = ({ title }: { title: string }) => {
   const spanRef = useRef<HTMLSpanElement>(null);
 
+  // Enter animation
   useEffect(() => {
     const animation = gsap.fromTo(
       spanRef.current,
@@ -34,12 +41,18 @@ const ContentTitle = ({ title }: { title: string }) => {
   );
 };
 
+/**
+ * 
+ * @param {string} direction - left or right, indicate the animation direction
+ * @returns a container for the projects/works section (summary, stack and features)
+ */
 export const ContentContainer = ({
   direction,
   children,
 }: PropsWithChildren<{ direction: string }>) => {
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Enter animation
   useEffect(() => {
     const animation = gsap.fromTo(
       sectionRef.current,
@@ -66,6 +79,14 @@ export const ContentContainer = ({
   );
 };
 
+
+/**
+ * 
+ * @param {string} props.summary - a short text about the project
+ * @param {{ icon: string; name: string }[]} props.stack - an optionnal array to display the stack with an icon and a name
+ * @param {string[]} props.features - an optionnal array to display a features list
+ * @returns a section to display the project/work content in  3 sections (summary, stack, features )
+ */
 export const ProjectContent = ({
   summary,
   stack,

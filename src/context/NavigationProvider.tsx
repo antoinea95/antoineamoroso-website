@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import { NavigationContext } from "./Context";
 
 export const NavigationProvider = ({ children }: { children: React.ReactNode }) => {
+
+    // Keep a state of the navigation to improve page transition and when to play animation
     const location = useLocation();
     const [currentKey, setCurrentKey] = useState<string | null>(location.key);
     const [previousKey, setPreviousKey] = useState<string | null>(null);

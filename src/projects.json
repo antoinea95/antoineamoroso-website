@@ -81,5 +81,15 @@
         "role": "Customer advisor",
         "company": "Lacoste",
         "summary": "Providing a premium sales experience, stock management, opening and closing the store."
-      }]
+      }],
+      
+      "skills" : [
+        { "icon": "SiReact", "name": "React" },
+        { "icon": "SiNextdotjs", "name": "Next.js" },
+        { "icon": "SiTypescript", "name": "TypeScript" },
+        { "icon": "DiSass", "name": "Sass" },
+        { "icon": "SiTailwindcss", "name": "Tailwind" },
+        { "icon": "TbPlayerTrackNextFilled", "name": "GSAP" },
+        { "icon": "SiFirebase", "name": "Firebase" }
+      ]
   }

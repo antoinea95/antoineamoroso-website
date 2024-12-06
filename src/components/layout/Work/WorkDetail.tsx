@@ -1,6 +1,11 @@
 import { WorkCardProps } from "./WorkCard";
 import { ProjectContent } from "../Projects/ProjectContent";
 
+/**
+ * 
+ * @param {WorkCardProps | null} props.work - the content of the work for the modal 
+ * @returns 
+ */
 export const WorkDetail = ({
   work,
 }: {

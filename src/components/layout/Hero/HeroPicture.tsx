@@ -5,8 +5,12 @@ import { useAppContext } from "../../../hooks/useAppContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * 
+ * Hero Picture wich is animate on the scroll trigger, picture is scrolling and scaling to be fixed on the navbar
+ */
 export const HeroPicture = () => {
-  const { navRef, isLargeScreen } = useAppContext(); // Assuming this provides the navbar ref
+  const { navRef, isLargeScreen } = useAppContext();
   const images = useMemo(() => ["./assets/big-head.png", "./assets/big-head-2.png"], []);
   const heroPictureRef = useRef<HTMLDivElement>(null);
   const currentImageIndex = useRef(0);
@@ -43,11 +47,11 @@ export const HeroPicture = () => {
   
     let animationId = requestAnimationFrame(loop);
   
-    return () => cancelAnimationFrame(animationId); // Nettoyage
-  }, [images]); // Recrée uniquement si `images` change
+    return () => cancelAnimationFrame(animationId); 
+  }, [images]);
 
   
-
+  // Main animation
   useEffect(() => {
     const heroElement = heroPictureRef.current;
     const picture = document.getElementById("hero-picture");
@@ -57,10 +61,11 @@ export const HeroPicture = () => {
   
     const isAnimated = sessionStorage.getItem("hasAnimationPlayed");
     const scrollY = window.scrollY;
-  
-    let entryAnimation : gsap.core.Tween | null = null; // Stocker l'animation d'entrée
-    let scrollAnimation : globalThis.ScrollTrigger | null = null; // Stocker ScrollTrigger
-  
+    
+    // Stock entry and scroll animation
+    let entryAnimation : gsap.core.Tween | null = null;
+    let scrollAnimation : globalThis.ScrollTrigger | null = null;
+    
     const animateEntry = () => {
       entryAnimation = gsap.fromTo(
         heroElement,
@@ -78,7 +83,7 @@ export const HeroPicture = () => {
           },
         }
       );
-      return entryAnimation; // Retourner l'animation pour chaîner les appels
+      return entryAnimation; 
     };
   
     const setupScrollAnimation = () => {
@@ -113,10 +118,12 @@ export const HeroPicture = () => {
           ),
       });
     };
-  
+    
+
+    // Play animation only if isAnimated is false and scrollY is equal to 0 else init scroll animation
     const initAnimations = () => {
       if (scrollAnimation) {
-        scrollAnimation.kill(); // Nettoyer les anciens triggers
+        scrollAnimation.kill();
       }
   
       if (!isAnimated && scrollY === 0) {
@@ -126,20 +133,20 @@ export const HeroPicture = () => {
       }
     };
   
-    // Initialisation des animations après un délai
+    // Wait to prevent page reload
     const timeoutId = setTimeout(initAnimations, 50);
   
     return () => {
-      clearTimeout(timeoutId); // Nettoyer le timeout
+      clearTimeout(timeoutId);
       if (entryAnimation) {
-        entryAnimation.kill(); // Nettoyer l'animation d'entrée
+        entryAnimation.kill();
       }
       if (scrollAnimation) {
-        scrollAnimation.kill(); // Nettoyer ScrollTrigger
+        scrollAnimation.kill();
       }
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); // Nettoyage global
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [navRef, isLargeScreen]); // Dépendances pertinentes
+  }, [navRef, isLargeScreen]);
   
   
 

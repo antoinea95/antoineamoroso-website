@@ -11,11 +11,18 @@ import { WorkDetail } from "./WorkDetail";
 
 gsap.registerPlugin(ScrollTrigger)
 
+/**
+ * 
+ * Display a timeline of my work Experience
+ */
 export const Work = () => {
+
   const works = projectsData.works;
   const timeRef = useRef<HTMLDivElement>(null);
   const timeLineRef = useRef<HTMLDivElement>(null);
   const { isLargeScreen } = useAppContext();
+
+  // Handle modal navigation
   const [workActive, setWorkActive] = useState<number | null>(null);
 
   const handleNext = () => {
@@ -54,6 +61,7 @@ export const Work = () => {
     }
   };
 
+  // Animation of the pictures
   useEffect(() => {
     ScrollTrigger.refresh()
     const tl = gsap.timeline({
@@ -68,7 +76,6 @@ export const Work = () => {
       },
     });
 
-    // Animation principale contrôlée par ScrollTrigger
     tl.fromTo(
       "#mac",
       { y: 30, scale: 0 },
@@ -84,7 +91,6 @@ export const Work = () => {
       }
     );
 
-    // Animation infinie séparée (démarrage après la timeline principale)
     const infiniteAnimation = gsap.to("#mac", {
       y: -5,
       keyframes: {
@@ -96,19 +102,18 @@ export const Work = () => {
       paused: true,
     });
 
-    // Démarrer l'animation infinie à la fin de la timeline
     tl.eventCallback("onComplete", () => {
       infiniteAnimation.play();
     });
 
     return () => {
-      tl.kill(); // Nettoyer la timeline
-      infiniteAnimation.kill(); // Nettoyer l'animation infinie
-      gsap.killTweensOf("#mac"); // Nettoyer les tweens restants
+      tl.kill(); 
+      infiniteAnimation.kill(); 
+      gsap.killTweensOf("#mac");
     };
   }, []);
 
-  // Animation principale (timeline + ligne)
+  // Entry animation of the timeline
   useEffect(() => {
     const timeElement = timeRef.current;
     const tl = gsap.timeline({
@@ -139,8 +144,8 @@ export const Work = () => {
     );
 
     return () => {
-      tl.kill(); // Nettoyer la timeline
-      gsap.killTweensOf(timeElement); // Nettoyer les tweens restants
+      tl.kill(); 
+      gsap.killTweensOf(timeElement);
     };
   }, [isLargeScreen]);
 
@@ -148,7 +153,7 @@ export const Work = () => {
     <Section id="work">
       <div className="flex items-center relative px-3 py-1">
         <Title titleText="Work" headingLevel="h1" trigger="#work" />
-        <img src="./assets/mac.png" className="w-24 stroke-two" id="mac" />
+        <img src="./assets/mac.png" className="w-24 stroke-two" id="mac" alt="Illustation of an Imac in a retro cartoon style" />
       </div>
       <section className="flex flex-col lg:flex-row justify-between items-center w-full max-w-[1400px] gap-10">
         <div

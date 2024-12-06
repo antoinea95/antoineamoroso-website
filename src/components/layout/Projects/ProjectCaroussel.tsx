@@ -4,28 +4,39 @@ import gsap from "gsap";
 import { PiArrowLeftBold, PiArrowRightBold } from "react-icons/pi";
 import { BsFillCircleFill } from "react-icons/bs";
 
+
+/**
+ * Display a carousel with an indicator
+ * @param {string[]} pictures - An array of pictures src
+ */
 export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
+
+  // Handle state of the display picture
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // GSAP Ref
   const carousel = useRef<HTMLElement>(null);
   const intervalRef = useRef<number | null>(null);
 
-    // Fonction pour calculer la largeur dynamique du carrousel
+    // Calculate the width of the carousel
     const calculateDynamicShift = () => {
-      const carouselWidth = carousel.current?.offsetWidth || window.innerWidth * 0.6; // Par défaut, 60% de l'écran
+      const carouselWidth = carousel.current?.offsetWidth || window.innerWidth * 0.6;
       return carouselWidth;
     };
 
   const stopAutoScroll = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current); // Arrête l'intervalle si existant
+    if (intervalRef.current) clearInterval(intervalRef.current);
   };
 
+  // GSAP Ref
   const activeImgRef = useRef<HTMLImageElement>(null);
   const prevImgRef = useRef<HTMLImageElement>(null);
   const nextImgRef = useRef<HTMLImageElement>(null);
   const rotateFrame = [5, -5, 5, -5, 0];
 
   useEffect(() => {
+
+    // Enter animation
     const animation = gsap.fromTo(
       carousel.current,
       { y: 200 },
@@ -43,12 +54,14 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
     };
   }, []);
 
+  // Set the start position
   const { contextSafe } = useGSAP(() => {
     gsap.set(nextImgRef.current, { x: -calculateDynamicShift() });
     gsap.set(activeImgRef.current, { x: -calculateDynamicShift() });
     gsap.set(prevImgRef.current, { x: calculateDynamicShift() });
   }, [activeIndex]);
 
+  // Go to next picture with a GSAP Animation
   const next = contextSafe(() => {
     stopAutoScroll();
     const tl = gsap.timeline({
@@ -84,6 +97,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
     );
   });
 
+    // Go to prev picture with a GSAP Animation
   const prev = contextSafe(() => {
     stopAutoScroll();
 
@@ -119,6 +133,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
     );
   });
 
+  // Next picture every 3s
   useEffect(() => {
     const startAutoScroll = () => {
       intervalRef.current = setInterval(() => {
@@ -128,9 +143,31 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
 
     startAutoScroll();
 
-    return () => stopAutoScroll(); // Nettoie l'intervalle au démontage
+    return () => stopAutoScroll();
   }, [next]);
 
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case "ArrowLeft":
+          prev();
+          break;
+        case "ArrowRight":
+          next();
+          break;
+        case "Escape":
+          stopAutoScroll();
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [next, prev]);
+
+
+  // Calculate prev and next index for GSAP animation
   const getPrevIndex = () =>
     activeIndex - 1 < 0 ? pictures.length - 1 : activeIndex - 1;
   const getNextIndex = () =>
@@ -140,9 +177,14 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
     <section
       className="overflow-hidden py-10 flex items-center justify-center relative w-fit mx-auto"
       ref={carousel}
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Project carousel"
+      aria-live="polite"
     >
       <button
         className="absolute left-3 z-20 text-3xl text-primary hover:scale-125 cursor-pointer"
+        aria-label="Previous picture"
         onClick={prev}
       >
         <PiArrowLeftBold
@@ -157,6 +199,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
       </button>
       <button
         className="absolute right-3 z-20 text-3xl text-primary hover:scale-125 cursor-pointer"
+        aria-label="Next picture"
         onClick={next}
       >
         <PiArrowRightBold
@@ -173,41 +216,43 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
         <img
           src={pictures[getNextIndex()]}
           className="object-cover w-full h-full px-10 stroke-two"
+          aria-hidden="true"
           ref={nextImgRef}
         />
         <img
           src={pictures[activeIndex]}
           className="object-cover w-full h-full px-10 stroke-two"
+          alt={`Current picture ${activeIndex + 1} of ${pictures.length}`}
           ref={activeImgRef}
         />
         <img
           src={pictures[getPrevIndex()]}
           className="object-cover w-full h-full px-10 stroke-two"
+          aria-hidden="true"
           ref={prevImgRef}
         />
       </div>
       <div className="absolute bottom-3 flex items-center justify-between gap-3">
-        {pictures.map((pic, index) => (
-          <span
+      {pictures.map((_, index) => (
+          <button
+            key={index}
             className={`${
               activeIndex === index ? "text-xl" : "text-base"
             } text-primary`}
-            key={pic}
+            aria-label={`Go to slide ${index + 1}`}
+            onClick={() => setActiveIndex(index)}
           >
-            {activeIndex === index ? (
-              <BsFillCircleFill
-                className="drop-shadow-custom overflow-visible stroke-tertiary"
-                paintOrder="stroke"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                style={{
-                  strokeWidth: "clamp(2px, 1em, 5px)",
-                }}
-              />
-            ) : (
-              <BsFillCircleFill />
-            )}
-          </span>
+            <BsFillCircleFill
+            className={`${ activeIndex === index ? "drop-shadow-custom overflow-visible stroke-tertiary" : "overflow-visible stroke-none"}`}
+            paintOrder="stroke"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            style={{
+              strokeWidth: "clamp(2px, 1em, 5px)",
+            }}
+            
+            />
+          </button>
         ))}
       </div>
     </section>

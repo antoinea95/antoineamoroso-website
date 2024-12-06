@@ -9,25 +9,36 @@ import { NavBar } from "../../nav/NavBar";
 import { HeroPicture } from "./HeroPicture";
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * 
+ * Hero Section of the home page
+ */
 export const Hero = () => {
+
+  // Get the navRef to handle scroll animation
   const { navRef, isLargeScreen } = useAppContext();
+
+  // Ref for GSAP
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subTitleRef = useRef<HTMLElement>(null);
 
+  // Entry animation
   useEffect(() => {
     if (!navRef?.current || !titleRef.current || !subTitleRef.current) return;
-  
+    
+    // Get state of the page to play or not the animation
     const isAnimated = sessionStorage.getItem("hasAnimationPlayed");
     const scrollY = window.scrollY;
-  
+    
+    // Ref for the animation
     const navElement = navRef.current;
     const titleElement = titleRef.current;
     const subtitleElement = subTitleRef.current;
     const [titleLeft, titleRight] = titleRef.current.childNodes;
   
-    let timeline: gsap.core.Timeline | null = null; // Stocker l'instance de la timeline pour un nettoyage correct
+    let timeline: gsap.core.Timeline | null = null;
   
-    // Fonction pour récupérer l'animation du titre
+    // Title animation depending on the direction
     const getTitleAnimation = (isToLeft = false) => {
       const rotateFrames = [5, -5, 5, 0, 0];
       const xValues = [280, 187, 94, -10, 0];
@@ -41,7 +52,6 @@ export const Hero = () => {
       return { keyframes, duration: 0.6, ease: "steps(4)" };
     };
   
-    // Positionnement initial des éléments
     const initializePositions = () => {
       gsap.set(titleRef.current, {
         y: isLargeScreen ? -30 : -80,
@@ -51,10 +61,10 @@ export const Hero = () => {
       gsap.set(navElement, { y: -80 });
     };
   
+    // Entry animation depending on the screen (mobile or desktop)
     const playAnimations = () => {
       timeline = gsap.timeline({ delay: 1.2 });
   
-      // Séquence principale d'animations
       timeline.to(titleElement, {
         visibility: "visible",
         duration: 0.2,
@@ -95,6 +105,7 @@ export const Hero = () => {
         );
     };
   
+    // Play animation only if isAnimated is false and scrollY is equal to 0
     const initAnimations = () => {
       if (!isAnimated && scrollY === 0) {
         initializePositions();
@@ -103,17 +114,16 @@ export const Hero = () => {
       }
     };
   
-    // Initialisation des animations après un délai
+    // Wait before animation to handle page reload
     const timeoutId = setTimeout(initAnimations, 50);
   
-    // Nettoyage pour éviter les animations persistantes
     return () => {
-      clearTimeout(timeoutId); // Nettoyer le timeout
+      clearTimeout(timeoutId);
       if (timeline) {
-        timeline.kill(); // Arrêter et nettoyer la timeline
+        timeline.kill();
       }
       gsap.set([titleElement, subtitleElement, navElement], {
-        clearProps: "all", // Supprimer les styles injectés par GSAP
+        clearProps: "all",
       });
     };
   }, [isLargeScreen, navRef]);

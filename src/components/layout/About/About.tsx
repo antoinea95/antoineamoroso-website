@@ -171,6 +171,7 @@ export const About = () => {
           src="./assets/flower.png"
           className=" w-16 lg:w-20 stroke-two"
           id="flower"
+          alt="Illustation of flower in a retro cartoon style"
         />
       </div>
 

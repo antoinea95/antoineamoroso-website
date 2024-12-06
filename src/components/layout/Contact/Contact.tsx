@@ -4,10 +4,15 @@ import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * 
+ * Footer of the home page
+ */
 export const Contact = () => {
   const titleRef = useRef<HTMLDivElement>(null);
   const titleText = "Let's work together";
 
+  // Picture animation
   useEffect(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -21,7 +26,6 @@ export const Contact = () => {
       },
     });
 
-    // Animation principale contrôlée par ScrollTrigger
     tl.fromTo(
       "#rock",
       { scale: 0, y: 200 },
@@ -35,7 +39,6 @@ export const Contact = () => {
       }
     );
 
-    // Animation infinie séparée (démarrage après la timeline principale)
     const infiniteAnimation = gsap.to("#rock", {
       rotateX: 20,
       keyframes: {
@@ -47,18 +50,18 @@ export const Contact = () => {
       paused: true,
     });
 
-    // Démarrer l'animation infinie à la fin de la timeline
     tl.eventCallback("onComplete", () => {
       infiniteAnimation.play();
     });
 
     return () => {
-      tl.kill(); // Nettoyer la timeline
-      infiniteAnimation.kill(); // Nettoyer l'animation infinie
-      gsap.killTweensOf("#rock"); // Nettoyer les tweens restants
+      tl.kill();
+      infiniteAnimation.kill();
+      gsap.killTweensOf("#rock");
     };
   }, []);
 
+  // Entry animation
   useEffect(() => {
     if (titleRef.current) {
       const letters = titleRef.current.querySelectorAll(".letter");
@@ -118,6 +121,7 @@ export const Contact = () => {
                 src="./assets/rock.png"
                 className=" w-8 lg:w-16 stroke-two absolute -right-8 lg:-right-16 lg:-top-3"
                 id="rock"
+                alt="Illustation of an hand wich do a rock sign in a retro cartoon style"
               />
             )}
           </span>
@@ -133,6 +137,7 @@ export const Contact = () => {
           target="_blank"
           href="https://linkedin.com/in/antoine-amoroso-developpeur-web"
           rel="noopener noreferrer"
+          aria-label="Link to Linkedin"
         >
           Linkedin
         </a>
@@ -140,6 +145,7 @@ export const Contact = () => {
           target="_blank"
           href="https://github.com/antoinea95"
           rel="noopener noreferrer"
+          aria-label="Link to Github"
         >
           Github
         </a>
@@ -147,6 +153,7 @@ export const Contact = () => {
           target="_blank"
           href="https://www.malt.fr/profile/antoineamoroso"
           rel="noopener noreferrer"
+          aria-label="Link to Malt"
         >
           Malt
         </a>
@@ -154,6 +161,7 @@ export const Contact = () => {
           target="_blank"
           href="mailto:antoineamr95@gmail.com"
           rel="noopener noreferrer"
+          aria-label="Send me an email"
         >
           Mail
         </a>

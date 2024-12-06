@@ -12,6 +12,11 @@ export type WorkCardProps = {
   features?: string[];
 };
 
+/**
+ * Display a summary of the work on the timeline
+ * @param {WorkCardProps} props.work - Contain every information of the work
+ * @param {number} props.index - Index to handle the modal display
+ */
 export const WorkCard = ({
   work,
   index,
@@ -21,11 +26,14 @@ export const WorkCard = ({
   index: number;
   setWorkActive: Dispatch<SetStateAction<number | null>>;
 }) => {
+
   const workRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const dateRef = useRef<HTMLDivElement>(null);
   const { isLargeScreen } = useAppContext();
 
+
+  // Animation entry
   useEffect(() => {
     const workElements = workRef.current?.childNodes;
     const dateElements = dateRef.current?.childNodes;
@@ -49,7 +57,6 @@ export const WorkCard = ({
 
     const finalPosition = isLargeScreen ? { y: 0 } : { x: 0 };
 
-    // Crée une timeline
     const timeLine = gsap.timeline({
       scrollTrigger: {
         trigger: "#work",
@@ -59,7 +66,6 @@ export const WorkCard = ({
       },
     });
 
-    // Animation pour les boutons
     timeLine
       .fromTo(
         buttonElements,
@@ -71,7 +77,6 @@ export const WorkCard = ({
           delay: 0.3 * (index + 1),
         }
       )
-      // Animation pour les éléments de travail
       .fromTo(
         workElements,
         getInitialPosition("bottom"),
@@ -85,7 +90,6 @@ export const WorkCard = ({
         },
         "<"
       )
-      // Animation pour les dates
       .fromTo(
         dateElements,
         getInitialPosition("top"),

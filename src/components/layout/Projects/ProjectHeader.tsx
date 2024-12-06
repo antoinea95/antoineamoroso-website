@@ -4,9 +4,19 @@ import { ProjectType } from "../../../pages/ProjectPage";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
+
+/**
+ * 
+ * @param {ProjectType} project
+ * @returns Project header : Name of the project with a link to see live project
+ */
 export const ProjectHeader = ({ project }: { project: ProjectType }) => {
+
+  // Ref for GSAP
   const headerRef = useRef<HTMLDivElement>(null);
 
+
+  // Enter animation
   useEffect(() => {
     const rotateFrames = [5, -5, 5, -5, 5, 0];
     const animation = gsap.fromTo(

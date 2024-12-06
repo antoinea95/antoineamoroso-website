@@ -11,6 +11,14 @@ type ModalProps = PropsWithChildren & {
   handlePrev: () => void;
 };
 
+/**
+ * A component to display modal carousel for work section
+ * @param props - properties of the Modal
+ * @param {number | null} props.workActive - index + 1 of the current work
+ * @param props.onClose - set workActive null to close the modal
+ * @param props.handleNext - increment or reset workActive to navigate
+ * @param props.handlePrev - decrement workActive to navigate
+ */
 export const Modal = ({
   children,
   workActive,
@@ -18,11 +26,15 @@ export const Modal = ({
   handleNext,
   handlePrev,
 }: ModalProps) => {
+
+  // Ref for GSAP animation
   const modalRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+
     if (workActive) {
+      // Enter animation
       const animation = gsap.fromTo(
         contentRef.current,
         { scale: 0 },
@@ -38,24 +50,53 @@ export const Modal = ({
 
       return () => {
         animation.kill();
-      }
+      };
     }
   }, [workActive]);
 
+
+    // Keyboard navigation
+    useEffect(() => {
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (!workActive) return;
+        switch (e.key) {
+          case "ArrowLeft":
+            handlePrev();
+            break;
+          case "ArrowRight":
+            handleNext();
+            break;
+          case "Escape":
+            onClose();
+            break;
+        }
+      };
+  
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    }, [workActive, handlePrev, handleNext, onClose]);
+
+  // Don't display modal if no work active
   if (!workActive) return null;
 
   return (
     <div
       className={"fixed inset-0 z-50 flex items-center justify-center"}
       ref={modalRef}
+      role="dialog"
+      aria-modal="true"
     >
       <div
         className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm"
         onClick={onClose}
+        aria-hidden="true"
       />
       <div className="absolute z-50 w-[95vw] lg:w-[93vw] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-between">
         <button
           className="text-3xl lg:text-4xl text-primary hover:scale-150"
+          aria-label="Previous"
           onClick={() => {
             handlePrev();
           }}
@@ -72,6 +113,7 @@ export const Modal = ({
         </button>
         <button
           className="text-3xl lg:text-4xl text-primary hover:scale-150"
+          aria-label="Next"
           onClick={() => {
             handleNext();
           }}

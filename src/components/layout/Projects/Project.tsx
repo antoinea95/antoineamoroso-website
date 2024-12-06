@@ -4,17 +4,23 @@ import gsap from "gsap";
 import { Title } from "../../text/Title";
 import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/all";
+import projectsData from "../../../projects.json"
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * Project section of the home page, display a title with projects card to navigate to Project page
+ */
 export const Project = () => {
-  const projects = [
-    { projectName: "Taskly", alt: "Kanban board" },
-    { projectName: "Bento-running", alt: "Strava visualizer" },
-  ];
 
+  // Lists of the projects card
+  const projects = projectsData.projects.map((project) => {
+    return {projectName: project.name, alt: project.alt}
+  })
+
+
+  // Handle picture animation and reset infinite animation when leave back
   useEffect(() => {
-
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#projects",
@@ -27,7 +33,7 @@ export const Project = () => {
       },
     });
   
-    // Animation principale contrôlée par ScrollTrigger
+    // Picture animation
     tl.fromTo(
       "#heart",
       { y: 30, scale: 0 },
@@ -43,7 +49,6 @@ export const Project = () => {
       }
     );
   
-    // Animation infinie séparée (démarrage après la timeline principale)
     const infiniteAnimation = gsap.to("#heart", {
       keyframes: {
         scale: [1, 1.2, 1, 1.1, 1, 1],
@@ -51,18 +56,17 @@ export const Project = () => {
       duration: 0.8,
       ease: "steps(5)",
       repeat: -1,
-      paused: true, // On commence en pause
+      paused: true,
     });
   
-    // Démarrer l'animation infinie à la fin de la timeline
     tl.eventCallback("onComplete", () => {
       infiniteAnimation.play();
     });
   
     return () => {
-      tl.kill(); // Nettoyer la timeline
-      infiniteAnimation.kill(); // Nettoyer l'animation infinie
-      gsap.killTweensOf("#heart"); // Nettoyer les tweens restants
+      tl.kill();
+      infiniteAnimation.kill();
+      gsap.killTweensOf("#heart");
     };
   }, []);
   
@@ -71,7 +75,7 @@ export const Project = () => {
     <Section id="projects">
       <div className="flex items-center relative  px-3 py-1">
         <Title titleText="Projects" headingLevel="h1" trigger="#projects" />
-        <img src="./assets/heart.png" className="w-20 stroke-two" id="heart" />
+        <img src="./assets/heart.png" className="w-20 stroke-two" id="heart" alt="Illustation of an heart in a retro cartoon style" />
       </div>
       <section className="w-[90%] flex flex-col justify-center items-center relative">
         {projects.map((project, index) => (

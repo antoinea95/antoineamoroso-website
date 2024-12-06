@@ -1,21 +1,18 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { iconMap } from "../../../utils/iconMap";
+import projectData from "../../../projects.json";
 
+/**
+ * 
+ * Display an animate list of skills with an icon and a name
+ */
 export const Skills = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
-
-  const skills = [
-    { icon: "SiReact", name: "React" },
-    { icon: "SiNextdotjs", name: "Next.js" },
-    { icon: "SiTypescript", name: "TypeScript" },
-    { icon: "DiSass", name: "Sass" },
-    { icon: "SiTailwindcss", name: "Tailwind" },
-    { icon: "TbPlayerTrackNextFilled", name: "GSAP" },
-    { icon: "SiFirebase", name: "Firebase" },
-  ];
+  const skills = projectData.skills;
 
 
+  // Entry and infinite animation
   useEffect(() => {
     const childrens = wrapperRef.current?.childNodes;
 
@@ -33,7 +30,6 @@ export const Skills = () => {
       },
     });
 
-    // Animation principale contrôlée par ScrollTrigger
     tl.fromTo(
       wrapperRef.current,
       { x: "-100vw" },
@@ -44,7 +40,6 @@ export const Skills = () => {
       }
     );
 
-    // Animation infinie séparée (démarrage après la timeline principale)
     const infiniteAnimation = gsap.to(childrens, {
       keyframes: {
         rotate: [5, -5, 5, -5, 5, -5],
@@ -55,15 +50,14 @@ export const Skills = () => {
       paused: true
     });
 
-    // Démarrer l'animation infinie à la fin de la timeline
     tl.eventCallback("onComplete", () => {
       infiniteAnimation.play();
     });
 
     return () => {
-      tl.kill(); // Nettoyer la timeline
-      infiniteAnimation.kill(); // Nettoyer l'animation infinie
-      gsap.killTweensOf(childrens); // Nettoyer les tweens restants
+      tl.kill(); 
+      infiniteAnimation.kill();
+      gsap.killTweensOf(childrens); 
     };
   }, []);
 

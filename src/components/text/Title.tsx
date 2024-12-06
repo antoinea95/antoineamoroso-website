@@ -6,13 +6,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 /**
  * `Title` is a component that renders a heading or paragraph with a stroke effect behind the text.
- * It allows customization of the text content, heading level, font size, and stroke width.
+ * It allows customization of the text content, heading level.
  *
  * @param {Object} props - The properties for the Title component.
- * @param {string} props.content - The text content to be displayed in the title.
+ * @param {string} props.titleText - The text content to be displayed in the title.
  * @param {ElementType} props.headingLevel - The HTML heading level or element type (e.g., 'h1', 'p') for the title.
- * @param {string} [props.fontSize] - Optional; custom font size for the title.
- * @param {string} props.strokeWidth - The stroke width to be applied to the text, specified in pixels (e.g., "stroke-[20px]").
+ * @param {string} props.trigger - an Id to trigger the scroll
  *
  * @returns A styled heading or paragraph element with the specified text and stroke effect.
  */
@@ -39,7 +38,6 @@ export const Title = ({
         opacity: 0,
       });
 
-      // Animation principale
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: trigger,
@@ -49,23 +47,21 @@ export const Title = ({
         },
       });
 
-      // Animation des lettres
       tl.to(titleElements, {
-        x: 0, // Ramène les lettres à leur position finale
+        x: 0,
         y: 0,
         opacity: 1,
         scale: 1,
         keyframes: {
-          rotation: [-15, 15, -15, 15, -15, 10, 0], // Balancement
+          rotation: [-15, 15, -15, 15, -15, 10, 0],
         },
         duration: 0.6,
         stagger: 0.1,
         ease: "steps(5)",
       });
 
-      // Nettoyage
       return () => {
-        tl.kill(); // Supprimer la timeline et les animations associées
+        tl.kill();
       };
     }
   }, [trigger]);

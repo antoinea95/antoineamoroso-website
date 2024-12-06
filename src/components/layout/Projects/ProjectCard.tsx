@@ -10,6 +10,13 @@ import { useNavigationContext } from "../../../hooks/useNavigationContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * 
+ * @param {string} props.projectName - Name of the project
+ * @param {string} props.alt - Short description of the project
+ * @param {number} props.number - index + 1 of the project to display a card number
+ * @returns a card to navigate of the project / an hover effect wich display an overview picture of the project 
+ */
 export const ProjectCard = ({
   projectName,
   alt,
@@ -19,11 +26,15 @@ export const ProjectCard = ({
   alt: string;
   number: number;
 }) => {
+
+
   const navigate = useNavigate();
   const { isLargeScreen } = useAppContext();
+
+  // To handle the page transition, return a state of the user navigation
   const { previousKey, currentKey } = useNavigationContext();
 
-  // Refs pour les éléments DOM
+  // Refs for DOM element
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -33,7 +44,7 @@ export const ProjectCard = ({
   const project = projectsData.projects.find((proj) => proj.name === projectName);
 
   /**
-   * Animation d'entrée lors de la navigation entre les pages
+   * Transition animation when navigating back
    */
   useEffect(() => {
     if (previousKey && previousKey !== currentKey) {
@@ -57,7 +68,7 @@ export const ProjectCard = ({
   }, [currentKey, previousKey]);
 
   /**
-   * Animation pour changer l'image toutes les 1 seconde
+   * Change image of the overwiew every seconds
    */
   useEffect(() => {
     if (project) {
@@ -70,7 +81,7 @@ export const ProjectCard = ({
   }, [activeIndex, project]);
 
   /**
-   * Animation GSAP pour le survol des boutons
+   * When hovering the card, picture is display + add a "mouse move" event to make the picture follow the mouse
    */
   const { contextSafe } = useGSAP();
 
@@ -94,13 +105,11 @@ export const ProjectCard = ({
   };
 
   /**
-   * Animation d'entrée avec ScrollTrigger
+   * Entry animation when scrolling on the homepage
    */
   useEffect(() => {
-    // Initialisation des propriétés pour les animations
     gsap.set(buttonRef.current, { y: 200 });
   
-    // Timeline pour les animations avec ScrollTrigger
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#projects",
@@ -110,6 +119,7 @@ export const ProjectCard = ({
       },
     });
   
+    // Pause the animation when navigate
     if (previousKey && currentKey !== previousKey) {
       timeline.pause(timeline.endTime())
     }
@@ -138,14 +148,13 @@ export const ProjectCard = ({
       )
       .to(cardRef.current, { overflow: "visible", duration: 0.2 });
   
-    // Nettoyage
     return () => {
       timeline.kill();
     };
   }, [number, isLargeScreen, currentKey, previousKey]);
 
   /**
-   * Gestion du clic pour naviguer vers une nouvelle page avec animation
+   * Handle click event to trigger the transition animation before navigate on the project page
    */
   const handleClick = () => {
     const timeline = gsap.timeline({

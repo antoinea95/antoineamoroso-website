@@ -2,9 +2,7 @@ import { useParams } from "react-router-dom";
 import projectsData from "../projects.json";
 import { ProjectCaroussel } from "../components/layout/Projects/ProjectCaroussel";
 import { ProjectHeader } from "../components/layout/Projects/ProjectHeader";
-import { useEffect, useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { useEffect } from "react";
 import { ProjectContent } from "../components/layout/Projects/ProjectContent";
 
 export type ProjectType = {
@@ -19,40 +17,23 @@ export type ProjectType = {
   features: string[];
 };
 
+/**
+ * Page to display project information
+ */
 export const ProjectPage = () => {
-  const contentRef = useRef<HTMLElement>(null);
+
+  // Get the projectName in URL and find the project in JSON data
   const { projectName } = useParams();
   const project = projectsData.projects.find(
     (proj) => proj.name === projectName
   );
 
+
+// Reset scroll when navigating on the page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Référence pour stocker l'animation
-  const reverseAnimationRef = useRef<gsap.core.Timeline | null>(null);
-
-  useGSAP(() => {
-    const contentElements = contentRef.current?.childNodes;
-    if (contentElements) {
-      // Définir l'animation principale
-      const animation = gsap.timeline();
-      animation.set(contentElements, { y: "100vh" });
-      animation.to(contentElements, {
-        keyframes: {
-          rotate: [5, -5, 5, -5, 5, 0],
-          y: ["100vh", 500, 250, 0, 100, 0],
-        },
-        ease: "steps(6)",
-        duration: 1,
-        delay: 0.6,
-      });
-
-      // Stocke l'animation pour qu'elle soit réversible
-      reverseAnimationRef.current = animation;
-    }
-  });
 
   if (!project) {
     return <p>Project not found</p>;
