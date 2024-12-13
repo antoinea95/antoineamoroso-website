@@ -32,12 +32,18 @@ export const Skills = () => {
 
     tl.fromTo(
       wrapperRef.current,
-      { x: "-100vw" },
       {
-        x: 0,
+        scale: 0,
+      },
+      {
+        keyframes: {
+          rotation: [-5, 5, -5, 5, -5, 5, 0], // Balancement
+          scale: [0, 0.3, 0.6, 0.9, 1.2, 1],
+        },
         duration: 1,
-        ease: "steps(3)",
-      }
+        delay: 0.6,
+        ease: "steps(5)",
+      },
     );
 
     const infiniteAnimation = gsap.to(childrens, {

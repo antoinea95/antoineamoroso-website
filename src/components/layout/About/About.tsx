@@ -18,8 +18,9 @@ export const About = () => {
     const gsapLetters = document.querySelector("#gsap-text")?.childNodes;
     const rx = 370;
     const ry = 58;
-    const circumference = Math.ceil(2 * Math.PI * Math.sqrt((rx ** 2 + ry ** 2) / 2));
-
+    const circumference = Math.ceil(
+      2 * Math.PI * Math.sqrt((rx ** 2 + ry ** 2) / 2)
+    );
 
     if (gsapLetters) {
       gsap.fromTo(
@@ -87,7 +88,15 @@ export const About = () => {
 
     if (aboutElement) {
       // Animation du paragraphe (décalée)
-      const animation = gsap.fromTo(
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#about",
+          start: "top 80%",
+          end: "top 20%",
+          toggleActions: "restart none none reset",
+        },
+      });
+      tl.fromTo(
         aboutElement,
         { y: 500 },
         {
@@ -97,17 +106,25 @@ export const About = () => {
           y: 0, // Monte doucement à sa position
           duration: 1,
           ease: "steps(5)",
-          scrollTrigger: {
-            trigger: "#about",
-            start: "top 80%",
-            end: "top 20%",
-            toggleActions: "restart none none reset",
-          },
         }
+      ).fromTo(
+        "#life-text",
+        {
+          scale: 0,
+        },
+        {
+          keyframes: {
+            rotation: [-5, 5, -5, 5, -5, 5, 0], // Balancement
+            scale: [0, 0.3, 0.6, 0.9, 1.2, 1],
+          },
+          duration: 1,
+          ease: "steps(5)",
+        },
+        "<+=0.6"
       );
 
       return () => {
-        animation.kill();
+        tl.kill();
       };
     }
   }, []);
@@ -180,9 +197,9 @@ export const About = () => {
           className="leading-snug font-medium w-full sm:w-[90%] max-w-[1300px] py-3"
           ref={aboutRef}
         >
-          As a {" "}
+          I'm a passionate{" "}
           <span className="relative inline-block">
-             passionate developer 
+            frontend developer
             <svg
               id="tracing-elipse"
               xmlns="http://www.w3.org/2000/svg"
@@ -200,9 +217,8 @@ export const About = () => {
                 className="stroke-primary"
               />
             </svg>
-          </span> {" "}
-          with nearly three years of experience, I am deeply drawn to front-end
-          development, combining my love for graphic design{" "}
+          </span>{" "}
+          with a strong background in graphic design{" "}
           <p className="inline-flex relative w-6 h-3/5 mx-1">
             <svg
               id="animated-square"
@@ -229,8 +245,9 @@ export const About = () => {
               <FiPenTool size={16} />
             </span>
           </p>
-          with my technical skills. <br />
-          <br /> My expertise primarily focuses on{" "}
+          and nearly three years of experience. <br />
+          <br /> I specialize in creating modern and responsive web applications
+          using
           <span
             id="logo-react"
             className="
@@ -238,21 +255,30 @@ export const About = () => {
           >
             <SiReact size={24} />
           </span>
-          React but I also explore technologies such as TypeScript,{" "}
-          <p
+          React, TypeScript, and Next.js. Whether it’s building SaaS platforms,
+          crafting animations with{" "}
+          <span
             className="inline-flex font-modak uppercase text-4xl leading-6 pt-1 px-1"
             id="gsap-text"
           >
             {gsapText.split("").map((letter) => (
               <span key={letter}>{letter}</span>
             ))}
-          </p>
-          and Next.js to deliver innovative and high-performing solutions. Each
-          project represents an exciting challenge that I approach with
-          enthusiasm and{" "}
-          <span className="inline-flex underline">creativity.</span>
+          </span>{" "}
+          or integrating pixel-perfect designs, I focus on delivering solutions
+          that are not only visually engaging but also high-performing and
+          user-friendly.<br></br>
         </p>
       </div>
+      <p
+        className="w-full text-center uppercase font-modak leading-10"
+        style={{
+          fontSize: "clamp(2.5rem, 4vw, 5rem)",
+        }}
+        id="life-text"
+      >
+        Let’s bring your vision to life!
+      </p>
       <Skills />
     </Section>
   );
