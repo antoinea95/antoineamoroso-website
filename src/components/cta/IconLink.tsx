@@ -25,7 +25,7 @@ export const IconLink = ({
     <a
       href={url}
       target="_blank"
-      className="flex items-center gap-2 bg-primary text-tertiary h-fit py-2 px-4 rounded-full border-2 border-tertiary hover:shadow-custom hover:scale-110 transition-transform text-lg"
+      className="flex items-center gap-2 bg-primary text-tertiary h-fit lg:py-2 lg:px-4 px-3 py-1 text-sm rounded-full border-2 border-tertiary hover:shadow-custom hover:scale-110 transition-transform lg:text-lg"
       aria-label={content}
     >
       <Icon />

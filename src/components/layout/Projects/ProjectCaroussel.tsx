@@ -20,7 +20,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
 
     // Calculate the width of the carousel
     const calculateDynamicShift = () => {
-      const carouselWidth = carousel.current?.offsetWidth || window.innerWidth * 0.6;
+      const carouselWidth = carousel.current?.offsetWidth || window.innerWidth * 0.7;
       return carouselWidth;
     };
 
@@ -183,7 +183,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
       aria-live="polite"
     >
       <button
-        className="absolute left-3 z-20 text-3xl text-primary hover:scale-125 cursor-pointer"
+        className="absolute left-2 lg:left-3 z-20 text-xl sm:text-3xl text-primary hover:scale-125 cursor-pointer"
         aria-label="Previous picture"
         onClick={prev}
       >
@@ -198,7 +198,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
         />
       </button>
       <button
-        className="absolute right-3 z-20 text-3xl text-primary hover:scale-125 cursor-pointer"
+        className="absolute right-2 lg:right-3 z-20 text-xl sm:text-3xl text-primary hover:scale-125 cursor-pointer"
         aria-label="Next picture"
         onClick={next}
       >
@@ -212,7 +212,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
           }}
         />
       </button>
-      <div className="w-[90vw] lg:w-[60vw] max-w-[800px] flex items-center pb-2">
+      <div className="w-[99vw] lg:w-[65vw] max-w-[1200px] flex items-center pb-2">
         <img
           src={pictures[getNextIndex()]}
           className="object-cover w-full h-full px-10 stroke-two"

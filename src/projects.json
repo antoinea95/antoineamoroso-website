@@ -5,7 +5,7 @@
         "url": "https://taskly-kappa.vercel.app/",
         "alt": "Kanban board",
         "technos": [{"icon": "SiReact", "name": "React"},{ "icon": "SiTypescript", "name": "Typescript"}, {"icon": "SiFirebase", "name": "Firebase"}, {"icon": "SiTailwindcss", "name":"Tailwind"}],
-        "pictures": ["./assets/taskly/taskly-home.png", "./assets/taskly/taskly-task.png", "./assets/taskly/taskly-login.png", "./assets/taskly/taskly-comment.png", "./assets/taskly/taskly-sidebar.png", "./assets/taskly/taskly-account.png"],
+        "pictures": ["./assets/taskly/taskly-home.png", "./assets/taskly/taskly-task.png", "./assets/taskly/taskly-login.png", "./assets/taskly/taskly-board.png", "./assets/taskly/taskly-account.png"],
         "summary": "Taskly is a side project developed to enhance my React skills and progress in TypeScript. It combines complexity and versatility, offering a robust platform to manage collaborative projects efficiently.",
         "features": [
           "Authentification: Secure user login and management of personal boards.",

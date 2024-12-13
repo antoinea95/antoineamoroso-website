@@ -199,7 +199,7 @@ export const ProjectCard = ({
           onMouseLeave={handleMouseLeave}
           ref={buttonRef}
         >
-          <h3>{projectName}</h3>
+          <h3 className="text-left">{projectName}</h3>
           <p className="text-sm flex flex-col gap-2 lg:flex-row lg:items-center justify-between lg:w-1/4 pr-2">
             {t("projects." + project?.name + ".alt")}
             <TbCircleArrowUpRightFilled size={24} />
