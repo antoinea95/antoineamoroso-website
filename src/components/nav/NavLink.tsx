@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 
 /**
  * `NavLink` is a component that renders a navigational link with a decorative SVG stroke behind the text. 
@@ -9,6 +10,8 @@
  * @returns A JSX element containing an anchor (`<a>`) with a hoverable SVG stroke effect.
  */
 export const NavLink = ({ name }: { name: string }) => {
+  const {t} = useTranslation();
+  const translateName = t("sectionTitles." + name);
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault(); // Empêche le comportement par défaut
     const targetId = name.toLowerCase();
@@ -29,13 +32,13 @@ export const NavLink = ({ name }: { name: string }) => {
 
   return (
     <a
-      href={`#${name.toLowerCase()}`}
+      href={`#${translateName.toLowerCase()}`}
       onClick={handleClick}
       className="relative group font-light text-tertiary z-30 hover:underline px-2"
-      aria-label={name}
-      data-after={name}
+      aria-label={translateName}
+      data-after={translateName}
     >
-      {name}
+      {translateName}
     </a>
   );
 };

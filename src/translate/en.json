@@ -1,0 +1,94 @@
+{
+    "sectionTitles": {
+        "About": "About",
+        "Projects": "Projects",
+        "Skills": "Skills",
+        "Work": "Work",
+        "Contact": "Contact",
+        "Stack": "Stack",
+        "Main features": "Main Features"
+    },
+
+    "texts": {
+        "front-end developer": "front-end developer",
+        "intro": {
+            "part1": "I'm a passionate",
+            "part2": "front-end developer",
+            "part3": "with a strong background in graphic design",
+            "part4": "and nearly three years of experience as a developer.",
+            "part5": "I specialize in creating modern and responsive web applications using",
+            "part6": "React, TypeScript, and Next.js. Whether it’s building SaaS platforms, crafting animations with",
+            "part7": "or integrating pixel-perfect designs, I focus on delivering solutions that are not only visually engaging but also high-performing and user-friendly."
+        },
+        "about-end": "Let's bring your vision to life!",
+        "Let's work together": "Let's work together",
+        "Contact me": "Contact me"
+    },
+
+    "projects": {
+        "Taskly": {
+            "summary": "Taskly is a side project developed to enhance my React skills and progress in TypeScript. It combines complexity and versatility, offering a robust platform to manage collaborative projects efficiently.",
+            "alt": "Kanban board",
+            "features": {
+              "0": "Authentification: Secure user login and management of personal boards.",
+              "1": "User Collaboration: Board creators can invite users to collaborate on projects.",
+              "2": "Board and List Management: Create, edit, and organize boards and task lists for seamless workflow.",
+              "3": "Task Features: Add, modify, assign, and set deadlines for tasks, with drag-and-drop functionality.",
+              "4": "Enhanced Collaboration: Task comments and user assignments to improve team communication."
+            }        
+        },
+        "Bento-running": {
+            "alt": "Strava visualizer",
+            "summary": "This was my first project using Next.js and TypeScript, driven by my passion for running. It leverages the Strava API to display user performance data in a clear and organized way with a Bento design approach for structured elements.",
+            "features": {
+                "0": "User Authentication: OAuth authentication implemented with NextAuth.",
+                "1": "Data Visualization: Informative performance charts created using Recharts.",
+                "2": "Interactive Maps: React-Leaflet integrated with Google Maps tiles for enhanced user interaction.",
+                "3": "Bento Design: A clean and structured layout for intuitive data presentation."
+            }
+        }
+
+    },
+
+    "works": {
+        "work-1": {
+                "date": "Mar.24-Jun.24",
+                "role": "Front-end developer",
+                "summary": "Development of a web platform designed for trainers to efficiently manage their training sessions and engage with students. Collaborated with two developers, overseeing development progress and validating Pull Requests.",
+                "features": {
+                  "0": "Trainer Dashboard: Create and manage training packs, customize the homepage, update availability, and communicate with students.",
+                  "1": "Student Portal: Schedule meetings with admins (email confirmation + Google Meet integration), purchase training packs via Stripe, and upload resumes.",
+                  "2": "Interactive Tools: Personalized profiles, dedicated messaging, quizzes, and CV feedback.",
+                  "3": "Document Management: Import and share training materials seamlessly."
+                }
+        },
+        "work-2": {
+            "date": "Dec.22-Nov.23",
+            "role": "Front-end developer",
+            "summary": "Development and design of a front-end portal providing clients with a comprehensive view of their assets. Focused on intuitive data display and effective filtering to highlight key insights.",
+            "features": {
+                "0": "Asset Management: Centralized overview and management of client assets.",
+                "1": "Monitoring: Real-time updates on asset performance and status.",
+                "2": "Reporting: Generation of detailed and customizable reports.",
+                "3": "Data Filtering: Advanced tools to sort and focus on relevant information.",
+                "4": "User-friendly Interface: Streamlined navigation for quick access to important data."
+            }
+        },
+        "work-3": {
+            "date": "Oct.21-Jan.22",
+            "role": "Specialist",
+            "summary": "Offering a unique customer experience: product demonstrations, assistance, and usage advice."
+        },
+        "work-4": {
+            "date": "Sep.19-Jun.20",
+            "role": "Entrepreneur",
+            "summary": "Co-created a streetwear boutique concept in Lyon, aiming to offer an innovative customer experience and unique products. Led communication efforts, designing the brand's visual identity and developing a communication strategy with partners. Project halted due to the pandemic."
+        },
+        "work-5": {   
+            "date": "Jan.18-Sep.19",
+            "role": "Customer advisor",
+            "summary": "Providing a premium sales experience, stock management, opening and closing the store."
+        }
+       
+    }
+}

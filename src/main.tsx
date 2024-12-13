@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./routes/Root.tsx";
 import { HomePage } from "./pages/HomePage.tsx";
 import { ProjectPage } from "./pages/ProjectPage.tsx";
+import './i18n';
 
 const router = createBrowserRouter([
   {

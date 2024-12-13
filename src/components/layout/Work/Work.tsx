@@ -151,9 +151,9 @@ export const Work = () => {
 
   return (
     <Section id="work">
-      <div className="flex items-center relative px-3 py-1">
+      <div className="flex items-center relative px-2 py-1 -space-x-2">
         <Title titleText="Work" headingLevel="h1" trigger="#work" />
-        <img src="./assets/mac.png" className="w-24 stroke-two" id="mac" alt="Illustation of an Imac in a retro cartoon style" />
+        <img src="./assets/mac.png" className="w-20 lg:w-24 stroke-two" id="mac" alt="Illustation of an Imac in a retro cartoon style" />
       </div>
       <section className="flex flex-col lg:flex-row justify-between items-center w-full max-w-[1400px] gap-10">
         <div

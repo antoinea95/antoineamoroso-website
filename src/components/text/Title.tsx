@@ -1,6 +1,8 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { ElementType, useEffect, useRef } from "react";
+import { ElementType, useEffect, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { v4 as uuid } from 'uuid'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,7 +27,10 @@ export const Title = ({
   headingLevel: ElementType;
   trigger: string;
 }) => {
+  const { t, i18n } = useTranslation();
   const titleRef = useRef<HTMLDivElement>(null);
+  const translateTitle = useMemo(() => t("sectionTitles." + titleText), [t, titleText]);
+
 
   useEffect(() => {
     const titleElements = titleRef.current?.querySelectorAll("span");
@@ -47,32 +52,47 @@ export const Title = ({
         },
       });
 
-      tl.to(titleElements, {
-        x: 0,
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        keyframes: {
-          rotation: [-15, 15, -15, 15, -15, 10, 0],
-        },
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "steps(5)",
-      });
+      tl.fromTo(
+        titleElements,
+        { scale: 0 },
+        {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          keyframes: {
+            rotation: [-15, 15, -15, 15, -15, 10, 0],
+          },
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "steps(5)",
+        }
+      );
 
       return () => {
         tl.kill();
+        gsap.killTweensOf(titleElements);
       };
     }
-  }, [trigger]);
+  }, [trigger, translateTitle, i18n.language]);
 
   return (
     <Heading ref={titleRef} className="flex flex-nowrap">
-      {titleText.split("").map((letter) => (
-        <span key={letter} className="inline-block scale-0">
-          {letter}
-        </span>
-      ))}
+      {translateTitle
+        .split("")
+        .map((letter) => {
+          if (letter === " ") {
+            return (
+              <span className="inline-block px-2" key={`space_${uuid()}`}></span>
+            );
+          } else {
+            return (
+              <span key={`${letter}_${uuid()}`} className="inline-block">
+                {letter}
+              </span>
+            );
+          }
+        })}
     </Heading>
   );
 };

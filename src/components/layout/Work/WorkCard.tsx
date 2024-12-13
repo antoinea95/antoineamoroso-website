@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useAppContext } from "../../../hooks/useAppContext";
+import { useTranslation } from "react-i18next";
 
 export type WorkCardProps = {
   id: string;
@@ -31,6 +32,7 @@ export const WorkCard = ({
   const buttonRef = useRef<HTMLDivElement>(null);
   const dateRef = useRef<HTMLDivElement>(null);
   const { isLargeScreen } = useAppContext();
+  const {t} = useTranslation();
 
 
   // Animation entry
@@ -122,7 +124,7 @@ export const WorkCard = ({
           ref={dateRef}
         >
           <p className="relative text-sm font-normal py-2">
-            {work.date}
+            {t("works."+ work.id + ".date")}
           </p>
         </section>
         <section ref={buttonRef}>
@@ -133,7 +135,7 @@ export const WorkCard = ({
           ref={workRef}
         >
           <p className="relative text-base lg:text-base leading-none lg:p-0.5 font-bold uppercase">
-            {work.role}
+            {t("works."+ work.id + ".role")}
           </p>
           <p className="relative text-xs lg:text-sm font-medium p-0.5">
             {work.company}

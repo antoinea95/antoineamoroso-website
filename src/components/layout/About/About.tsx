@@ -1,16 +1,18 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { Skills } from "../Skills/Skills";
 import { Section } from "../../container/Section";
 import { Title } from "../../text/Title";
-import { SiReact } from "react-icons/si";
+import { SiGmail, SiReact } from "react-icons/si";
 import { useGSAP } from "@gsap/react";
 import { FiPenTool } from "react-icons/fi";
+import {useTranslation } from "react-i18next";
+import { IconLink } from "../../cta/IconLink";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const About = () => {
+  const {t} = useTranslation();
   const aboutRef = useRef<HTMLParagraphElement>(null);
   const gsapText = "GSAP";
 
@@ -197,9 +199,9 @@ export const About = () => {
           className="leading-snug font-medium w-full sm:w-[90%] max-w-[1300px] py-3"
           ref={aboutRef}
         >
-          I'm a passionate{" "}
+          {t("texts.intro.part1")} {" "}
           <span className="relative inline-block">
-            frontend developer
+          {t("texts.intro.part2")}
             <svg
               id="tracing-elipse"
               xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +220,7 @@ export const About = () => {
               />
             </svg>
           </span>{" "}
-          with a strong background in graphic design{" "}
+          {t("texts.intro.part3")}
           <p className="inline-flex relative w-6 h-3/5 mx-1">
             <svg
               id="animated-square"
@@ -245,9 +247,8 @@ export const About = () => {
               <FiPenTool size={16} />
             </span>
           </p>
-          and nearly three years of experience. <br />
-          <br /> I specialize in creating modern and responsive web applications
-          using
+          {t("texts.intro.part4")} <br />
+          <br /> {t("texts.intro.part5")}
           <span
             id="logo-react"
             className="
@@ -255,8 +256,7 @@ export const About = () => {
           >
             <SiReact size={24} />
           </span>
-          React, TypeScript, and Next.js. Whether it’s building SaaS platforms,
-          crafting animations with{" "}
+          {t("texts.intro.part6")} {" "}
           <span
             className="inline-flex font-modak uppercase text-4xl leading-6 pt-1 px-1"
             id="gsap-text"
@@ -265,21 +265,22 @@ export const About = () => {
               <span key={letter}>{letter}</span>
             ))}
           </span>{" "}
-          or integrating pixel-perfect designs, I focus on delivering solutions
-          that are not only visually engaging but also high-performing and
-          user-friendly.<br></br>
+          {t("texts.intro.part7")}<br></br>
         </p>
       </div>
+      <div className="w-full flex items-center justify-center flex-col gap-2"   id="life-text">
       <p
         className="w-full text-center uppercase font-modak leading-10"
         style={{
           fontSize: "clamp(2.5rem, 4vw, 5rem)",
         }}
-        id="life-text"
       >
-        Let’s bring your vision to life!
+        {t("texts.about-end")}
       </p>
-      <Skills />
+      <IconLink url={"mailto:antoineamr95@gmail.com"} icon={SiGmail} content={t("texts.Contact me")} />
+
+      </div>
+        
     </Section>
   );
 };

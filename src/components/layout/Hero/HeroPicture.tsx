@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useAppContext } from "../../../hooks/useAppContext";
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +15,7 @@ export const HeroPicture = () => {
   const images = useMemo(() => ["./assets/big-head.png", "./assets/big-head-2.png"], []);
   const heroPictureRef = useRef<HTMLDivElement>(null);
   const currentImageIndex = useRef(0);
+  const { i18n} = useTranslation();
 
   // Preload images
   useEffect(() => {
@@ -100,7 +102,7 @@ export const HeroPicture = () => {
               rotate: [0, -20, 20, -20, 0],
               scale: [1, 0.8, 0.6, 0.4, 0.2],
             },
-            yPercent: -45,
+            yPercent: isLargeScreen ? -45 : -42,
             duration: 1,
             ease: "steps(5)",
           })
@@ -144,9 +146,8 @@ export const HeroPicture = () => {
       if (scrollAnimation) {
         scrollAnimation.kill();
       }
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [navRef, isLargeScreen]);
+  }, [navRef, isLargeScreen, i18n.language]);
   
   
 
@@ -158,7 +159,7 @@ export const HeroPicture = () => {
     >
       <img
         src="./assets/big-head.png"
-        className="object-cover w-[75%] sm:w-[60%] lg:w-[30%] 2xl:w-[25%] max-w-[500px] will-change-auto lg:-translate-x-10 drop-shadow-custom"
+        className="object-cover w-[75%] sm:w-[60%] lg:w-[30%] 2xl:w-[25%] max-w-[500px] will-change-auto -translate-x-3 lg:-translate-x-10 drop-shadow-custom"
         alt="Hero Animation"
         id="hero-picture"
       />

@@ -1,6 +1,7 @@
 import { PropsWithChildren, useEffect, useRef } from "react";
 import { iconMap } from "../../../utils/iconMap";
 import gsap from "gsap";
+import { useTranslation } from "react-i18next";
 
 
 /**
@@ -10,6 +11,7 @@ import gsap from "gsap";
  */
 const ContentTitle = ({ title }: { title: string }) => {
   const spanRef = useRef<HTMLSpanElement>(null);
+  const {t} = useTranslation();
 
   // Enter animation
   useEffect(() => {
@@ -35,7 +37,7 @@ const ContentTitle = ({ title }: { title: string }) => {
   return (
     <p className="font-bold border-b border-primary pb-1 mb-3 text-lg lg:text-xl overflow-hidden whitespace-nowrap">
       <span ref={spanRef} id="title" className="inline-block">
-        {title}
+        {t("sectionTitles." + title)}
       </span>
     </p>
   );
@@ -82,25 +84,32 @@ export const ContentContainer = ({
 
 /**
  * 
- * @param {string} props.summary - a short text about the project
+ * @param {string} props.id - An id to access translation object
  * @param {{ icon: string; name: string }[]} props.stack - an optionnal array to display the stack with an icon and a name
  * @param {string[]} props.features - an optionnal array to display a features list
  * @returns a section to display the project/work content in  3 sections (summary, stack, features )
  */
 export const ProjectContent = ({
-  summary,
+  id,
   stack,
   features,
 }: {
-  summary: string;
+  id: string,
   stack?: { icon: string; name: string }[];
   features?: string[];
 }) => {
+
+  const {t} = useTranslation();
+  const isWork = id.includes("work");
+
+  const translateSummary = isWork ? t("works." + id + ".summary") : t("projects." + id + ".summary");
+
+
   return (
     <section className="flex flex-col lg:flex-row lg:justify-between p-2 gap-10 lg:flex-1 mt-10">
       <ContentContainer direction="right">
         <ContentTitle title="About" />
-        <p className="text-sm lg:text-lg font-semibold">{summary}</p>
+        <p className="text-sm lg:text-lg font-semibold">{translateSummary}</p>
         {stack && (
           <div>
             <ContentTitle title="Stack" />
@@ -134,14 +143,15 @@ export const ProjectContent = ({
         <ContentContainer direction="left">
           <ContentTitle title="Main features" />
           <ul className="space-y-5 text-primary">
-            {features.map((feature, index) => (
-              <li key={index} className="flex flex-col text-xs">
+            {features.map((__, index) => {
+                const translatedFeature = isWork ? t("works." + id + ".features." + index ) : t("projects." + id + ".features." + index);
+              return <li key={index} className="flex flex-col text-xs">
                 <span className="font-bold text-sm">
-                  {feature.split(":")[0]}
+                  {translatedFeature.split(":")[0]}
                 </span>
-                {feature.split(":")[1]}
+                {translatedFeature.split(":")[1]}
               </li>
-            ))}
+        })}
           </ul>
         </ContentContainer>
       )}

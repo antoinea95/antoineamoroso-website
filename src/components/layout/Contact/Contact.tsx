@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,7 +11,8 @@ gsap.registerPlugin(ScrollTrigger);
  */
 export const Contact = () => {
   const titleRef = useRef<HTMLDivElement>(null);
-  const titleText = "Let's work together";
+  const {t} = useTranslation();
+  const titleText = t("texts.Let's work together");
 
   // Picture animation
   useEffect(() => {
@@ -59,7 +61,7 @@ export const Contact = () => {
       infiniteAnimation.kill();
       gsap.killTweensOf("#rock");
     };
-  }, []);
+  }, [titleText]);
 
   // Entry animation
   useEffect(() => {
@@ -96,9 +98,10 @@ export const Contact = () => {
 
       return () => {
         tl.kill();
+        gsap.killTweensOf(letters);
       };
     }
-  }, []);
+  }, [titleText]);
 
   return (
     <footer className="flex flex-col w-screen pb-2 relative" id="contact">

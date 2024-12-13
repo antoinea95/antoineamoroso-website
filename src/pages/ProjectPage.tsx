@@ -39,11 +39,13 @@ export const ProjectPage = () => {
     return <p>Project not found</p>;
   }
 
+
+
   return (
     <main className="py-10 flex flex-col items-center mx-auto gap-5 w-[90vw]">
       <ProjectHeader project={project} />
       <div className="flex flex-col gap-10 overflow-hidden">
-        <ProjectContent summary={project.summary} stack={project.technos} features={project.features} />
+        <ProjectContent id={project.name} stack={project.technos} features={project.features} />
         <ProjectCaroussel pictures={project.pictures} />
       </div>
     </main>

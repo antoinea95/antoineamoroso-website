@@ -7,6 +7,7 @@ import { useAppContext } from "../../../hooks/useAppContext";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 import { useNavigationContext } from "../../../hooks/useNavigationContext";
+import { useTranslation } from "react-i18next";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,17 +20,16 @@ gsap.registerPlugin(ScrollTrigger);
  */
 export const ProjectCard = ({
   projectName,
-  alt,
   number,
 }: {
   projectName: string;
-  alt: string;
   number: number;
 }) => {
 
 
   const navigate = useNavigate();
   const { isLargeScreen } = useAppContext();
+  const {t} = useTranslation();
 
   // To handle the page transition, return a state of the user navigation
   const { previousKey, currentKey } = useNavigationContext();
@@ -201,7 +201,7 @@ export const ProjectCard = ({
         >
           <h3>{projectName}</h3>
           <p className="text-sm flex flex-col gap-2 lg:flex-row lg:items-center justify-between lg:w-1/4 pr-2">
-            {alt}
+            {t("projects." + project?.name + ".alt")}
             <TbCircleArrowUpRightFilled size={24} />
           </p>
         </button>

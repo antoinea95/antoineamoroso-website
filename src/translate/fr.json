@@ -1,0 +1,96 @@
+{
+    "sectionTitles": {
+        "About": "À propos",
+        "Projects": "Projets",
+        "Skills": "Skills",
+        "Work": "Parcours",
+        "Contact": "Contact",
+        "Stack": "Stack",
+        "Main features": "Fonctionnalités principales"
+    },
+
+    "texts": {
+
+        "front-end developer": "développeur front-end",
+        "intro": {
+            "part1": "Je suis un développer",
+            "part2": "front-end passionné",
+            "part3": "avec une solide expérience en design graphique",
+            "part4": "et presque trois ans d'expérience en tant que développeur.",
+            "part5": "Je me spécialise dans la création d'applications web modernes et responsives en utilisant",
+            "part6": "React, TypeScript et Next.js. Que ce soit pour la création de plateformes SaaS, la réalisation d'animations avec",
+            "part7": "ou l'intégration de designs pixel-perfect, je me concentre sur la livraison de solutions qui sont non seulement visuellement attrayantes mais aussi performantes et conviviales."
+        },
+        "about-end": "Ensemble, réalisons vos projets!",
+         "Let's work together": "Travaillons ensemble",
+         "Contact me": "Contactez-moi"
+
+    },
+
+    "projects": {
+        "Taskly": {
+            "summary": "Taskly est un projet personnel développé pour améliorer mes compétences en React et progresser en TypeScript. Il combine complexité et polyvalence, offrant une plateforme robuste pour gérer des projets collaboratifs efficacement.",
+            "alt": "Tableau Kanban",
+            "features": {
+                "0": "Authentification : Connexion utilisateur sécurisée et gestion de tableaux personnels.",
+                "1": "Collaboration utilisateur : Les créateurs de tableaux peuvent inviter des utilisateurs à collaborer sur des projets.",
+                "2": "Gestion de tableaux et de listes : Créez, modifiez et organisez des tableaux et des listes de tâches pour un flux de travail fluide.",
+                "3": "Fonctionnalités des tâches : Ajoutez, modifiez, assignez et définissez des délais pour les tâches, avec une fonctionnalité de glisser-déposer.",
+                "4": "Collaboration améliorée : Commentaires sur les tâches et assignation d'utilisateurs pour améliorer la communication au sein de l'équipe."
+            }
+        },
+        "Bento-running": {
+            "summary": "C'était mon premier projet utilisant Next.js et TypeScript, motivé par ma passion pour la course. Il exploite l'API Strava pour afficher les données de performance des utilisateurs de manière claire et organisée, avec une approche de conception Bento pour des éléments structurés.",
+            "alt": "Visualiseur Strava",
+            "features": {
+                "0": "Authentification utilisateur : Authentification OAuth implémentée avec NextAuth.",
+                "1": "Visualisation des données : Graphiques de performance informatifs créés avec Recharts.",
+                "2": "Cartes interactives : Intégration de React-Leaflet avec des tuiles Google Maps pour une interaction utilisateur enrichie.",
+                "3": "Conception Bento : Une mise en page propre et structurée pour une présentation intuitive des données."
+            }
+        }
+
+    },
+
+    "works": {
+        "work-1": {
+            "date": "Mars 24 - Juin 24",
+            "role": "Développeur front-end",
+            "summary": "Développement d'une plateforme web conçue pour permettre aux formateurs de gérer efficacement leurs sessions de formation et d'interagir avec les étudiants. Collaboration avec deux développeurs, supervision des avancées et validation des Pull Requests.",
+            "features": {
+                "0": "Tableau de bord formateur : Création et gestion des packs de formation, personnalisation de la page d'accueil, mise à jour des disponibilités et communication avec les étudiants.",
+                "1": "Portail étudiant : Planification de rendez-vous avec les administrateurs (confirmation par email + intégration Google Meet), achat de packs de formation via Stripe et téléversement de CV.",
+                "2": "Outils interactifs : Profils personnalisés, messagerie dédiée, quiz et retour sur CV.",
+                "3": "Gestion documentaire : Importation et partage de matériaux de formation sans effort."
+            }
+        },
+        "work-2": {
+            "date": "Déc. 22 - Nov. 23",
+            "role": "Développeur front-end",
+            "summary": "Développement et conception d'un portail front-end offrant aux clients une vue complète de leurs actifs. Mise en avant d'une présentation intuitive des données et de filtres efficaces pour mettre en évidence les points essentiels.",
+            "features": {
+              "0": "Gestion des actifs : Vue d'ensemble centralisée et gestion des actifs des clients.",
+              "1": "Suivi : Mises à jour en temps réel sur les performances et l'état des actifs.",
+              "2": "Rapport : Génération de rapports détaillés et personnalisables.",
+              "3": "Filtrage des données : Outils avancés pour trier et se concentrer sur les informations pertinentes.",
+              "4": "Interface conviviale : Navigation simplifiée pour un accès rapide aux données importantes."
+            }
+        },
+        "work-3": {
+            "date": "Oct. 21 - Jan. 22",
+            "role": "Spécialiste",
+            "summary": "Offrir une expérience client unique : démonstrations de produits, assistance et conseils d'utilisation."
+        },
+        "work-4": {
+            "date": "Sep. 19 - Juin 20",
+            "role": "Entrepreneur",
+            "summary": "Co-création d'un concept de boutique streetwear à Lyon, visant à offrir une expérience client innovante et des produits uniques. Responsable de la communication, conception de l'identité visuelle de la marque et élaboration d'une stratégie de communication avec les partenaires. Projet interrompu en raison de la pandémie."
+        },
+        "work-5": {
+            "date": "Jan. 18 - Sep. 19",
+            "role": "Conseiller client",
+            "summary": "Offrir une expérience de vente premium, gestion des stocks, ouverture et fermeture du magasin."
+        }
+       
+    }
+}

@@ -7,6 +7,7 @@ import { RiLinkedinFill } from "react-icons/ri";
 import { TbBrandGithubFilled } from "react-icons/tb";
 import { NavBar } from "../../nav/NavBar";
 import { HeroPicture } from "./HeroPicture";
+import { useTranslation } from "react-i18next";
 gsap.registerPlugin(ScrollTrigger);
 
 /**
@@ -14,6 +15,8 @@ gsap.registerPlugin(ScrollTrigger);
  * Hero Section of the home page
  */
 export const Hero = () => {
+
+  const {t} = useTranslation();
 
   // Get the navRef to handle scroll animation
   const { navRef, isLargeScreen } = useAppContext();
@@ -169,7 +172,7 @@ export const Hero = () => {
               fontSize: "clamp(1.2rem, 2vw, 2rem)",
             }}
           >
-            front-end developer
+            {t("texts.front-end developer")}
           </p>
         </section>
       </section>
