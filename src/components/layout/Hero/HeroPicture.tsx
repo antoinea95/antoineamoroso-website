@@ -146,6 +146,8 @@ export const HeroPicture = () => {
       if (scrollAnimation) {
         scrollAnimation.kill();
       }
+      gsap.killTweensOf(heroElement);
+
     };
   }, [navRef, isLargeScreen, i18n.language]);
   
