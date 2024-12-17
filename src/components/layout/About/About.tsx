@@ -185,7 +185,7 @@ export const About = () => {
   return (
     <Section id="about">
       <div className="flex items-center relative">
-        <Title titleText="About" headingLevel="h1" trigger="#about" />
+        <Title titleText="About" headingLevel="h2" trigger="#about" />
         <img
           src="./assets/flower.png"
           className=" w-16 lg:w-20 stroke-two"

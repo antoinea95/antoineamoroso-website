@@ -105,7 +105,7 @@ export const Contact = () => {
 
   return (
     <footer className="flex flex-col w-screen pb-2 relative" id="contact">
-      <h1
+      <h2
         className="text-center overflow-hidden pt-10 flex flex-wrap items-center justify-center gap-2 lg:gap-4 relative"
         ref={titleRef}
       >
@@ -129,7 +129,7 @@ export const Contact = () => {
             )}
           </span>
         ))}
-      </h1>
+      </h2>
 
       {/* Liens sociaux */}
       <div

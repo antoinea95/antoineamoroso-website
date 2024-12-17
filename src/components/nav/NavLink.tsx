@@ -34,7 +34,7 @@ export const NavLink = ({ name }: { name: string }) => {
     <a
       href={`#${translateName.toLowerCase()}`}
       onClick={handleClick}
-      className="relative group font-light text-tertiary z-30 hover:underline px-2"
+      className="relative group font-light text-tertiary z-30 hover:underline px-2 whitespace-nowrap"
       aria-label={translateName}
       data-after={translateName}
     >

@@ -121,7 +121,7 @@ export const Skills = () => {
   return (
     <Section id="skills">
       <div className="flex items-center relative">
-        <Title titleText="Skills" headingLevel="h1" trigger="#skills" />
+        <Title titleText="Skills" headingLevel="h2" trigger="#skills" />
         <img
           src="./assets/cool.png"
           className=" w-16 lg:w-20 stroke-two"

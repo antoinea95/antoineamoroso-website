@@ -152,7 +152,7 @@ export const Work = () => {
   return (
     <Section id="work">
       <div className="flex items-center relative px-2 py-1 -space-x-2">
-        <Title titleText="Work" headingLevel="h1" trigger="#work" />
+        <Title titleText="Work" headingLevel="h2" trigger="#work" />
         <img src="./assets/mac.png" className="w-20 lg:w-24 stroke-two" id="mac" alt="Illustation of an Imac in a retro cartoon style" />
       </div>
       <section className="flex flex-col lg:flex-row justify-between items-center w-full max-w-[1400px] gap-10">

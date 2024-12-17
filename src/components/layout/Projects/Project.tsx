@@ -74,7 +74,7 @@ export const Project = () => {
   return (
     <Section id="projects">
       <div className="flex items-center relative  px-3 py-1">
-        <Title titleText="Projects" headingLevel="h1" trigger="#projects" />
+        <Title titleText="Projects" headingLevel="h2" trigger="#projects" />
         <img src="./assets/heart.png" className="w-20 stroke-two" id="heart" alt="Illustation of an heart in a retro cartoon style" />
       </div>
       <section className="w-[90%] flex flex-col justify-center items-center relative">

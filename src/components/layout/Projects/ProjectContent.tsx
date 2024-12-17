@@ -35,11 +35,11 @@ const ContentTitle = ({ title }: { title: string }) => {
   }, []);
 
   return (
-    <p className="font-bold border-b border-primary pb-1 mb-3 text-lg lg:text-xl overflow-hidden whitespace-nowrap">
+    <h2 className="font-bold border-b border-primary pb-1 mb-3 text-lg lg:text-xl overflow-hidden whitespace-nowrap font-parkinsans">
       <span ref={spanRef} id="title" className="inline-block">
         {t("sectionTitles." + title)}
       </span>
-    </p>
+    </h2>
   );
 };
 

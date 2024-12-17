@@ -216,6 +216,9 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
         <img
           src={pictures[getNextIndex()]}
           className="object-cover w-full h-full px-10 stroke-two"
+          alt={`Next picture ${activeIndex
+          } of ${pictures.length}`}
+
           aria-hidden="true"
           ref={nextImgRef}
         />
@@ -229,6 +232,7 @@ export const ProjectCaroussel = ({ pictures }: { pictures: string[] }) => {
           src={pictures[getPrevIndex()]}
           className="object-cover w-full h-full px-10 stroke-two"
           aria-hidden="true"
+          alt={`Previous picture ${activeIndex + 2} of ${pictures.length}`}
           ref={prevImgRef}
         />
       </div>
