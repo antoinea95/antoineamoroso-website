@@ -46,7 +46,7 @@ export const ProjectPage = () => {
       <ProjectHeader project={project} />
       <div className="flex flex-col gap-10 overflow-hidden">
         <ProjectContent id={project.name} stack={project.technos} features={project.features} />
-        <ProjectCaroussel pictures={project.pictures} />
+        {project.pictures.length > 0 && <ProjectCaroussel pictures={project.pictures} />}
       </div>
     </main>
   );

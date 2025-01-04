@@ -20,13 +20,26 @@
         "url": "https://bento-running.vercel.app/",
         "alt": "Strava visualizer",
         "technos": [{"icon": "SiNextdotjs", "name": "Next.js"} ,{ "icon": "SiTypescript", "name": "Typescript"},  { "icon": "SiStrava", "name": "Strava API"}, { "icon": "DiSass", "name": "Sass"}],
-        "pictures": ["./assets/bento-running/login.png", "./assets/bento-running/light.png", "./assets/bento-running/dark.png"],
         "summary": "This was my first project using Next.js and TypeScript, driven by my passion for running. It leverages the Strava API to display user performance data in a clear and organized way with a Bento design approach for structured elements.",
+        "pictures": ["./assets/bento-running/login.png", "./assets/bento-running/light.png", "./assets/bento-running/dark.png"],
         "features": [
           "User Authentication: OAuth authentication implemented with NextAuth.",
           "Data Visualization: Informative performance charts created using Recharts.",
           "Interactive Maps: React-Leaflet integrated with Google Maps tiles for enhanced user interaction.",
           "Bento Design: A clean and structured layout for intuitive data presentation."
+        ]
+      },
+      {
+        "name": "Playground",
+        "url": "https://antoine-amoroso-playground.vercel.app/",
+        "alt": "Animation playground",
+        "summary": "A collection of little challenges! I love experimenting, refining my skills, and recreating eye-catching effects and animations that inspire me.",
+        "technos": [{"icon": "SiNextdotjs", "name": "Next.js"} ,{ "icon": "SiTypescript", "name": "Typescript"}, { "icon": "DiSass", "name": "Sass"}, {"icon": "TbPlayerTrackNextFilled", "name":"GSAP"}],
+        "pictures": [],
+        "features": [
+          "Animation Gallery: Showcase a curated collection of creative animations built with GSAP.",
+          "Challenge Highlights: Present animation challenges with detailed examples and outcomes.",
+          "Tech Stack Focus: Highlight the use of Next.js, GSAP, and Sass for building complex animations."
         ]
       }
     ],

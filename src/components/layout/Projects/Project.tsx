@@ -44,7 +44,7 @@ export const Project = () => {
           scale: [0, 0.3, 0.6, 1.2, 2, 1],
         },
         duration: 0.6,
-        delay: 0.5,
+        delay: 1,
         ease: "steps(6)",
       }
     );

@@ -36,13 +36,6 @@ export const Title = ({
     const titleElements = titleRef.current?.querySelectorAll("span");
 
     if (titleElements) {
-      gsap.set(titleElements, {
-        x: () => gsap.utils.random(-500, 500), // Position X aléatoire
-        y: () => gsap.utils.random(-100, 200), // Position Y aléatoire
-        scale: () => gsap.utils.random(0.3, 2), // Position Y aléatoire
-        opacity: 0,
-      });
-
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: trigger,
@@ -54,18 +47,16 @@ export const Title = ({
 
       tl.fromTo(
         titleElements,
-        { scale: 0 },
+       { scale: 0 },
         {
-          x: 0,
-          y: 0,
-          opacity: 1,
-          scale: 1,
           keyframes: {
-            rotation: [-15, 15, -15, 15, -15, 10, 0],
+            scale: [0, 0.3, 0.6, 0.9, 2, 1, 1, 1],
+            rotate: [5, -5, 5, -5, 5, -5, 0, 0, 0],
           },
           duration: 0.6,
           stagger: 0.1,
-          ease: "steps(5)",
+          ease: "steps(6)",
+          delay: 0.6,
         }
       );
 

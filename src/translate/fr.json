@@ -48,6 +48,15 @@
                 "2": "Cartes interactives : Intégration de React-Leaflet avec des tuiles Google Maps pour une interaction utilisateur enrichie.",
                 "3": "Conception Bento : Une mise en page propre et structurée pour une présentation intuitive des données."
             }
+        },
+        "Playground": {
+            "alt": "Terrain de jeu",
+            "summary": "Une collection de petits défis ! J'adore expérimenter, perfectionner mes compétences et recréer des effets et animations captivants qui m'inspirent.",
+            "features": {
+                "0": "Galerie d'animations : Présente une collection soigneusement sélectionnée d'animations créatives réalisées avec GSAP.",
+                "1": "Mise en avant des défis : Montre des challenge d’animation avec des exemples détaillés et leurs résultats.",
+                "2": "Focus sur la stack: Mets en avant l'utilisation de Next.js, GSAP et Sass pour créer des animations complexes."
+            }
         }
 
     },

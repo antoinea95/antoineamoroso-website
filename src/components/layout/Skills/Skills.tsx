@@ -37,7 +37,7 @@ export const Skills = () => {
           scale: [0, 0.3, 0.6, 1.2, 2, 1],
         },
         duration: 0.6,
-        delay: 0.5,
+        delay: 1,
         ease: "steps(6)",
       }
     );
@@ -92,6 +92,7 @@ export const Skills = () => {
           scale: [0, 0.3, 0.6, 0.9, 1.6, 1],
         },
         duration: 1,
+        delay: 1,
         stagger: 0.07,
         ease: "steps(5)",
       }

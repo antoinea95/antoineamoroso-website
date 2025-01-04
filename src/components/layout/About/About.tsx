@@ -107,6 +107,7 @@ export const About = () => {
           },
           y: 0, // Monte doucement à sa position
           duration: 1,
+          delay: 0.6,
           ease: "steps(5)",
         }
       ).fromTo(
@@ -155,7 +156,7 @@ export const About = () => {
           scale: [0, 0.3, 0.6, 1.2, 2, 1],
         },
         duration: 0.6,
-        delay: 0.5,
+        delay: 1,
         ease: "steps(6)",
       }
     );

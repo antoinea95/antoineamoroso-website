@@ -46,6 +46,15 @@
                 "2": "Interactive Maps: React-Leaflet integrated with Google Maps tiles for enhanced user interaction.",
                 "3": "Bento Design: A clean and structured layout for intuitive data presentation."
             }
+        },
+        "Playground": {
+            "alt": "Animation playground",
+            "summary": "A collection of little challenges! I love experimenting, refining my skills, and recreating eye-catching effects and animations that inspire me.",
+            "features": {
+                "0": "Animation Gallery: Showcase a curated collection of creative animations built with GSAP.",
+                "1": "Challenge Highlights: Present animation challenges with detailed examples and outcomes.",
+                "2": "Tech Stack Focus: Highlight the use of Next.js, GSAP, and Sass for building complex animations."
+            }
         }
 
     },

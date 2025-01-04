@@ -205,12 +205,12 @@ export const ProjectCard = ({
             <TbCircleArrowUpRightFilled size={24} />
           </p>
         </button>
-        <img
+       {project?.pictures && project?.pictures.length > 0 && <img
           src={project?.pictures[activeIndex]}
           alt={`${projectName} preview`}
           className="lg:absolute lg:top-[0] lg:-left-10 w-1/2 lg:w-1/3 max-w-[350px] lg:scale-0 z-50 stroke-two"
           ref={imageRef}
-        />
+        />}
       </div>
     </>
   );
