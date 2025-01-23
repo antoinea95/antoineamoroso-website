@@ -40,7 +40,7 @@ export const ProjectHeader = ({ project }: { project: ProjectType }) => {
 
   return (
     <header className="flex flex-col lg:flex-row items-center lg:justify-between w-full gap-6">
-      <div className="flex gap-2" ref={headerRef}>
+      <div className="flex gap-2 -translate-x-[100vw]" ref={headerRef}>
         <h1>{project.name}</h1>
         <IconLink
           content="Live"
